@@ -199,8 +199,8 @@ public class EventoDao {
  	
 	    String sql = "call elimina_evento(?)";
 
-        try (Connection conn = connector.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+        try (Connection connection = connector.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 	       	  pstmt.setInt(1, idEvento);
       
             rowAffected = pstmt.executeUpdate();
@@ -223,7 +223,7 @@ public class EventoDao {
    }
 
 
-public boolean confermaEvento(int idEvento) {
+public boolean confermaEvento(int idEv) {
 	
 	   int rowAffected;
 	 	
@@ -231,7 +231,7 @@ public boolean confermaEvento(int idEvento) {
 
        try (Connection connection = connector.getConnection();
             PreparedStatement pstmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-	       	  pstmt.setInt(1, idEvento);
+	       	  pstmt.setInt(1, idEv);
      
            rowAffected = pstmt.executeUpdate();
 
