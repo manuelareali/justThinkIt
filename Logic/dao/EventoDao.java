@@ -193,7 +193,7 @@ public class EventoDao {
    }
     
    
-   public boolean cancellaEvento(int idEvento) {
+   public boolean cancellaEvento(int idEvent) {
 	   
 	   int rowAffected;
  	
@@ -201,18 +201,17 @@ public class EventoDao {
 
         try (Connection connection = connector.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-	       	  pstmt.setInt(1, idEvento);
+	       	  pstmt.setInt(1, idEvent);
       
             rowAffected = pstmt.executeUpdate();
 
             if (rowAffected == 1) {
                 logger.debug(SUCCESS);
             } 
-            else { logger.debug(FAILED);
+            else { 
+            	logger.debug(FAILED);
             	return false;
             }
-
-
         } catch (SQLException ex) {
             logger.debug((ex.getMessage()));
         }
