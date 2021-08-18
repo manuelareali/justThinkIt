@@ -45,7 +45,7 @@ public class CercaCaritas {
 	private PartecipaEventoBoundary partecipaEventoBoundary;
 	private PromuoviEventoBoundary promuoviEventoBoundary;
 	private UserHomeBoundary userHomeBoundary;
-	private ShopHomeBoundary shopHomeBoundary;
+	
 	
 	private static CercaCaritas instance  = null;
 	
@@ -66,7 +66,7 @@ public class CercaCaritas {
 				userHomeController.initDataCont(this.idUser,userHomeBoundary);
 	}
 	else if(ruolo.equalsIgnoreCase(n)) {
-			shopHomeBoundary = ShopHomeBoundary.getInstance();
+			ShopHomeBoundary shopHomeBoundary = ShopHomeBoundary.getInstance();
 			ShopHomeController shopHomeC = new ShopHomeController();
 			shopHomeC.initDataShop(this.idUser, shopHomeBoundary);
 		}
