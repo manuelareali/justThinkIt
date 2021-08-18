@@ -229,8 +229,8 @@ public boolean confermaEvento(int idEvento) {
 	 	
 	    String sql = "call conferma_evento(?)";
 
-       try (Connection conn = connector.getConnection();
-            PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+       try (Connection connection = connector.getConnection();
+            PreparedStatement pstmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 	       	  pstmt.setInt(1, idEvento);
      
            rowAffected = pstmt.executeUpdate();
@@ -238,8 +238,9 @@ public boolean confermaEvento(int idEvento) {
            if (rowAffected == 1) {
                logger.debug(SUCCESS);
            } 
-           else { logger.debug(FAILED);
-           	return false;
+           else { 
+        	   logger.debug(FAILED);
+           	   return false;
            }
 
 
