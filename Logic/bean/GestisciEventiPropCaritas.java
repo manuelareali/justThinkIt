@@ -78,8 +78,8 @@ public class GestisciEventiPropCaritas {
     	try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/boundary/ShopHomePage.fxml"));
 			Parent root = loader.load();
-			shopHomeBoundary = shopHomeBoundary.getInstance();
 			ShopHomeBoundary  shopC= loader.getController();
+			shopHomeBoundary = shopHomeBoundary.getInstance();
 			ShopHomeController shopHomeC = new ShopHomeController();
 			shopHomeC.initDataShop(idShop, shopC);
 			Stage home = (Stage) back.getScene().getWindow();
