@@ -25,9 +25,10 @@ public class CercaCaritasDao {
 	private String latit = "latitudine";
 	private String longit = "longitudine";
     private static final Logger logger = LoggerFactory.getLogger(CercaCaritasDao.class);
+    String codiceEvent = "codiceEv";
 
 	 public CercaCaritasDao() {
-		    this.connector =  new Connector("jdbc:mysql://127.0.0.1:3307/Justthinkit", "rootUser", "password");;
+		    this.connector =  new Connector("jdbc:mysql://127.0.0.1:3307/Justthinkit", "rootUser", "password");
 		}
 
 	 
@@ -71,32 +72,28 @@ public class CercaCaritasDao {
 		List<MarkerID> markerEvento =new ArrayList<>();
 		
 		 String sql = "Call assegna_marker_evento_volontario()";
-	     ResultSet rs = null;
+	     ResultSet resultSet = null;
 	 
 	     try (Connection conn = connector.getConnection();
 	          PreparedStatement pstmt = conn.prepareStatement(sql)) {
 	    	
 	        
-	         rs = pstmt.executeQuery();
+	    	 resultSet = pstmt.executeQuery();
 
-	         while (rs.next()) {
-	        	 int codiceEvento = rs.getInt("codiceEv");
+	         while (resultSet.next()) {
+	        	 int codiceEvento = resultSet.getInt(codiceEvent);
 	        	 
-	        	 Coordinate eventoCoordinate = new Coordinate(Double.parseDouble(rs.getString(this.latit)),Double.parseDouble(rs.getString(this.longit)));
+	        	 Coordinate eventoCoordinate = new Coordinate(Double.parseDouble(resultSet.getString(this.latit)),Double.parseDouble(resultSet.getString(this.longit)));
 	        	 Marker m = Marker.createProvided(Marker.Provided.BLUE).setPosition(eventoCoordinate);
 	        	 MarkerID mc = new MarkerID(m, codiceEvento);
 	        		
-	        	 markerEvento.add(mc);
-					
-	        	
-	        	 
+	        	 markerEvento.add(mc); 
 	         } 
-
 	     } catch (SQLException ex) {
 	    	 logger.debug(ex.getMessage());
 	     } finally {
 	         try {
-	             if (rs != null) rs.close();
+	             if (resultSet != null) resultSet.close();
 	         } catch (SQLException e) {
 	        	 logger.debug(e.getMessage());
 	         }
@@ -120,16 +117,13 @@ public class CercaCaritasDao {
 	         rs = pstmt.executeQuery();
 
 	         while (rs.next()) {
-	        	 int codiceEvento = rs.getInt("codiceEv");
+	        	 int codiceEvento = rs.getInt(codiceEvent);
 	        	 
 	        	 Coordinate eventoCoordinate = new Coordinate(Double.parseDouble(rs.getString(this.latit)),Double.parseDouble(rs.getString(this.longit)));
 	        	 Marker m = Marker.createProvided(Marker.Provided.BLUE).setPosition(eventoCoordinate);
 	        	 MarkerID mc = new MarkerID(m, codiceEvento);
 	        		
 	        	 markerEvento.add(mc);
-					
-	        	
-	        	 
 	         } 
 
 	     } catch (SQLException ex) {
@@ -217,6 +211,7 @@ public List<MarkerID> assegnaMarkerNegozio() {
 		}
 	
 	
+	
 	public List<CoordinateMap> getCoordinateCaritas() {
 		List<CoordinateMap> lista = new ArrayList<>();
 		String sql = "Call assegna_marker()";
@@ -248,6 +243,7 @@ public List<MarkerID> assegnaMarkerNegozio() {
 		return lista;
 		}
 	
+	
 public List<CoordinateMap> getCoordinateEvento() {
 		
 		List<CoordinateMap> markerEvento =new ArrayList<>();
@@ -262,7 +258,7 @@ public List<CoordinateMap> getCoordinateEvento() {
 	         rs = pstmt.executeQuery();
 
 	         while (rs.next()) {
-	        	 int codiceEvento = rs.getInt("codiceEv");
+	        	 int codiceEvento = rs.getInt(codiceEvent);
 	        	 double lati = Double.parseDouble(rs.getString(this.latit));
 	        	 double longi = Double.parseDouble(rs.getString(this.longit));
 					
@@ -281,6 +277,7 @@ public List<CoordinateMap> getCoordinateEvento() {
 	     } return markerEvento;
 		}
 	
+
 public List<CoordinateMap> getCoordinateEvento(int idUser) {
 	
 	List<CoordinateMap> markerEvento =new ArrayList<>();
@@ -295,7 +292,7 @@ public List<CoordinateMap> getCoordinateEvento(int idUser) {
          rs = pstmt.executeQuery();
 
          while (rs.next()) {
-        	 int codiceEvento = rs.getInt("codiceEv");
+        	 int codiceEvento = rs.getInt(codiceEvent);
         	 double lati = Double.parseDouble(rs.getString(this.latit));
         	 double longi = Double.parseDouble(rs.getString(this.longit));
 				
@@ -313,6 +310,8 @@ public List<CoordinateMap> getCoordinateEvento(int idUser) {
          }
      } return markerEvento;
 	}
+
+
 
 	public List<CoordinateMap> getCoordinateDonazione(int idUser) {
 	
