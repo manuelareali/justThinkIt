@@ -126,10 +126,10 @@ List<CoordinateMap> donazione = CercaCaritas.getInstance().initMarkersDonazione(
 
 
 		<div class="indietro">
-			<button class="btn btn-warning" type="submit" name="INDIETRO" value="INDIETRO">Indietro</button>
+			<button class="btn btn-warning" type="submit" name="indietro" value="indietro">Indietro</button>
 		</div>
 		<% 
-		if(request.getParameter("INDIETRO") != null){
+		if(request.getParameter("indietro") != null){
 			%>
 			<jsp:forward page="homeNegozio.jsp" />
 			<%
