@@ -10,6 +10,7 @@ import com.sothawo.mapjfx.Projection;
 
 import controller.CaritasHomeController;
 import controller.CercaCaritasController;
+import controller.ShopHomeController;
 import exception.MyException;
 import exception.Trigger;
 import javafx.fxml.FXMLLoader;
@@ -182,9 +183,10 @@ public class TransizionePagine {
 				logger.error(e.getMessage());
 
 			}
-
-		
 	}
+	
+	
+
 	
 	public void check() {
 		Trigger trigger = new Trigger();

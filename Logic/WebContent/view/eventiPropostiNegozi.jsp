@@ -43,7 +43,7 @@ if(request.getParameter("Proponi Offerta") != null){
 	crossorigin="anonymous">
 
 <title>EVENTI PROPOSTI DALLE CARITAS</title>
-<link rel="stylesheet" href="../css/gestisciEventiCaritas.css">
+<link rel="stylesheet" href="../css/gestisciEventiCaritass.css">
 <link rel="icon" sizes="64x64" href="../img/favicon.png">
 </head>
 <body>

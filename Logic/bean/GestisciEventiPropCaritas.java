@@ -142,7 +142,7 @@ public class GestisciEventiPropCaritas {
     
     public void loadShop(int idShop) {
 		this.idShop = idShop;
-		List<EventTab> listEv = gestisciEventiC.caricaEventiPropCaritas(this.idShop);
+		List<EventTab> listEv = gestisciEventiC.caricaEventiPropCaritas();
 		ObservableList<EventTab> data = FXCollections.observableArrayList(listEv);
 		nomeEvento.setCellValueFactory(new PropertyValueFactory<>("NomeEvento"));
 		nomeCaritas.setCellValueFactory(new PropertyValueFactory<>("NomeCaritas"));

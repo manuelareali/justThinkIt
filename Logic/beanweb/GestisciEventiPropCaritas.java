@@ -37,7 +37,7 @@ public class GestisciEventiPropCaritas {
 	}
 	
 	public List<EventTab> loadFormEvento() {
-		return  gestisciEventiC.caricaEventiPropCaritas(idShop);
+		return  gestisciEventiC.caricaEventiPropCaritas();
 			
 	}
 	
