@@ -98,14 +98,6 @@ public class CoordinateDao {
     	
     }
     
-    public void close() {
-    	try {
-			connector.getConnection().close();
-		} catch (SQLException e) {
-			
-     	   logger.debug(e.getMessage());
-
-		}
-    }
+   
 	
 }
