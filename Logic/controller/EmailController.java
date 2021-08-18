@@ -2,17 +2,13 @@ package controller;
 
 
 import dao.EmailDao;
-import dao.UserDao;
 import entity.EmailEntity;
 
 public class EmailController {
 
 	private EmailDao emailDao;
-	private UserDao v;
 	
-	public EmailController(){
-		v = new UserDao();
-	}
+	
 	
     public int sendMessageController(String mit, String dest, String mess, String ogg) {
     	

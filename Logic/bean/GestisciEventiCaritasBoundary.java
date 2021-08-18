@@ -119,7 +119,6 @@ public class GestisciEventiCaritasBoundary {
 	
 	@FXML
 	void contattaShop(ActionEvent event) {
-		Logger logger = LoggerFactory.getLogger(GestisciEventiCaritasBoundary.class.getName());
 		if (this.event != null) {
 			TransizionePagine pageSwitch = new TransizionePagine();
 			pageSwitch.goToEmail(this.event.getCodiceNegozio(), idCar, contattaNegozio.getScene().getWindow());
