@@ -42,7 +42,7 @@ public class OfferteNegoziCaritas {
 	
 	           while ( resultSet.next()) {
 	        	   this.listEv.add(new Offerte( resultSet.getInt("id_proposta"),  resultSet.getInt("id_evento") , resultSet.getString("NomeNegozio"), resultSet.getString("NomeEvento"),  resultSet.getFloat("prezzo"),  resultSet.getString("noteEvento"),  resultSet.getString("dataEvento"),  resultSet.getInt("id_negozio")));
-	        	   Offerte temp = this.listEv.get(i);
+	        	   this.listEv.get(i);
 	        	 
 	        	  i++;
 	           }
