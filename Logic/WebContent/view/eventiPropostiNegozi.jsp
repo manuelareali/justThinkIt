@@ -16,17 +16,16 @@ if (request.getParameter("indietro") != null) {
 <%
 }
 
-if(request.getParameter("Proponi Offerta") != null){
-	if (request.getParameter("Proponi OffertaId") != null){
-		GestisciEventiPropCaritas.getInstance().proponi(Integer.parseInt(request.getParameter("Proponi OffertaId")));
+
+if (request.getParameter("Proponi OffertaId") != null){
+		if(GestisciEventiPropCaritas.getInstance().proponi(request.getParameter("Proponi OffertaId"))== true){
 %>
 	<jsp:forward page="offerteNegozi.jsp" />
 <%		
 	}
 }
-
-
 %>
+	
 
 <!doctype html>
 <html lang="en">

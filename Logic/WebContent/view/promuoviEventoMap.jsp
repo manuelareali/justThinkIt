@@ -54,7 +54,7 @@ if (PromuoviEventoBoundary.getInstance().confermaPressed(request.getParameter("N
 	crossorigin="anonymous">
 
 <title>PROMUOVI EVENTO</title>
-<link rel="stylesheet" href="../css/proponiEvento.css">
+<link rel="stylesheet" href="../css/proponiEventi.css">
 <link rel="icon" sizes="64x64" href="../img/favicon.png">
 </head>
 <body>

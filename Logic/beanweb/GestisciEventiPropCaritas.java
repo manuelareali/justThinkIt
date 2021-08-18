@@ -46,8 +46,13 @@ public class GestisciEventiPropCaritas {
    
     }
 
-	public void proponi (int idEv) {
-		prop.getInstance().load(idShop, idEv);
+	public boolean proponi (String i) {
+		if (i == null || i.equals("")) {
+    		return false;
+    	}
+		int x = Integer.parseInt(i);
+		prop.getInstance().load(idShop, x);
+		return true;
 	}
 }
 

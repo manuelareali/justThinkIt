@@ -33,7 +33,7 @@ Class.forName("com.mysql.jdbc.Driver");
 	crossorigin="anonymous">
 
 <title>CONTATTA</title>
-<link rel="stylesheet" href="../css/email.css">
+<link rel="stylesheet" href="../css/invioEmail.css">
 <link rel="icon" sizes="64x64" href="../img/favicon.png">
 </head>
 <body>
@@ -91,28 +91,23 @@ Class.forName("com.mysql.jdbc.Driver");
 </form>
 
 
-	<div class = "container my-4">
-				<div class="row">
-					<div class="col-8">
-						<a class="button" href="#popup2"><button
-						class="btn btn-warning" type="submit" name="INDIETRO"
-						value="INDIETRO">Indietro</button></a>
-					</div>
-					
-					<div class="invia">
-						<a class="button" href="#popup3"><button type="submit" class="btn btn-light" name="INVIA" value="INVIA">INVIA</button></a>
-					</div>
-					</div>
+		<div class="container my-4">
+			<div class="row">
+				<div class="col">
+					<a class="button" href="#popup2"><button
+							class="btn btn-warning" type="submit" name="INDIETRO"
+							value="INDIETRO">Indietro</button></a>
 				</div>
-				
-				
-<div class="box">
-			<div class="container text-center">
-
-			
-				
+				<div class="col"></div>
+				<div class="col">
+					<a class="button" href="#popup3"><button type="submit"
+							class="btn btn-light" name="INVIA" value="INVIA">INVIA</button></a>
+				</div>
 			</div>
 		</div>
+
+
+	
 		<div id="popup2" class="overlay">
 			<div class="popup">
 

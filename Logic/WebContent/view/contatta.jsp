@@ -6,8 +6,8 @@
 
 <%
 Class.forName("com.mysql.jdbc.Driver");
-	if(request.getParameter("invia")!=null){
-		if(EmailBoundary.getInstance().sendMessage(request.getParameter("codice_mittente"),request.getParameter("codiceDestinatario"), request.getParameter("messaggio"), request.getParameter("oggetto")) == 0){
+	if(request.getParameter("OK")!=null){
+		if(EmailBoundary.getInstance().sendMessage(request.getParameter("codice_mittente"),request.getParameter("codiceDestinatario"), request.getParameter("messaggio"), request.getParameter("oggetto")) == true){
 			
 %>
 <jsp:forward page="homeCaritas.jsp" />
@@ -37,7 +37,7 @@ Class.forName("com.mysql.jdbc.Driver");
 	crossorigin="anonymous">
 
 <title>CONTATTA</title>
-<link rel="stylesheet" href="../css/email.css">
+<link rel="stylesheet" href="../css/invioEmail.css">
 <link rel="icon" sizes="64x64" href="../img/favicon.png">
 </head>
 <body>
@@ -74,18 +74,37 @@ Class.forName("com.mysql.jdbc.Driver");
 			</div>
 
 
-			<div class="invia">
-				<button type="submit" class="btn btn-light" name="invia"
-					value="invia">INVIA</button>
+			<div id="popup4" class="overlay">
+			<div class="popup">
+
+				<div class="content">
+					<h3 class="fw-bold">Sei sicuro di voler inviare l'email?</h3>
+					<p>Verifica se l'indirizzo del destinatario sia corretto.</p>
+					<div class="content text-center">
+						<button class="btn btn-outline-light"
+								type="submit" name="OK" value="OK">OK</button>
+							<button class="btn btn-outline-light"
+								type="submit" name="" value="">ANNULLA</button>
+					</div>
+				</div>
+
 			</div>
-			
+		</div>
 				
 </form>
-		<div class="box">
-			<div class="container text-center">
-				<a class="button" href="#popup1"><button
-						class="btn btn-warning" type="submit" name="INDIETRO"
-						value="INDIETRO"">Indietro</button></a>
+			
+		<div class="container my-4">
+			<div class="row">
+				<div class="col">
+					<a class="button" href="#popup1"><button
+							class="btn btn-warning" type="submit" name="INDIETRO"
+							value="INDIETRO">Indietro</button></a>
+				</div>
+				<div class="col"></div>
+				<div class="col">
+					<a class="button" href="#popup4"><button type="submit"
+							class="btn btn-light" name="INVIA" value="INVIA">INVIA</button></a>
+				</div>
 			</div>
 		</div>
 		
