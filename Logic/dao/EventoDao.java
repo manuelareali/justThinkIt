@@ -25,6 +25,7 @@ public class EventoDao {
 
     String nomeEvento = "NomeEvento";
     String noteEvento = "NoteEvento"; 
+    String completato = "Completato";
     private final Connector connector;
 	
 	
@@ -48,7 +49,7 @@ public class EventoDao {
 	           while (res.next()) {
 	        	   listEv.add(new EventTab( res.getString(nomeEvento),res.getString("NomeCaritas"), res.getString(noteEvento), res.getFloat("PrezzoEvento"), res.getInt("CodiceCaritas")));
 	        	   this.listEv.get(i).setId(res.getInt("Id"));
-	        	   this.listEv.get(i).setStatoEvento(res.getString("Completato"));
+	        	   this.listEv.get(i).setStatoEvento(res.getString(completato));
 	        	   this.listEv.get(i).setImportoRaggiunto(res.getFloat("Importo"));	        	 
 	        	   this.listEv.get(i).setRapportoDenaro();
 	        	  
@@ -65,7 +66,7 @@ public class EventoDao {
     	
     }
     
-    public List<EventTab> cercaEventiPropCaritas(int idShop){
+    public List<EventTab> cercaEventiPropCaritas(){
 
    	String sql = " call visualizza_eventi_proposti_caritas() ";
 	   	listEv.clear();
@@ -75,7 +76,7 @@ public class EventoDao {
 	            res = stmt.executeQuery();
 	
 	           while (res.next()) {
-	        	   listEv.add(new EventTab(res.getInt("Id"),res.getString(nomeEvento),res.getString("NomeCaritas"), res.getString(noteEvento), res.getString("TipoEvento"), res.getString("Completato")));
+	        	   listEv.add(new EventTab(res.getInt("Id"),res.getString(nomeEvento),res.getString("NomeCaritas"), res.getString(noteEvento), res.getString("TipoEvento"), res.getString(completato)));
 	           }
 	       } catch (SQLException ex) {
 	           logger.debug(ex.getMessage());
@@ -100,7 +101,7 @@ public class EventoDao {
 	           while (res.next()) {
 	        	   this.listEv.add(new EventTab( res.getInt("id") ,res.getString(nomeEvento), res.getString(noteEvento), res.getFloat("PrezzoEvento"),res.getString("NomeNegozio"),  res.getInt("CodiceNegozio")));
 	        	   EventTab temp = this.listEv.get(i);
-	        	   temp.setStatoEvento(res.getString("Completato"));
+	        	   temp.setStatoEvento(res.getString(completato));
 	        	   temp.setImportoRaggiunto(res.getFloat("Importo"));
 	        	   temp.setRapportoDenaro();
 	        	  i++;

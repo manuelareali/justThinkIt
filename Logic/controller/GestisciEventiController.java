@@ -19,7 +19,7 @@ public class GestisciEventiController {
 	}
 	
 	public List<EventTab> caricaEventiPropCaritas(int idShop) {
-		return this.eventDao.cercaEventiPropCaritas( idShop);
+		return this.eventDao.cercaEventiPropCaritas();
 
 	}
 	
