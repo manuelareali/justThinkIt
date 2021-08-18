@@ -23,7 +23,7 @@ public class EventoDao {
     private List<EventTab> listEv;
     private static final Logger logger = LoggerFactory.getLogger(EventoDao.class);
 
-
+    String nomeEvento = "NomeEvento";
     private final Connector connector;
 	
 	
@@ -45,7 +45,7 @@ public class EventoDao {
 	            res = stmt.executeQuery();
 	
 	           while (res.next()) {
-	        	   listEv.add(new EventTab( res.getString("NomeEvento"),res.getString("NomeCaritas"), res.getString("NoteEvento"), res.getFloat("PrezzoEvento"), res.getInt("CodiceCaritas")));
+	        	   listEv.add(new EventTab( res.getString("nomeEvento"),res.getString("NomeCaritas"), res.getString("NoteEvento"), res.getFloat("PrezzoEvento"), res.getInt("CodiceCaritas")));
 	        	   this.listEv.get(i).setId(res.getInt("Id"));
 	        	   this.listEv.get(i).setStatoEvento(res.getString("Completato"));
 	        	   this.listEv.get(i).setImportoRaggiunto(res.getFloat("Importo"));	        	 
@@ -75,7 +75,7 @@ public class EventoDao {
 	            res = stmt.executeQuery();
 	
 	           while (res.next()) {
-	        	   listEv.add(new EventTab(res.getInt("Id"),res.getString("NomeEvento"),res.getString("NomeCaritas"), res.getString("NoteEvento"), res.getString("TipoEvento"), res.getString("Completato")));	  
+	        	   listEv.add(new EventTab(res.getInt("Id"),res.getString("nomeEvento"),res.getString("NomeCaritas"), res.getString("NoteEvento"), res.getString("TipoEvento"), res.getString("Completato")));	  
 	        	   i++;
 	           }
 	       } catch (SQLException ex) {
@@ -99,7 +99,7 @@ public class EventoDao {
 	            res = stmt.executeQuery();
 	
 	           while (res.next()) {
-	        	   this.listEv.add(new EventTab( res.getInt("id") ,res.getString("NomeEvento"), res.getString("NoteEvento"), res.getFloat("PrezzoEvento"),res.getString("NomeNegozio"),  res.getInt("CodiceNegozio")));
+	        	   this.listEv.add(new EventTab( res.getInt("id") ,res.getString("nomeEvento"), res.getString("NoteEvento"), res.getFloat("PrezzoEvento"),res.getString("NomeNegozio"),  res.getInt("CodiceNegozio")));
 	        	   EventTab temp = this.listEv.get(i);
 	        	   temp.setStatoEvento(res.getString("Completato"));
 	        	   temp.setImportoRaggiunto(res.getFloat("Importo"));
