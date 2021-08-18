@@ -292,19 +292,20 @@ public List<CoordinateMap> getCoordinateEvento(int idUser) {
          rs = pstmt.executeQuery();
 
          while (rs.next()) {
-        	 int codiceEvento = rs.getInt(codiceEvent);
-        	 double lati = Double.parseDouble(rs.getString(this.latit));
-        	 double longi = Double.parseDouble(rs.getString(this.longit));
+        	 int codiceEv = rs.getInt(codiceEvent);
+        	 double latitudine = Double.parseDouble(rs.getString(this.latit));
+        	 double longitudine = Double.parseDouble(rs.getString(this.longit));
 				
-        	 CoordinateMap eventoCoordinate = new CoordinateMap(lati,longi,codiceEvento);
-        	 markerEvento.add(eventoCoordinate);	 
+        	 CoordinateMap eventoCoordinat = new CoordinateMap(latitudine,longitudine,codiceEv);
+        	 markerEvento.add(eventoCoordinat);	 
          } 
 
      } catch (SQLException ex) {
     	 logger.debug(ex.getMessage());
      } finally {
          try {
-             if (rs != null) rs.close();
+             if (rs != null)
+            	 rs.close();
          } catch (SQLException e) {
         	 logger.debug(e.getMessage());
          }
