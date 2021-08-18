@@ -6,7 +6,7 @@ import entity.Offerte;
 
 public class GestioneOfferteCaritas {
 
-	private Offerte offerta;
+
 	private ProponiOfferta proponi;
 	private int idCar;
 	
