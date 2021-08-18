@@ -25,6 +25,7 @@ import javafx.scene.input.MouseEvent;
 public class GestisciDonazioniBoundary {
 	Logger logger = LoggerFactory.getLogger(GestisciDonazioniBoundary.class.getName());
 	private Trigger trigger;
+	String s = "Devi selezionare una riga della tabella";
 	
 		
 	@FXML
@@ -71,7 +72,7 @@ public class GestisciDonazioniBoundary {
 			try {
 				trigger.myTrigger();
 			}catch(MyException e) {
-				logger.error("Devi selezionare una riga della tabella");
+				logger.error(s);
 			}
 		}
 
@@ -96,7 +97,7 @@ public class GestisciDonazioniBoundary {
 			try {
 				trigger.myTrigger();
 			}catch(MyException e) {
-				logger.error("Devi selezionare una riga della tabella");
+				logger.error(s);
 			}
 		}
 
@@ -110,7 +111,7 @@ public class GestisciDonazioniBoundary {
 			try {
 				trigger.myTrigger();
 			} catch (MyException e) {
-				logger.error("Devi selezionare una riga della tabella");
+				logger.error(s);
 			}
 		}
 

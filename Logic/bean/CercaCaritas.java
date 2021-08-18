@@ -394,9 +394,6 @@ public class CercaCaritas {
 
 	public CercaCaritas() throws NumberFormatException, SQLException {	
 		cercaController = new CercaCaritasController();
-		//initMarkers();
-
-
 	}
 
 	public void initMarkers(int idUser, String ruolo) {

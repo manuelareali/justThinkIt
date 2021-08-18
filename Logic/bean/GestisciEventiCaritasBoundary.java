@@ -30,6 +30,7 @@ public class GestisciEventiCaritasBoundary {
 	private int idCar;
 	private PromuoviEventoGenerale promEv;
 	private EventTab event;
+	String s = "Devi selezionare una riga della tabella";
 	private Trigger trigger;
 
 	@FXML
@@ -77,7 +78,7 @@ public class GestisciEventiCaritasBoundary {
 				trigger.myTrigger();
 				
 			} catch (MyException e) {
-				logger.error("Devi selezionare una riga della tabella");
+				logger.error(s);
 			}
 			return false;
 		}
@@ -100,7 +101,7 @@ public class GestisciEventiCaritasBoundary {
 				try {
 					trigger.myTrigger();
 				} catch (MyException e) {
-					logger.error("Devi selezionare una riga della tabella");
+					logger.error(s);
 				} 
 			}else {
 				try {
@@ -126,7 +127,7 @@ public class GestisciEventiCaritasBoundary {
 			try {
 				trigger.myTrigger();
 			} catch (MyException e) {
-				logger.error("Devi selezionare una riga della tabella");
+				logger.error(s);
 			}
 		}
 

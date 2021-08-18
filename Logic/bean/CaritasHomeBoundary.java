@@ -201,7 +201,6 @@ public class CaritasHomeBoundary {
 
 	    @FXML
 	    void offerteProposte(ActionEvent event) {
-	    	Logger logger = LoggerFactory.getLogger(GestisciOffertaCaritas.class.getName());
 	    	try {
 
 				FXMLLoader fxmlLoader = new FXMLLoader();

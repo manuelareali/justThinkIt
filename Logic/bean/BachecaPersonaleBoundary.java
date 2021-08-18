@@ -54,9 +54,7 @@ public class BachecaPersonaleBoundary {
 	@FXML
 	private Button back;
 	
-	public BachecaPersonaleBoundary() {
-		
-	}
+	
 
 	@FXML
 	void backPressed(ActionEvent event) {

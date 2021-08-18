@@ -32,7 +32,7 @@ public class PromuoviEventoGenerale {
 	private int idCar;
 	private String tipo;
 	private int idShop;
-	private Trigger trigger;
+	
 
 	
     @FXML
@@ -70,13 +70,12 @@ public class PromuoviEventoGenerale {
     @FXML
     void indietro(ActionEvent event) {
     	try {
-    		GestisciEventiCaritasBoundary gestCar = new GestisciEventiCaritasBoundary ();
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/boundary/gestisci_eventi_caritas.fxml"));
 			Parent root = loader.load();
 
 			Stage home = (Stage) indietro.getScene().getWindow();
 	
-			gestCar = loader.getController();
+			GestisciEventiCaritasBoundary gestCar = loader.getController();
 			
 			gestCar.loadShop(idCar);
 			home.setScene(new Scene(root, 800, 500));
@@ -89,7 +88,7 @@ public class PromuoviEventoGenerale {
 
     @FXML
 	void confermaEventoPressed(ActionEvent event) {
-    	trigger = new Trigger();
+    	Trigger trigger = new Trigger();
 		GestisciEventiCaritasController controller = new GestisciEventiCaritasController();
 		float x = (float) 0.0;
 		if (nome.getText() != null && note.getText() != null) {

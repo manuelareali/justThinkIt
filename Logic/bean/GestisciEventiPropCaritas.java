@@ -96,12 +96,11 @@ public class GestisciEventiPropCaritas {
     void proposteNegozi(ActionEvent event) {
 		if (this.event != null) {
 			try {
-				ProponiOffertaCaritas proponiOfferta = new ProponiOffertaCaritas();
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/boundary/ProposteOfferte.fxml"));
 				Parent root = loader.load();
 
 				Stage stage = (Stage) proposteNegozi.getScene().getWindow();
-				proponiOfferta = loader.getController();
+				ProponiOffertaCaritas proponiOfferta = loader.getController();
 				proponiOfferta.load(idShop, this.event.getId());
 				stage.setTitle("Proponi Offerta alla Caritas");
 				stage.setScene(new Scene(root, 600, 450));
