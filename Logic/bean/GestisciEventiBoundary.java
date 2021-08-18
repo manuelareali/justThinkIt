@@ -68,6 +68,7 @@ public class GestisciEventiBoundary {
 	@FXML
 	private Button back;
 
+	
 	@FXML
 	void backButtonPressed(ActionEvent event) {
 		try {
