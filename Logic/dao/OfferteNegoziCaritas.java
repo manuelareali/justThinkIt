@@ -33,15 +33,15 @@ public class OfferteNegoziCaritas {
 
 	   	String sql = "call visualizza_proposte_negozi(?) ";
 	   	int i = 0;
-		ResultSet res = null;
+		ResultSet resultSet = null;
 		listEv.clear();
 		try (Connection conn = connector.getConnection();
 	            PreparedStatement stmt = conn.prepareStatement(sql)) {
 				stmt.setInt(1, idCar );
-	            res = stmt.executeQuery();
+				 resultSet = stmt.executeQuery();
 	
-	           while (res.next()) {
-	        	   this.listEv.add(new Offerte(res.getInt("id_proposta"), res.getInt("id_evento") ,res.getString("NomeNegozio"),res.getString("NomeEvento"), res.getFloat("prezzo"), res.getString("noteEvento"), res.getString("dataEvento"), res.getInt("id_negozio")));
+	           while ( resultSet.next()) {
+	        	   this.listEv.add(new Offerte( resultSet.getInt("id_proposta"),  resultSet.getInt("id_evento") , resultSet.getString("NomeNegozio"), resultSet.getString("NomeEvento"),  resultSet.getFloat("prezzo"),  resultSet.getString("noteEvento"),  resultSet.getString("dataEvento"),  resultSet.getInt("id_negozio")));
 	        	   Offerte temp = this.listEv.get(i);
 	        	 
 	        	  i++;
@@ -50,7 +50,8 @@ public class OfferteNegoziCaritas {
 	           logger.debug(ex.getMessage());
 	       } finally {
 	           try {
-	               if (res != null) res.close();
+	               if ( resultSet != null)
+	            	   resultSet.close();
 	           } catch (SQLException e) {
 	               logger.debug(e.getMessage());
 	           }
