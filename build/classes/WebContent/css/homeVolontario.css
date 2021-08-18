@@ -1,0 +1,145 @@
+@charset "ISO-8859-1";
+body, html {
+  height: 100%;
+  background:#f2f2f2;
+}
+
+.bg-light {
+  /* The image used */
+  
+
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+
+  background-size: cover;
+}
+
+
+.h1, h1 {
+	font-family: comics soon;
+	margin-top: 2.5rem;
+    font-size: calc(2.375rem + 1.5vw);
+    margin-bottom:0.5rem;
+}
+.h2, h2 {
+	text-align:center;
+    font-size: calc(2.375rem+ 1.5vw);
+    font-family: comics soon;
+}
+
+.my-5 {
+    margin-top: 10rem!important;
+    margin-bottom: 8rem!important;
+}
+
+.my-3{
+	margin-left: 8rem!important;
+}
+
+.btn-light{	
+	padding: 2px;
+	height:150px;
+	width:250px;
+    color: #fff;
+    background-color: red;
+    border-radius: 10px;
+    border: none;
+	outline:none;
+	color: #fff;
+	font-size: 22px;
+}
+
+
+.btn-light:hover
+{
+	cursor: pointer;
+	background:yellow;
+	color: #000;
+}
+
+.btn-outline-light{	
+    color: black;
+    border-radius: 10px;
+  	 border-color: red;
+	outline:none;
+
+}
+
+
+.btn-outline-light:hover
+{
+	cursor: pointer;
+	background:yellow;
+
+}
+
+
+
+.btn-outline-primary{	
+	padding: 2px;
+	height:40px;
+	width:200px;
+    border-radius: 10px;
+	font-size: 22px;
+}
+
+
+
+
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+  position:absolute;
+  top:10%;
+  left:34%;
+  margin: 70px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 30%;
+ 
+  transition: all 1s ease-in-out;
+  border:solid red;
+}
+
+.content h3 {
+ font-size:24px;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+}
+
+
+
+.content p{
+	font-size:22px;
+}
+
+
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
+@import "../node_modules/bootstrap/scss/mixins";
+@import "../node_modules/bootstrap/scss/root";
+@import "../node_modules/bootstrap/scss/reboot";
+@import "../node_modules/bootstrap/scss/type";
+@import "../node_modules/bootstrap/scss/images";
+@import "../node_modules/bootstrap/scss/containers";
+@import "../node_modules/bootstrap/scss/grid";

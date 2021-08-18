@@ -1,0 +1,67 @@
+@charset "ISO-8859-1";
+
+body, html {
+  height: 100%;
+  background:#f2f2f2;
+}
+
+.bg-light {
+  /* The image used */
+  
+
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+
+  background-size: cover;
+}
+
+
+.h1, h1 {
+	padding:10px 0px 0px 0px;
+    font-size: 50px;
+    font-family: comics soon;
+}
+
+
+.btn-light{	
+    color: #fff;
+    width:200px;
+    background-color: red;
+    border-radius: 10px;
+    border: none;
+	outline:none;
+	color: #fff;
+	font-size:18px;
+	font-weight:bold;
+}
+
+
+.btn-light:hover
+{
+	cursor: pointer;
+	background:yellow;
+	color: #000;
+}
+
+
+.indietro{
+	position: absolute;
+	top:88%;
+	font-size:18px;
+	left:5%;
+}
+
+.contatta{
+	position:absolute;
+	top:88%;
+	left:77%;
+}
+
+input{
+	border: solid 2px;
+	width:300px;
+
+}

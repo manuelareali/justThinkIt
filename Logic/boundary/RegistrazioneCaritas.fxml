@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bean.RegistraCaritasBoundary">
+   <children>
+      <TextField fx:id="cittadiResidenza" layoutX="35.0" layoutY="142.0" prefHeight="26.0" prefWidth="230.0" promptText="Roma" />
+      
+      <TextField fx:id="via" layoutX="35.0" layoutY="204.0" promptText="luigi settembrini" />
+      <TextField fx:id="civico" layoutX="198.0" layoutY="204.0" prefHeight="25.0" prefWidth="67.0" promptText="54" />
+      <TextField fx:id="telefono" layoutX="68.0" layoutY="310.0" prefHeight="26.0" prefWidth="198.0" promptText="656589645" />
+      <Text layoutX="36.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Via" />
+      <Text layoutX="198.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="N° Civico" />
+      <Text layoutX="39.0" layoutY="328.0" strokeType="OUTSIDE" strokeWidth="0.0" text="+39" />
+      <Text layoutX="36.0" layoutY="302.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telefono" />
+      <ToolBar prefHeight="25.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <items>
+            <Button fx:id="backButton" mnemonicParsing="false" onAction="#backButtonPressed" text="Indietro" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Registrazione come Caritas" translateX="115.0">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+         </items>
+      </ToolBar>
+      <TextField fx:id="nomeCaritas" layoutX="36.0" layoutY="88.0" prefHeight="26.0" prefWidth="230.0" promptText="es. Mario" />
+      <TextField fx:id="email" layoutX="35.0" layoutY="252.0" prefHeight="26.0" prefWidth="230.0" promptText="es. mariorossi@gmail.com" />
+      <Text layoutX="36.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome della Caritas" />
+      <Text layoutX="35.0" layoutY="247.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" />
+      <Text layoutX="334.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
+      <Text layoutX="334.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Conferma Password" />
+      <Text layoutX="35.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Città di Residenza" />
+      <Text layoutX="35.0" layoutY="363.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tipologia:" />
+      <CheckBox fx:id="type" layoutX="132.0" layoutY="350.0" mnemonicParsing="false" text="Cibo" />
+      <CheckBox fx:id="type2" layoutX="197.0" layoutY="350.0" mnemonicParsing="false" text="Vestiario" />
+      <Separator layoutX="299.0" layoutY="82.0" orientation="VERTICAL" prefHeight="285.0" prefWidth="1.0" />
+      <Button fx:id="completaButton" layoutX="335.0" layoutY="378.0" mnemonicParsing="false" onAction="#completaButtonPressed" prefHeight="38.0" prefWidth="230.0" text="Completa la registrazione" />
+      <PasswordField fx:id="passwordCaritas" layoutX="335.0" layoutY="91.0" prefHeight="26.0" prefWidth="230.0" />
+      <PasswordField fx:id="confermaPassCaritas" layoutX="335.0" layoutY="143.0" prefHeight="26.0" prefWidth="230.0" />
+      <Text fx:id="passwordMatch" fill="RED" layoutX="359.0" layoutY="363.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Le password non corrispondono!" wrappingWidth="181.336669921875" />
+      <Text layoutX="334.0" layoutY="239.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Le Caritas offrono un serivzio insostituibile, ottieni il supporto di cui hai bisogno!" wrappingWidth="230.00000417232513" />
+   </children>
+</AnchorPane>

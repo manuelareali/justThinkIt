@@ -1,0 +1,191 @@
+@charset "ISO-8859-1";
+body{
+	background:#f2f2f2;
+}
+
+.header{
+	height: 60px;
+	background: red;
+	overflow: hidden;
+	border-radius: 3px 3px 0 0;
+	box-shadow: 0 px px 0 rgba(0,0,0,.2);	
+}
+
+.header h3{
+	position:absolute;
+	left:580px;
+	text-align:center;
+	color:white;
+}
+
+body, html {
+  height: 100%;
+  background: bg-light;
+}
+
+.bg-light {
+  /* The image used */
+  
+
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+
+  background-size: cover;
+}
+
+
+.h1, h1 {
+	color:white;
+	padding:5px 0px 0px 0px;
+    font-size: 40px;
+    font-family: comics soon;
+}
+
+
+.btn-light{	
+    color: #fff;
+    width:200px;
+    background-color: red;
+    border-radius: 10px;
+    border: none;
+	outline:none;
+	color: #fff;
+	font-size:18px;
+	font-weight:bold;
+}
+
+
+.btn-light:hover
+{
+	cursor: pointer;
+	background:yellow;
+	color: #000;
+}
+
+
+.indietro{
+	position: absolute;
+	top:88%;
+	font-size:18px;
+	left:5%;
+}
+
+
+.check{
+	position:absolute;
+	top:16%;
+	left:1%;
+	font-weight:bold;
+	font-size:20px;
+}
+
+
+.hidden
+	{
+	position:absolute;
+ 	left:0px;
+ 	top:-500px;
+ 	width:1px;
+ 	height:1px;
+ 	overflow:hidden;
+ 	}
+ 	
+.cordinate{
+	position:absolute;
+	top:10%;
+	left:61%;
+}
+
+
+.don {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+
+.don .popuptext {
+  visibility: hidden;
+  width: 160px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -80px;
+}
+
+
+.don .popuptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+
+.don .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;} 
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+}
+.container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+    width: 100%;
+    padding-right: var(--bs-gutter-x,18.75rem);
+    padding-left: var(--bs-gutter-x,18.75rem);
+    margin-right: auto;
+    margin-left: auto;
+    margin-top:  var(--bs-gutter-y,18.75rem);;
+}
+
+.map {
+	width: 1030px;
+	height: 530px;
+}
+
+.my-5{
+	margin-top: 2rem!important;
+    margin-bottom: 5rem!important;
+    margin-left: 28rem!important;
+}
+
+.my-3{
+	margin-top:2rem!important;
+	margin-left: 28rem!important;
+}
+
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
+@import "../node_modules/bootstrap/scss/mixins";
+@import "../node_modules/bootstrap/scss/root";
+@import "../node_modules/bootstrap/scss/reboot";
+@import "../node_modules/bootstrap/scss/type";
+@import "../node_modules/bootstrap/scss/images";
+@import "../node_modules/bootstrap/scss/containers";
+@import "../node_modules/bootstrap/scss/grid";
