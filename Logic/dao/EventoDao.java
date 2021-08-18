@@ -69,14 +69,12 @@ public class EventoDao {
    	String sql = " call visualizza_eventi_proposti_caritas() ";
 	   	listEv.clear();
 		ResultSet res = null;
-		int i = 0;
 		try (Connection conn = connector.getConnection();
 	            PreparedStatement stmt = conn.prepareStatement(sql)) {
 	            res = stmt.executeQuery();
 	
 	           while (res.next()) {
-	        	   listEv.add(new EventTab(res.getInt("Id"),res.getString("nomeEvento"),res.getString("NomeCaritas"), res.getString("NoteEvento"), res.getString("TipoEvento"), res.getString("Completato")));	  
-	        	   i++;
+	        	   listEv.add(new EventTab(res.getInt("Id"),res.getString("nomeEvento"),res.getString("NomeCaritas"), res.getString("NoteEvento"), res.getString("TipoEvento"), res.getString("Completato")));
 	           }
 	       } catch (SQLException ex) {
 	           logger.debug(ex.getMessage());
