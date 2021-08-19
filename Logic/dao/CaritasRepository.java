@@ -50,7 +50,7 @@ public class CaritasRepository {
 
   public CaritasUser getCaritasByID(int id) {
 
-        String sql = "SELECT  NomeCaritas, IndirizzoCaritas, Tipologia, RecapitoTel FROM caritas WHERE CodiceCaritas=?";
+        String sql = "SELECT  NomeCaritas, IndirizzoCaritas,  utenti.Email, Tipologia, RecapitoTel FROM caritas JOIN utenti ON caritas.CodiceCaritas = utenti.Id_utente WHERE CodiceCaritas=?";
         ResultSet rs = null;
         CaritasUser carUsr = new CaritasUser();
 
@@ -65,6 +65,7 @@ public class CaritasRepository {
                 carUsr.setNome(rs.getString("NomeCaritas"));
                 carUsr.setId(id);
                 carUsr.setIndirizzo(rs.getString("IndirizzoCaritas"));
+                carUsr.setEmail(rs.getString("Email"));
                 carUsr.setTipologia(rs.getString("Tipologia"));
                 carUsr.setRecapitoTel(rs.getString("RecapitoTel"));
                

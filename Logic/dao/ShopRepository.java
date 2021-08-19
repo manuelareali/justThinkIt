@@ -73,6 +73,7 @@ public class ShopRepository {
                 shopUser.setIndirizzo(rs.getString("IndirizzoNeg"));
                 shopUser.setTipologia(rs.getString("Tipologia"));
                 shopUser.setRecapitoTel(rs.getString("RecapitoTel"));
+                shopUser.setEmail(rs.getString("Email"));
             }
 
         } catch (SQLException ex) {
@@ -88,12 +89,5 @@ public class ShopRepository {
 
 
    
-    public void deleteNegozio(int id) {
-     
-    	UserDao userd= new UserDao();
-    	userd.deleteVolunteer(id);
-      
-    }
-
  
 }

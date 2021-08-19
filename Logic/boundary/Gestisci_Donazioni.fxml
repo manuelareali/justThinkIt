@@ -11,9 +11,10 @@
    <children>
       <TableView fx:id="table" layoutX="26.0" layoutY="82.0" onMouseClicked="#donationSelect" prefHeight="334.0" prefWidth="603.0">
         <columns>
-          <TableColumn fx:id="tipologia" prefWidth="75.0" text="Tipo" />
-          <TableColumn fx:id="descrizione" prefWidth="255.0" text="Descrizione" />
-            <TableColumn fx:id="indirizzo" prefWidth="204.0" text="Indirizzo" />
+            <TableColumn fx:id="nomeVolontario" prefWidth="108.0" text="Nome Volontario" />
+          <TableColumn fx:id="tipologia" prefWidth="140.0" text="Tipo" />
+          <TableColumn fx:id="descrizione" prefWidth="140.0" text="Descrizione" />
+            <TableColumn fx:id="indirizzo" prefWidth="140.0" text="Indirizzo" />
             <TableColumn fx:id="stato" prefWidth="74.0" text="Stato" />
         </columns>
       </TableView>

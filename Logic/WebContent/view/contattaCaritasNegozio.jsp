@@ -2,11 +2,12 @@
 	pageEncoding="ISO-8859-1"%>
 
 <%@ page import="beanweb.EmailBoundary"%>
+<%@ page import="beanweb.ShopHomeBoundary"%>
 
 <%
 Class.forName("com.mysql.jdbc.Driver");
 	if(request.getParameter("OK")!=null){
-		if(EmailBoundary.getInstance().sendMessage(request.getParameter("codice_mittente"),request.getParameter("codice_destinatario"), request.getParameter("Messaggio"), request.getParameter("oggetto")) == true){
+		if(EmailBoundary.getInstance().sendMessage(ShopHomeBoundary.getInstance().getEmailShop(),request.getParameter("codice_destinatario"), request.getParameter("Messaggio"), request.getParameter("oggetto")) == true){
 			
 %>
 <jsp:forward page="homeCaritas.jsp" />
@@ -47,8 +48,8 @@ Class.forName("com.mysql.jdbc.Driver");
 			<div class="container text-center my-5">
 				<div class="row">
 					<div class="col">
-						<input type="text" id="codice_mittente" name="codice_mittente"
-							placeholder="Mittente" />
+						<input type="text" id="<%out.println(ShopHomeBoundary.getInstance().getEmailShop()); %>" name="<%out.println(ShopHomeBoundary.getInstance().getEmailShop()); %>"
+							placeholder="<%out.println(ShopHomeBoundary.getInstance().getEmailShop()); %>" />
 					</div>
 					<div class="col">
 						<input type="text" id="codice_destinatario"

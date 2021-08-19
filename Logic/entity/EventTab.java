@@ -25,25 +25,22 @@ public class EventTab {
 	private SimpleStringProperty statoEvento;
 	private SimpleIntegerProperty codiceNegozio;
 	private SimpleStringProperty nomeNegozio;
-	
-
+	private SimpleStringProperty emailCaritas;
+	private SimpleStringProperty emailNegozio;
 
     
 	
 	
 	
-	public SimpleIntegerProperty getNumPartecipanti() {
-		return numPartecipanti;
-	}
 
-	public void setNumPartecipanti(SimpleIntegerProperty numPartecipanti) {
-		this.numPartecipanti = numPartecipanti;
-	}
 
-	public EventTab(int id, String nomeEvento, String noteEvento, float prezzoEvento,
-			String nomeNegozio,   int codiceNeg) {
+
+
+	public EventTab(int id, String nomeEvento,String nomeNegozio, String emailNegozio,float prezzoEvento, String noteEvento, 
+			 int codiceNeg) {
 		this.id = new SimpleIntegerProperty(id);	
 		this.nomeEvento = new SimpleStringProperty(nomeEvento);	
+		this.emailNegozio= new SimpleStringProperty(emailNegozio);	
 		this.prezzoEvento = new SimpleFloatProperty(prezzoEvento);
 		this.noteEvento = new SimpleStringProperty(noteEvento);
 		this.nomeNegozio = new SimpleStringProperty(nomeNegozio);
@@ -68,9 +65,10 @@ public class EventTab {
 		this.codiceCaritas = new SimpleIntegerProperty(idCaritas);
 	}
 
-	public EventTab(String nomeEvento, String nomeCaritas, String noteEvento, float prezzoEvento, int codiceCaritas) {
+	public EventTab(String nomeEvento,String nomeCaritas, String emailCaritas, String noteEvento, float prezzoEvento, int codiceCaritas) {
 		this.nomeEvento = new SimpleStringProperty(nomeEvento);
-		this.nomeCaritas = new SimpleStringProperty(nomeCaritas);
+		this.emailCaritas = new SimpleStringProperty(emailCaritas);
+		this.nomeNegozio = new SimpleStringProperty(nomeCaritas);
 		this.codiceCaritas = new SimpleIntegerProperty(codiceCaritas);
 		this.prezzoEvento = new SimpleFloatProperty(prezzoEvento);
 		this.noteEvento = new SimpleStringProperty(noteEvento);
@@ -78,7 +76,7 @@ public class EventTab {
 		this.importoRaggiunto = new SimpleFloatProperty(0);
 		this.rapportoDenaro = new SimpleStringProperty("");
 		this.id  = new SimpleIntegerProperty(0);
-
+		this.nomeCaritas = new SimpleStringProperty(nomeCaritas);
 	}
 	
 	public EventTab(int id, String nomeEvento, String nomeCaritas, String noteEvento, String tipoEvento, String statoEvento) {
@@ -103,7 +101,31 @@ public class EventTab {
 	public String getNomeEvento() {
 		return this.nomeEvento.get();
 	}
+	
+	public String getEmailNegozio() {
+		return emailNegozio.get();
+	}
 
+	public void setEmailNegozio(String emailNegozio) {
+		this.emailNegozio.set(emailNegozio);
+	}
+	
+	public String getEmailCaritas() {
+		return emailCaritas.get();
+	}
+
+	
+	public void setEmailCaritas(String emailCaritas) {
+		this.emailCaritas.set(emailCaritas);
+	}
+
+	public Integer getNumPartecipanti() {
+		return numPartecipanti.get();
+	}
+
+	public void setNumPartecipanti(Integer numPartecipanti) {
+		this.numPartecipanti.set(numPartecipanti);
+	}
 	public void setNomeEvento(String nomeEvento) {
 		this.nomeEvento.set(nomeEvento);
 	}

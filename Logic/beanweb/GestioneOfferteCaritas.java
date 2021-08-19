@@ -26,8 +26,13 @@ public class GestioneOfferteCaritas {
 
 	 
 
-	  public void accetta(String idEv) {
+	  public boolean accetta(String idEv) {
+		  if(idEv == null || idEv.equals("")) {
+	    		return false;
+		  }else {
 	    	proponi.confermaEvento(Integer.parseInt(idEv));
+	    	return true;
+		  }
 	    }
 
     public List<Offerte> loadOfferte(){

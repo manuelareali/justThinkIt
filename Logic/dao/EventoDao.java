@@ -47,7 +47,7 @@ public class EventoDao {
 	            res = stmt.executeQuery();
 	
 	           while (res.next()) {
-	        	   listEv.add(new EventTab( res.getString(nomeEvento),res.getString("NomeCaritas"), res.getString(noteEvento), res.getFloat("PrezzoEvento"), res.getInt("CodiceCaritas")));
+	        	   listEv.add(new EventTab( res.getString(nomeEvento),res.getString("NomeCaritas"), res.getString("Email"), res.getString(noteEvento), res.getFloat("PrezzoEvento"), res.getInt("CodiceCaritas")));
 	        	   this.listEv.get(i).setId(res.getInt("Id"));
 	        	   this.listEv.get(i).setStatoEvento(res.getString(completato));
 	        	   this.listEv.get(i).setImportoRaggiunto(res.getFloat("Importo"));	        	 
@@ -76,7 +76,7 @@ public class EventoDao {
 	            res = stmt.executeQuery();
 	
 	           while (res.next()) {
-	        	   listEv.add(new EventTab(res.getInt("Id"),res.getString(nomeEvento),res.getString("NomeCaritas"), res.getString(noteEvento), res.getString("TipoEvento"), res.getString(completato)));
+	        	   listEv.add(new EventTab(res.getInt("Id"),res.getString(nomeEvento),res.getString("NomeCaritas"), res.getString("NoteEvento"), res.getString("TipoEvento"), res.getString(completato)));
 	           }
 	       } catch (SQLException ex) {
 	           logger.debug(ex.getMessage());
@@ -99,7 +99,7 @@ public class EventoDao {
 	            res = stmt.executeQuery();
 	
 	           while (res.next()) {
-	        	   this.listEv.add(new EventTab( res.getInt("id") ,res.getString(nomeEvento), res.getString(noteEvento), res.getFloat("PrezzoEvento"),res.getString("NomeNegozio"),  res.getInt("CodiceNegozio")));
+	        	   this.listEv.add(new EventTab( res.getInt("id") ,res.getString(nomeEvento),res.getString("NomeNegozio"),res.getString("Email"), res.getFloat("PrezzoEvento"), res.getString(noteEvento),  res.getInt("CodiceNegozio")));
 	        	   EventTab temp = this.listEv.get(i);
 	        	   temp.setStatoEvento(res.getString(completato));
 	        	   temp.setImportoRaggiunto(res.getFloat("Importo"));

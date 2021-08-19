@@ -10,13 +10,30 @@ public class DonazioneTab {
 	private SimpleStringProperty descrizione;
 	private SimpleStringProperty indirizzo;
 	private SimpleStringProperty stato;
+	private SimpleStringProperty emailVolontario;
+	private SimpleStringProperty nomeVolontario;
+	
+	
+	
+	public String getNomeVolontario() {
+		return nomeVolontario.get();
+	}
 
-	
-	
-	
-	public DonazioneTab(int id, int codVol, String tipo, String desc, String ind, String stato) {
+
+
+
+	public void setNomeVolontario(String nomeVolontario) {
+		this.nomeVolontario.set(nomeVolontario); 
+	}
+
+
+
+
+	public DonazioneTab(String nomeVolontario,int id, String emailVolontario, int codVol, String tipologia, String desc, String ind, String stato) {
+		this.nomeVolontario = new SimpleStringProperty(nomeVolontario);
 		this.idDon = new SimpleIntegerProperty(id);
-		this.tipologia = new SimpleStringProperty(tipo);
+		this.emailVolontario = new SimpleStringProperty(emailVolontario);
+		this.tipologia = new SimpleStringProperty(tipologia);
 		this.descrizione = new SimpleStringProperty(desc);
 		this.indirizzo = new SimpleStringProperty(ind);
 		this.codVol = new SimpleIntegerProperty(codVol);
@@ -26,6 +43,14 @@ public class DonazioneTab {
 	
 	
 	
+	public String getEmailVolontario() {
+		return emailVolontario.get();
+	}
+
+	public void setEmailVolontario(String emailVolontario) {
+		this.emailVolontario.set(emailVolontario);
+	}
+
 	public String getTipologia() {
 		return this.tipologia.get();
 	}

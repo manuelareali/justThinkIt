@@ -91,8 +91,9 @@ if (request.getParameter("contatta") != null) {
 				<thead>
 					<tr>
 						<th scope="col">ID EVENTO</th>
-						<th scope="col">EVENTO</th>
-						<th scope="col">CARITAS</th>
+						<th scope="col">NOME EVENTO</th>
+						<th scope="col">NOME CARITAS</th>
+						<th scope="col">EMAIL CARITAS</th>
 						<th scope="col">NOTE EVENTO</th>
 						<th scope="col">IMPORTO RAGGIUNTO</th>
 						<th scope="col">STATO EVENTO</th>
@@ -120,6 +121,11 @@ if (request.getParameter("contatta") != null) {
 						<td>
 							<%
 							out.println(list.get(i).getNomeCaritas());
+							%>
+						</td>
+						<td>
+							<%
+							out.println(list.get(i).getEmailCaritas());
 							%>
 						</td>
 						<td>

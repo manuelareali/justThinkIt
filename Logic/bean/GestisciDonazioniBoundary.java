@@ -32,6 +32,9 @@ public class GestisciDonazioniBoundary {
 	private TableView<DonazioneTab> table;
 
 	@FXML
+	private TableColumn<DonazioneTab, String> nomeVolontario;
+	
+	@FXML
 	private TableColumn<DonazioneTab, String> tipologia;
 
 	@FXML
@@ -42,6 +45,8 @@ public class GestisciDonazioniBoundary {
 
 	@FXML
 	private TableColumn<DonazioneTab, String> stato;
+	
+  
 
 	@FXML
 	private Button ritira;
@@ -127,8 +132,9 @@ public class GestisciDonazioniBoundary {
 		this.caritas = idCar;
 		this.listDon = gestDon.visualizzaDonazioni(caritas);
 		ObservableList<DonazioneTab> data = FXCollections.observableArrayList(this.listDon);
+		this.nomeVolontario.setCellValueFactory(new PropertyValueFactory<>("nomeVolontario"));
 		this.tipologia.setCellValueFactory(new PropertyValueFactory<>("tipologia"));
-		this.descrizione.setCellValueFactory(new PropertyValueFactory<>("Descrizione"));
+		this.descrizione.setCellValueFactory(new PropertyValueFactory<>("descrizione"));
 		this.indirizzo.setCellValueFactory(new PropertyValueFactory<>("indirizzo"));
 		this.stato.setCellValueFactory(new PropertyValueFactory<>("stato"));
 		table.setItems(data);

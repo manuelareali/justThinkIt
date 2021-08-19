@@ -10,6 +10,7 @@ public class UserHomeBoundary{
 	private int userId;
 	private String nome;
 	private String cognome;
+	private String email;
 	
 	private static UserHomeBoundary instance = null;
 	
@@ -35,14 +36,19 @@ public class UserHomeBoundary{
     }
  
 
-	public void initData(int id, String nome, String cognome) {
+	public void initData(int id, String nome, String cognome, String email) {
         this.userId = id;
         this.nome = nome;
         this.cognome = cognome;
+        this.email = email;
     }
 	
 	public String getNomeVolunteer() {
 		return this.nome + " "+ this.cognome;
+	}
+	
+	public String getEmail() {
+		return this.email;
 	}
 }
 

@@ -2,14 +2,14 @@
 	pageEncoding="ISO-8859-1"%>
 
 <%@ page import="beanweb.EmailBoundary"%>
-
+<%@ page import="beanweb.CaritasHomeBoundary"%>
 <%
 Class.forName("com.mysql.jdbc.Driver");
 	if(request.getParameter("OK")!=null){
-		if(EmailBoundary.getInstance().sendMessage(request.getParameter("codice_mittente"),request.getParameter("codice_destinatario"), request.getParameter("messaggio"), request.getParameter("Oggetto")) == true){
+		if(EmailBoundary.getInstance().sendMessage(CaritasHomeBoundary.getInstance().getEmail(),request.getParameter("codice_destinatario"), request.getParameter("messaggio"), request.getParameter("Oggetto")) == true){
 			
 %>
-<jsp:forward page="homeCaritas.jsp" />
+<jsp:forward page="gestisciDonazioniCaritas.jsp" />
 <%			
 		}
 
@@ -38,7 +38,7 @@ Class.forName("com.mysql.jdbc.Driver");
 </head>
 <body>
 	<div class="container">
-		<form action="contattaCaritasMap.jsp" name="my" method="POST">
+		<form action="contattaVolontario.jsp" name="my" method="POST">
 
 			<div class="container text-center">
 				<h1>Contattami ti risponderò appena possibile!</h1>
@@ -47,8 +47,8 @@ Class.forName("com.mysql.jdbc.Driver");
 			<div class="container text-center my-5">
 				<div class="row">
 					<div class="col">
-						<input type="text" id="codice_mittente" name="codice_mittente"
-							placeholder="Mittente" />
+						<input type="text" id="<%out.println(CaritasHomeBoundary.getInstance().getEmail()); %>" name="<%out.println(CaritasHomeBoundary.getInstance().getEmail()); %>"
+							placeholder="<%out.println(CaritasHomeBoundary.getInstance().getEmail()); %>" />
 					</div>
 					<div class="col">
 						<input type="text" id="codice_destinatario"
@@ -96,7 +96,7 @@ Class.forName("com.mysql.jdbc.Driver");
 				</div>
 				<div class="col"></div>
 				<div class="col">
-					<a class="button" href="#popup3"><button type="submit"
+					<a class="button" href="#popup6"><button type="submit"
 							class="btn btn-light" name="INVIA" value="INVIA">INVIA</button></a>
 				</div>
 			</div>

@@ -17,8 +17,8 @@
      
       <TableView fx:id="tab" layoutX="39.0" layoutY="69.0" onMouseClicked="#eventClicked" prefHeight="361.0" prefWidth="604.0">
         <columns>
-          <TableColumn fx:id="nomeEvento" prefWidth="150.0" text="Evento" />
-          <TableColumn fx:id="nomeNegozio" prefWidth="120.0" text="Negozio" />
+          <TableColumn fx:id="nomeEvento" prefWidth="150.0" text="Nome Evento" />
+          <TableColumn fx:id="nomeNegozio" prefWidth="120.0" text="Nome Negozio" />
             <TableColumn fx:id="noteEvento" prefWidth="150.0" text="Note Evento" />
             <TableColumn fx:id="importo" prefWidth="105.0" text="Importo" />
             <TableColumn fx:id="stato" prefWidth="77.0" text="Stato" />

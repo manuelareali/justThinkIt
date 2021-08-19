@@ -7,6 +7,7 @@ public class ShopHomeBoundary {
 
 	private int idShop;
 	private String nome;
+	private String email;
 	
 	private GestisciEventiBoundary gestisciBoundary;
 	private GestisciEventiPropCaritas gestisciPropCar;
@@ -48,16 +49,20 @@ public class ShopHomeBoundary {
 
 
 
-	public void initData(int id, String nome) {
+	public void initData(int id, String nome,String email) {
 		this.idShop = id;	
 		this.nome = nome;
+		this.email = email;
 	}
 
 
 	public String getNomeShop() {
 		return this.nome;
 	}
-
+	
+	public String getEmailShop() {
+		return this.email;
+	}
 
 
 }

@@ -77,6 +77,7 @@ BachecaBoundary.getInstance().creaDonazione();
 			<caption style="visibility: hidden;">Bacheca</caption>
 				<thead>
 					<tr>
+						<th scope="col">EMAIL CARITAS</th>
 						<th scope="col">TIPOLOGIA</th>
 						<th scope="col">URGENZA</th>
 						<th scope="col">DESCRIZIONE</th>

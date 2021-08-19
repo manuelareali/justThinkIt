@@ -15,7 +15,7 @@ public class GestisciEventiCaritasController {
 
 	public List<EventTab> caricaEventi(int idCaritas) {
 
-		return this.eventDao.cercaEventiCaritas(idCaritas);
+		return eventDao.cercaEventiCaritas(idCaritas);
 
 	}
 	

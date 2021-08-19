@@ -35,7 +35,7 @@ public class CaritasHomeController {
 			((bean.CaritasHomeBoundary) caritasHomeBoundary).initDataC(currentUser.getId(), currentUser.getNome());
 		}
 		else if (caritasHomeBoundary.getClass() == beanweb.CaritasHomeBoundary.class) {
-			((beanweb.CaritasHomeBoundary) caritasHomeBoundary).initDataC(currentUser.getId(), currentUser.getNome());
+			((beanweb.CaritasHomeBoundary) caritasHomeBoundary).initDataC(currentUser.getId(), currentUser.getNome(), currentUser.getEmail());
 		}
 	}
 

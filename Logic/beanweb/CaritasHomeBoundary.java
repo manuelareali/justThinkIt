@@ -7,7 +7,7 @@ public class CaritasHomeBoundary {
 	
 	private int idCar;
 	private String nome;
-	
+	private String email;
 	private static CaritasHomeBoundary instance = null;
 
 	private GestisciTurniBoundary gestTurn;
@@ -66,13 +66,18 @@ public class CaritasHomeBoundary {
 			bacheca.getInstance().loadFormBoundary(idCar);
 	}
 
-	public void initDataC(int id, String nome) {
+	public void initDataC(int id, String nome,String email) {
 		this.idCar = id;
 		this.nome = nome;
+		this.email = email;
 	}
 	
 	public String getNomeCaritas() {
 		return this.nome;
+	}
+	
+	public String getEmail() {
+		return this.email;
 	}
 
 }

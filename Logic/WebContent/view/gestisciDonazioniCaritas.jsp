@@ -108,7 +108,9 @@ if (request.getParameter("RITIRA DONAZIONE") != null) {
 					<thead>
 						<tr>
 							<th scope="col">ID DONAZIONE</th>
-							<th scope="col">TIPO</th>
+							<th scope="col">NOME VOLONTARIO</th>
+							<th scope="col">EMAIL VOLONTARIO</th>
+							<th scope="col">TIPOLOGIA</th>
 							<th scope="col">DESCRIZIONE</th>
 							<th scope="col">INDIRIZZO</th>
 							<th scope="col">STATO</th>
@@ -128,7 +130,16 @@ if (request.getParameter("RITIRA DONAZIONE") != null) {
 								out.println(list.get(i).getIdDon());
 								%>
 							</td>
-							
+							<td>
+								<%
+								out.println(list.get(i).getNomeVolontario());
+								%>
+							</td>
+							<td>
+								<%
+								out.println(list.get(i).getEmailVolontario());
+								%>
+							</td>
 							<td>
 								<%
 								out.println(list.get(i).getTipologia());

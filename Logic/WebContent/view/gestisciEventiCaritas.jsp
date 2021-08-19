@@ -96,6 +96,7 @@ if(request.getParameter("Evento") != null){
 							<th scope="col">ID EVENTO</th>
 							<th scope="col">EVENTO</th>
 							<th scope="col">NEGOZIO</th>
+							<th scope="col">EMAIL NEGOZIO</th>
 							<th scope="col">NOTE EVENTO</th>
 							<th scope="col">IMPORTO</th>
 							<th scope="col">STATO</th>
@@ -125,6 +126,12 @@ if(request.getParameter("Evento") != null){
 								out.println(list.get(i).getNomeNegozio());
 								%>
 							
+							</td>
+							<td>
+							<%
+								out.println(list.get(i).getEmailNegozio());
+								%>
+							</td>
 							<td>
 								<%
 								out.println(list.get(i).getNoteEvento());

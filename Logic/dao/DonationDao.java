@@ -100,7 +100,7 @@ public void eseguiQuery(int idDon, String sql) {
 	            res = stmt.executeQuery();
 	
 	           while (res.next()) {
-	        	   listDon.add(new DonazioneTab(res.getInt("cod_dona"),res.getInt("cod_volontario"), res.getString("tipo"), res.getString("descrizione"), res.getString("IndirizzoVolontario"), res.getString("consegnato")));
+	        	   listDon.add(new DonazioneTab(res.getString("Nome"),res.getInt("cod_dona"),res.getString("Email"), res.getInt("cod_volontario"), res.getString("tipologia"), res.getString("descrizione"), res.getString("IndirizzoVolontario"), res.getString("consegnato")));
 	           }
 	       } catch (SQLException ex) {
 	           logger.debug(ex.getMessage());
