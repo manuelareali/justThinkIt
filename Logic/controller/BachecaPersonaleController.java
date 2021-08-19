@@ -28,7 +28,7 @@ public class BachecaPersonaleController {
 		List<Necessita> necessita = bacheca.visualizzaNecessita(idCar);
 		bachecaE.setNecessita(necessita);
 	
-		return necessita;
+		return bachecaE.getNecessita();
 	}
 	
 }
