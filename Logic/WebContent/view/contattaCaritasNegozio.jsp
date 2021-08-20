@@ -95,13 +95,13 @@ Class.forName("com.mysql.jdbc.Driver");
 		<div class="container my-4">
 			<div class="row">
 				<div class="col">
-					<a class="button" href="#popup3"><button
+					<a class="button" href="#popup7"><button
 							class="btn btn-warning" type="submit" name="INDIETRO"
 							value="INDIETRO">Indietro</button></a>
 				</div>
 				<div class="col"></div>
 				<div class="col">
-					<a class="button" href="#popup3"><button type="submit"
+					<a class="button" href="#popup7"><button type="submit"
 							class="btn btn-light" name="INVIA" value="INVIA">INVIA</button></a>
 				</div>
 			</div>

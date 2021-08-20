@@ -18,12 +18,8 @@ public class EmailBoundary {
 	private static Logger logger = LoggerFactory.getLogger(EmailBoundary.class.getName());
 	private EmailController emailC;
 	
-	private TextField[] text;
+
 	private TextArea[] textMex;
-	
-	public EmailBoundary() {
-		trigger = new Trigger();
-	}
 	
 	private Trigger trigger;
 	@FXML
@@ -44,10 +40,16 @@ public class EmailBoundary {
 	@FXML
 	private Button invia;
 
+
+	public EmailBoundary() {
+		trigger = new Trigger();
+	}
+	
+	
 	@FXML
 	public int sendMessage(ActionEvent event) {
 		int i = 0;
-		if (checker() ) {
+		if (!mittente.getText().isEmpty() && !destinatario.getText().isEmpty() && !textMex[0].getText().isEmpty()) {
 		i = emailC.sendMessageController(mittente.getText(), destinatario.getText(), messaggio.getText(),
 				oggetto.getText());
 
@@ -64,28 +66,13 @@ public class EmailBoundary {
 		return 0;
 	}
 
-	public boolean checker() {
-		// Controlla che non ci siano campi lasciati vuoti
-		
-			if (mittente.getText().isEmpty() || destinatario.getText().isEmpty() || textMex[0].getText().isEmpty() ){
-				return false;
-			}
-		
-		return true;
-	}
-	
+
 
 	
 	@FXML
 	void initialize() {
-
-		emailC = new EmailController();
-		text = new TextField[] {
-				this.destinatario,
-				this.mittente,
-				this.oggetto
-		};
 		
+		emailC = new EmailController();
 		textMex = new TextArea[]{this.messaggio};
 	}
 

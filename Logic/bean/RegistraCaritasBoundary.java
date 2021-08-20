@@ -87,7 +87,7 @@ public class RegistraCaritasBoundary implements Initializable {
 		TransizionePagine check = new TransizionePagine();
 		int resCheck = checker();
 		if (resCheck != 1) {
-			if(check.isNumeric(telefono.getText()) == true) {
+			if(check.isNumeric(telefono.getText())) {
 			try {
 
 			 regController.completaButtonPressed(nomeCaritas.getText(),tipo, passwordCaritas.getText(),

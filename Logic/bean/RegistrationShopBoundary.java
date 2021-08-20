@@ -85,7 +85,7 @@ public class RegistrationShopBoundary implements Initializable {
 	void registraNegozioPressed(ActionEvent event) {
 		TransizionePagine check = new TransizionePagine();
 	if(checker() == 0) {
-		if(check.isNumeric(telNeg.getText()) == true){
+		if(check.isNumeric(telNeg.getText())){
 		try {
 			 regNeg.registraNegozioPressed(tipo, nomeNegozio.getText(), passwordNeg.getText(),
 					viaNeg.getText() + " " + civicoNeg.getText(), telNeg.getText(), mailNeg.getText(),

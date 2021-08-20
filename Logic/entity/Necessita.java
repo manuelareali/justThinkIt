@@ -38,7 +38,7 @@ public class Necessita {
 	}
 
 	public void setEmail(String email) {
-		this.email.set(email);;
+		this.email.set(email);
 	}
 
 

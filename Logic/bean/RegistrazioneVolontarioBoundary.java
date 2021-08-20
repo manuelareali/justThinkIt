@@ -97,7 +97,7 @@ public class RegistrazioneVolontarioBoundary implements Initializable {
 		TransizionePagine check = new TransizionePagine();
 		
 		if (checker() == 0) {
-			if(check.isNumeric(tel.getText()) == true) {
+			if(check.isNumeric(tel.getText())) {
 			try {
 				
 			 regC.completaButtonPressed(nome.getText(), cognome.getText(), password.getText(),
