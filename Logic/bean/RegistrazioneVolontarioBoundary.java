@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import controller.RegistrazioneVolontarioController;
+import exception.MyException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
@@ -69,7 +71,7 @@ public class RegistrazioneVolontarioBoundary implements Initializable {
 	private Text passwordMatch;
 
 	@FXML
-	private TextField date;
+	private DatePicker date;
 
 
 
@@ -88,14 +90,18 @@ public class RegistrazioneVolontarioBoundary implements Initializable {
 	}
 	
 	
+	
 	@FXML
 	void registraVolontarioPressed(ActionEvent event) {
-
+		
+		TransizionePagine check = new TransizionePagine();
+		
 		if (checker() == 0) {
+			if(check.isNumeric(tel.getText()) == true) {
 			try {
 				
 			 regC.completaButtonPressed(nome.getText(), cognome.getText(), password.getText(),
-						via.getText(),tel.getText(), mail.getText(), date.getText(), cittaRes.getText());
+						via.getText(),tel.getText(), mail.getText(), date.getValue().toString(), cittaRes.getText());
 
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/boundary/Login_boundary.fxml"));
 				Parent root = loader.load();
@@ -107,10 +113,10 @@ public class RegistrazioneVolontarioBoundary implements Initializable {
 				logger.error(e.getMessage());
 			}
 		} else {
-			TransizionePagine check = new TransizionePagine();
+			
 			check.check();
+			}
 		}
-
 	}
 
 	public int checker() {
@@ -125,7 +131,7 @@ public class RegistrazioneVolontarioBoundary implements Initializable {
 		}
 
 		// Valida che i campi password e conferma password siano uguali
-
+		
 		if (password.getText().equals(confermaPass.getText())) {
 			passwordMatch.setVisible(false);
 			return 0;

@@ -83,8 +83,9 @@ public class RegistrationShopBoundary implements Initializable {
 
 	@FXML
 	void registraNegozioPressed(ActionEvent event) {
-	
+		TransizionePagine check = new TransizionePagine();
 	if(checker() == 0) {
+		if(check.isNumeric(telNeg.getText()) == true){
 		try {
 			 regNeg.registraNegozioPressed(tipo, nomeNegozio.getText(), passwordNeg.getText(),
 					viaNeg.getText() + " " + civicoNeg.getText(), telNeg.getText(), mailNeg.getText(),
@@ -100,8 +101,8 @@ public class RegistrationShopBoundary implements Initializable {
 				logger.error(e.getMessage());
 			}
 	}
-		else {
-			TransizionePagine check = new TransizionePagine();
+	}else {
+			
 			check.check();
 			
 		}

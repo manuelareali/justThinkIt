@@ -8,13 +8,15 @@ public class Necessita {
 	private SimpleStringProperty tipologia;
 	private SimpleStringProperty descrizione;
 	private SimpleStringProperty urgenza;
+	private SimpleStringProperty email;
 
-	
-	public Necessita(int nece, String tipo, String descr, String urg) {
+
+	public Necessita(int nece, String tipo, String descr, String urg,String email) {
 		this.descrizione= new SimpleStringProperty(descr);
 		this.tipologia = new SimpleStringProperty(tipo);
 		this.urgenza = new SimpleStringProperty(urg);
 		this.idNece = new SimpleIntegerProperty(nece);
+		this.email = new SimpleStringProperty(email);
 	}
 	
 	public Necessita( String tipo, String descr, String urg) {
@@ -25,9 +27,18 @@ public class Necessita {
 	}
 	
 
-
 	public Necessita() {
 		
+	}
+
+	
+	
+	public String getEmail() {
+		return email.get();
+	}
+
+	public void setEmail(String email) {
+		this.email.set(email);;
 	}
 
 

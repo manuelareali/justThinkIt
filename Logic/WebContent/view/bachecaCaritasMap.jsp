@@ -41,7 +41,7 @@ BachecaBoundary.getInstance().creaDonazione();
 	crossorigin="anonymous">
 
 <title>BACHECA CARITAS</title>
-<link rel="stylesheet" href="../css/bachecaCaritasMap.css">
+<link rel="stylesheet" href="../css/bachecaCaritasMaps.css">
 <link rel="icon" sizes="64x64" href="../img/favicon.png">
 </head>
 <body>
@@ -50,30 +50,29 @@ BachecaBoundary.getInstance().creaDonazione();
 			<h1>Bacheca della Caritas</h1>
 		</div>
 		<form action="bachecaCaritasMap.jsp" name="my" method="POST">
-
+		
+		<div class = "container my-4 text-center">
 			<div class="row">
 				<div class="col">
-					</br>
 					<button class="btn  btn-light" type="submit"
 						name="CONTATTA CARITAS" value="CONTATTA CARITAS">Contatta
 						Caritas</button>
 				</div>
-			</div>
-
-
-			<div class="row">
+		
 				<div class="col">
-					</br>
 					<button class="btn btn-light" type="submit" name="CREA DONAZIONE"
 						value="CREA DONAZIONE">Crea Donazione</button>
 				</div>
-
 			</div>
+			</div>
+
+
+		
 
 
 
 			
-			<table class="table table-hover">
+			<table class="table table-hover text-center">
 			<caption style="visibility: hidden;">Bacheca</caption>
 				<thead>
 					<tr>
@@ -92,6 +91,11 @@ BachecaBoundary.getInstance().creaDonazione();
 					while (i < list.size()) {
 					%>
 					<tr>
+					<td>
+							<%
+							out.println(list.get(i).getEmail());
+							%>
+						</td>
 						<td>
 							<%
 							out.println(list.get(i).getTipologia());

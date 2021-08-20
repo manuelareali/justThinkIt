@@ -9,6 +9,7 @@
 Class.forName("com.mysql.jdbc.Driver");
 
 	if(request.getParameter("OK") != null){
+		if(RegistraCaritasBoundary.isNumeric(request.getParameter("RecapitoTel") ) == true){
 	if (request.getParameter("Password").equalsIgnoreCase(request.getParameter("confermaPassword"))) {
 		 if ((request.getParameter("Tipologia1").equalsIgnoreCase("Cibo")) && request.getParameter("Tipologia2").equalsIgnoreCase("Vestiti")) {
 			if ((RegistraCaritasBoundary.completaButtonPressed(request.getParameter("NomeCaritas"),"Tutto",request.getParameter("IndirizzoCaritas") + " " + request.getParameter("Via") + " "
@@ -40,7 +41,7 @@ if ((RegistraCaritasBoundary.completaButtonPressed(request.getParameter("NomeCar
 <%
 }
 }
-else{
+	}else{
 %>
 <jsp:forward page="registrazioneCaritas.jsp" />
 <%

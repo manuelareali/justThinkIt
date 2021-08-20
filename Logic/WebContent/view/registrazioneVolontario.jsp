@@ -1,16 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<!-- dichiarazione e instanziazione di un loginBean !-->
+	
+<%@ page import="beanweb.TransizionePagine"%>
+	
 <jsp:useBean id="RegistrazioneVolontarioBoundary" scope="request" class="beanweb.RegistrazioneVolontarioBoundary"/>
-
-<!-- mappare gli attributi di un oggetto sui campi della form -->
 <jsp:setProperty name="RegistrazioneVolontarioBoundary" property="*"/>
 
 <%
 Class.forName("com.mysql.jdbc.Driver");
  		if(request.getParameter("OK")!=null){
- 			if ( request.getParameter("confermaPassword").equalsIgnoreCase(request.getParameter("Password"))){
- 				if ((RegistrazioneVolontarioBoundary.registraVolontarioPressed(request.getParameter("Nome"),request.getParameter("Cognome"),request.getParameter("Password"),request.getParameter("indirizzo")+ " "+ request.getParameter("Via")+" "+ request.getParameter("nCivico"),request.getParameter("RecapitoTel"),request.getParameter("Email"),request.getParameter("DataNascita"), request.getParameter("Città"))) == true ){ 			
+ 			if(RegistrazioneVolontarioBoundary.isNumeric(request.getParameter("RecapitoTel")) == true ){
+ 				if ( request.getParameter("confermaPassword").equalsIgnoreCase(request.getParameter("Password"))){
+ 					if ((RegistrazioneVolontarioBoundary.registraVolontarioPressed(request.getParameter("Nome"),request.getParameter("Cognome"),request.getParameter("Password"),request.getParameter("indirizzo")+ " "+ request.getParameter("Via")+" "+ request.getParameter("nCivico"),request.getParameter("RecapitoTel"),request.getParameter("Email"),request.getParameter("DataNascita"), request.getParameter("Città"))) == true ){ 			
 
 %>  					
 					<jsp:forward page="log.jsp"/>
@@ -22,8 +23,13 @@ Class.forName("com.mysql.jdbc.Driver");
 %>
  			<jsp:forward page="registrazioneVolontario.jsp"/>
 <% 		
-	}
- }
+				}
+ 			}else{
+ %>	
+ 			
+ <%}			
+ 			}
+ 
  	
  	
  		if(request.getParameter("INDIETRO") != null){
@@ -75,7 +81,7 @@ Class.forName("com.mysql.jdbc.Driver");
 
 
 				<div class="col-md-4">
-					<label for="validationCustom03" class="form-label">Data di Nascita</label> <input type="text" class="form-control"
+					<label for="validationCustom03" class="form-label">Data di Nascita</label> <input type="date" class="form-control"
 						id= "DataNascita" name= "DataNascita" placeholder="es. 17/03/1995" >
 				</div>
 
@@ -166,7 +172,6 @@ Class.forName("com.mysql.jdbc.Driver");
 					
 			
 				
-			
 
 		
 

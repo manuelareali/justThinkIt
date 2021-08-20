@@ -1,5 +1,8 @@
 package beanweb;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import controller.CaritasHomeController;
 import controller.CercaCaritasController;
 
@@ -8,8 +11,8 @@ import controller.CercaCaritasController;
 public class TransizionePagine {
 	private beanweb.CercaCaritas cercaCaritasBean;
 	private beanweb.CaritasHomeBoundary caritasHomeBoundary;
-	
-				
+
+
 	
 	public void apriMappa(int idUser){
 				cercaCaritasBean = cercaCaritasBean.getInstance();
@@ -25,6 +28,6 @@ public class TransizionePagine {
 	}
 	
 
-
+	
 	
 }

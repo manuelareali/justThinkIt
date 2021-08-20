@@ -84,9 +84,10 @@ public class RegistraCaritasBoundary implements Initializable {
 
 	@FXML
 	public void completaButtonPressed(ActionEvent event) throws SQLException {
-
+		TransizionePagine check = new TransizionePagine();
 		int resCheck = checker();
 		if (resCheck != 1) {
+			if(check.isNumeric(telefono.getText()) == true) {
 			try {
 
 			 regController.completaButtonPressed(nomeCaritas.getText(),tipo, passwordCaritas.getText(),
@@ -101,11 +102,11 @@ public class RegistraCaritasBoundary implements Initializable {
 			} catch (IOException e) {
 				logger.error(e.getMessage());
 			}
-		} else {
-			TransizionePagine check = new TransizionePagine();
+		
+			} else {
 			check.check();
 		}
-
+	}
 	}
 
 	public int checker() {

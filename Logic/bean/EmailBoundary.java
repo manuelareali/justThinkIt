@@ -47,7 +47,7 @@ public class EmailBoundary {
 	@FXML
 	public int sendMessage(ActionEvent event) {
 		int i = 0;
-		if (checker() && !textMex[0].getText().isEmpty()) {
+		if (checker() ) {
 		i = emailC.sendMessageController(mittente.getText(), destinatario.getText(), messaggio.getText(),
 				oggetto.getText());
 
@@ -66,11 +66,11 @@ public class EmailBoundary {
 
 	public boolean checker() {
 		// Controlla che non ci siano campi lasciati vuoti
-		for (int i = 0; i < text.length; i++) {
-			if (text[i].getText().isEmpty()){
+		
+			if (mittente.getText().isEmpty() || destinatario.getText().isEmpty() || textMex[0].getText().isEmpty() ){
 				return false;
 			}
-		}	
+		
 		return true;
 	}
 	

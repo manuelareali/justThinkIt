@@ -95,7 +95,7 @@ Class.forName("com.mysql.jdbc.Driver");
 		<div class="container my-4">
 			<div class="row">
 				<div class="col">
-					<a class="button" href="#popup2"><button
+					<a class="button" href="#popup3"><button
 							class="btn btn-warning" type="submit" name="INDIETRO"
 							value="INDIETRO">Indietro</button></a>
 				</div>
@@ -109,7 +109,7 @@ Class.forName("com.mysql.jdbc.Driver");
 
 
 	
-		<div id="popup2" class="overlay">
+		<div id="popup3" class="overlay">
 			<div class="popup">
 
 				<div class="content">

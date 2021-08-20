@@ -8,12 +8,17 @@ import org.slf4j.LoggerFactory;
 
 import controller.BachecaController;
 import entity.Necessita;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -34,6 +39,18 @@ public class BachecaBoundary {
 
 	@FXML
 	private TextArea vestiti;
+	
+    @FXML
+    private TableView<Necessita> tab;
+	
+    @FXML
+    private TableColumn<Necessita, String> tipologia;
+
+    @FXML
+    private TableColumn<Necessita, String> descrizione;
+
+    @FXML
+    private TableColumn<Necessita, String> urgenza;
 
 	@FXML
 	void creaDonazione(ActionEvent event) {
@@ -94,28 +111,15 @@ public class BachecaBoundary {
 		BachecaController bachecaController = new BachecaController();
 		List<Necessita> necessita = bachecaController.loadForm(idCar);
 
-		for (int i = 0; i < necessita.size(); i++) {
-			Necessita tmp = necessita.get(i);
+		ObservableList<Necessita> data = FXCollections.observableArrayList(necessita);
+		descrizione.setCellValueFactory(new PropertyValueFactory<>("Descrizione"));
+		tipologia.setCellValueFactory(new PropertyValueFactory<>("Tipologia"));
+		urgenza.setCellValueFactory(new PropertyValueFactory<>("Urgenza"));
 
-			switch (tmp.getTipologia()) {
-			case "Vestiti":
-				vestiti.setText(tmp.getDescrizione());
-				break;
-
-			case "Cibo":
-				cibo.setText(tmp.getDescrizione());
-				break;
-			case "Varie":
-				varie.setText(tmp.getDescrizione());
-				break;
-
-			default:
-				break;
-
-			}
+		tab.setItems(data);
 
 		}
 
-	}
+	
 
 }

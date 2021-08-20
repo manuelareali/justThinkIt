@@ -1,15 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<!-- dichiarazione e instanziazione di un loginBean !-->
-<jsp:useBean id="RegistrationShopBoundary" scope="request" class="beanweb.RegistrationShopBoundary"/>
 
-<!-- mappare gli attributi di un oggetto sui campi della form -->
+<jsp:useBean id="RegistrationShopBoundary" scope="request" class="beanweb.RegistrationShopBoundary"/>
 <jsp:setProperty name="RegistrationShopBoundary" property="*"/>
 
 
 <%
 Class.forName("com.mysql.jdbc.Driver");
 if (request.getParameter("OK") != null) {
+	if(RegistrationShopBoundary.isNumeric(request.getParameter("RecapitoTel")) == true){
 		if (request.getParameter("confermaPassword").equalsIgnoreCase(request.getParameter("Password"))) {
 	if (request.getParameter("Tipologia").equalsIgnoreCase("Vestiti")) {
 		if ((RegistrationShopBoundary.registraNegozioPressed("Vestiti", request.getParameter("NomeNegozio"),
@@ -32,6 +31,7 @@ if ((RegistrationShopBoundary.registraNegozioPressed("Cibo", request.getParamete
 <%
 }
 
+}
 } else {
 %>
 <jsp:forward page="registrazioneShop.jsp" />

@@ -43,7 +43,7 @@ public class BachecaDao {
 	            res = stmt.executeQuery();
 	
 	           while (res.next()) {
-	        	   necessita.add(new Necessita(res.getInt("id_necessità"), res.getString("tipologia"),res.getString("richiesta"), res.getString("urgenza")));
+	        	   necessita.add(new Necessita(res.getInt("id_necessità"), res.getString("tipologia"),res.getString("richiesta"), res.getString("urgenza"),res.getString("Email")));
 		       
 	           }
 	       } catch (SQLException ex) {

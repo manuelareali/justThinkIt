@@ -185,7 +185,15 @@ public class TransizionePagine {
 			}
 	}
 	
-	
+	public boolean isNumeric(String str) { 
+		  try {  
+		    Integer.parseInt(str); 
+		    return true;
+		  } catch(NumberFormatException e){  
+			  logger.error("Inserisci correttamente il numero di telefono");
+		    return false;  
+		  } 
+		}
 
 	
 	public void check() {
