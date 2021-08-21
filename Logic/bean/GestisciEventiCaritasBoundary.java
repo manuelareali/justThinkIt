@@ -121,7 +121,7 @@ public class GestisciEventiCaritasBoundary {
 	void contattaShop(ActionEvent event) {
 		if (this.event != null) {
 			TransizionePagine pageSwitch = new TransizionePagine();
-			pageSwitch.goToEmail(this.event.getCodiceNegozio(), idCar, contattaNegozio.getScene().getWindow());
+			pageSwitch.goToEmail(this.event.getCodiceNegozio(), idCar);
 		} else {
 			try {
 				trigger.myTrigger();

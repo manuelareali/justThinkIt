@@ -37,7 +37,7 @@ public boolean isNumeric(String str) {
 	}
 	    
 	   public boolean confermaPressed(String nome, String tipo, String note, Float costoEvento){
-		   if (nome == null || nome.equals("")|| tipo == null || tipo.equals("") ||  costoEvento == null || costoEvento.equals("")) {
+		   if (nome == null || nome.equals("")|| tipo == null || tipo.equals("") ||  costoEvento == null) {
 			   return false;
 		   }
 		   else {

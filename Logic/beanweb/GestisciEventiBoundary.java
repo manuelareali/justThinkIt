@@ -3,6 +3,9 @@ package beanweb;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import controller.GestisciEventiController;
 import entity.EventTab;
 
@@ -32,15 +35,27 @@ public class GestisciEventiBoundary {
 	       email.loadEmail(this.event.getIdCaritas(),this.idShop);  	
 	   }  	
 	    
-
+		public boolean isNumeric(String str) { 
+			Logger logger = LoggerFactory.getLogger(GestisciEventiBoundary.class.getName());
+			  try {  
+			    Integer.parseInt(str); 
+			    return true;
+			  } catch(NumberFormatException e){  
+				  logger.error("Inserisci correttamente l'id");
+			    return false;  
+			  } 
+			}
 	    
 	   public boolean eliminaEvento(String i) {
 		   if (i == null || i.equals("")) {
 			   return false;
 		   }
 		   else {
-			  gestEventC.cancellaEvento(Integer.parseInt(i)); 
-			  return true;
+			   if(isNumeric(i)) {
+				   gestEventC.cancellaEvento(Integer.parseInt(i)); 
+				   
+			   }
+			   return true;
 		   }
 	    }
 

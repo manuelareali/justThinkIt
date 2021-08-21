@@ -7,7 +7,7 @@ Class.forName("com.mysql.jdbc.Driver");
 %>
 <%
 if (request.getParameter("OK") != null) {
-		if(PromuoviEventoGenerale.getInstance().confermaEventoPressed(request.getParameter("NomeEvento"), request.getParameter("Tipologia"), Float.parseFloat("0"), request.getParameter("NoteEvento")) == true){ 
+		if(PromuoviEventoGenerale.getInstance().confermaEventoPressed(request.getParameter("NomeEvento"), request.getParameter("Tipologia1"), Float.parseFloat("0"), request.getParameter("NoteEvento")) == true){ 
 			
 %>
 <jsp:forward page="gestisciEventiCaritas.jsp" />
@@ -64,17 +64,17 @@ if (request.getParameter("OK") != null) {
 				<div class="row justify-content-center">
 					<div class="col">
 						<div>
-							<input style = "border: solid 2px;" class="form-check-input" type="checkbox" name="Tipologia"
+							<input style = "border: solid 2px;" class="form-check-input" type="checkbox" name="Tipologia1"
 								value="Vestiti"> <label style = "font-size: 22px;" class="form-check-label"
 								for="invalidCheck"> Vestiti </label>
 						</div>
 						<div>
-							<input style = "border: solid 2px;" class="form-check-input" type="checkbox" name="Tipologia"
+							<input style = "border: solid 2px;" class="form-check-input" type="checkbox" name="Tipologia1"
 								value="Cibo"> <label style = "font-size: 22px;" class="form-check-label"
 								for="invalidCheck">Cibo</label>
 						</div>
 						<div>
-							<input style = "border: solid 2px;" class="form-check-input" type="checkbox" name="Tipologia"
+							<input style = "border: solid 2px;" class="form-check-input" type="checkbox" name="Tipologia1"
 								value="Tutto"> <label style = "font-size: 22px;" class="form-check-label"
 								for="invalidCheck">Tutto</label>
 						</div>

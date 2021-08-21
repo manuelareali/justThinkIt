@@ -46,7 +46,7 @@ public class GestisciTurniBoundary {
 	    		return false;
 	    	}
 	    	else {
-	    		if(isNumeric(i) == true) {
+	    		if(isNumeric(i)) {
 	    			int x = Integer.parseInt(i);
 	    			gestTurn.cancellaTurno(x);
 	    		}
@@ -60,7 +60,7 @@ public class GestisciTurniBoundary {
 			   if ( idTurno == null || idTurno.equals("")) {
 				   return false;
 			   }else {
-				   if(isNumeric(idTurno) == true) {
+				   if(isNumeric(idTurno)) {
 					   gestTurn.modificaTurno(Integer.parseInt(idTurno),note,id);
 				   }
 		    	return true;

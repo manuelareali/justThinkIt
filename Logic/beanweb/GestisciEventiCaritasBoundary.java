@@ -45,7 +45,7 @@ public class GestisciEventiCaritasBoundary {
 	    		return false;
 	    	}
 	    	else {
-	    		if(isNumeric(id) == true) {
+	    		if(isNumeric(id)) {
 	    			gestEventC.confermaEvento(Integer.parseInt(id));
 	    		}
 	    		return true;
@@ -58,7 +58,7 @@ public class GestisciEventiCaritasBoundary {
 	    		return false;
 	    	}
 	    	else {
-	    		if(isNumeric(id) == true) {
+	    		if(isNumeric(id)) {
 	    			gestEventC.cancellaEvento(Integer.parseInt(id));
 	    		}
 	    		return true;

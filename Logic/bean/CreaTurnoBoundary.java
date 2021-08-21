@@ -147,13 +147,6 @@ public class CreaTurnoBoundary {
 			oraFin.getItems().add(oraFine[i]);
 		}
 		
-		TextField[] text = new TextField[] {
-				this.numParte
-		};
-		
-		TextArea[] textArea = new TextArea[] {
-				this.note
-		};
 
 	}
 

@@ -48,7 +48,7 @@ public class BachecaPersonaleBoundary {
 			return false;
 		}
 		else {
-			if(isNumeric(i) == true) {
+			if(isNumeric(i)) {
 				int x = Integer.parseInt(i);
 				bachecaController.eliminaAnnuncio(x);
 			}

@@ -101,8 +101,8 @@ if (request.getParameter("OK") != null) {
 								<option value="21:00">21:00</option>
 								<option value="21:30">21:30</option>
 							</select>
-
 						</div>
+						
 						<div class="col">
 							<label  style = "font-size: 20px" for="validationCustom04" class="form-label">Ora
 								Fine Turno</label><select style = "border: solid 2px;" class="form-select" id="oraFine"						

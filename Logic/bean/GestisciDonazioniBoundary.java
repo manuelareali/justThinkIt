@@ -97,7 +97,7 @@ public class GestisciDonazioniBoundary {
 		
 		if(this.idVolontario != 0) {
 			TransizionePagine pageSwitch = new TransizionePagine();
-			pageSwitch.goToEmail(idVolontario, caritas, contatta.getScene().getWindow());
+			pageSwitch.goToEmail(idVolontario, caritas);
 		}else {
 			try {
 				trigger.myTrigger();

@@ -4,8 +4,6 @@ import java.io.IOException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import beanweb.CreaTurnoBoundary;
 import controller.ProponiOfferta;
 import exception.MyException;
 import exception.Trigger;
@@ -43,7 +41,6 @@ public class ProponiOffertaCaritas {
     
     
 	public boolean isNumeric(String str) { 
-		Logger logger = LoggerFactory.getLogger(ProponiOffertaCaritas.class.getName());
 		  try {  
 			  Float.parseFloat(str); 
 		    return true;

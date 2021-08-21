@@ -1,8 +1,5 @@
 package bean;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-import javafx.fxml.Initializable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import controller.PromuoviEventoController;
@@ -22,7 +19,7 @@ public class PromuoviEventoBoundary {
 		private int idShop;
 		private String tipo;
 		
-		private TextField[] text;
+	
 
 		
 	    @FXML
@@ -45,7 +42,7 @@ public class PromuoviEventoBoundary {
 
 	    @FXML
 		void confermaPressed(ActionEvent event) {
-			if (checker() != -1 && isNumeric(prezzo.getText()) == true) {
+			if (checker() != -1 && isNumeric(prezzo.getText())) {
 				float costoEvento = Float.parseFloat(prezzo.getText());
 
 				PromuoviEventoController promuoviEvento = new PromuoviEventoController();

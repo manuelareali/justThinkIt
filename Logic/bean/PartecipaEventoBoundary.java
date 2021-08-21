@@ -52,7 +52,7 @@ public class PartecipaEventoBoundary {
 
 	@FXML
 	void partecipaEvento(ActionEvent event) {
-		if(isNumeric(importo.getText()) == true) {
+		if(isNumeric(importo.getText())) {
 			PartecipaEventoController parteCon = new PartecipaEventoController();
 			parteCon.setDataController(idEvento, idUtente);
 			parteCon.partecipaEvento(Float.parseFloat(importo.getText()));

@@ -78,7 +78,7 @@ public class TransizionePagine {
 	}
 	
 	
-	public void goToEmail(int idUser,int idCaritas, Window stage) {
+	public void goToEmail(int idUser,int idCaritas) {
 	
 		try {
 
@@ -88,15 +88,15 @@ public class TransizionePagine {
 
 			EmailBoundary emailBoundary = fxmlLoader.getController();
 
-			Stage stage1 = new Stage();
-			stage1.setTitle("Email");
+			Stage stage = new Stage();
+			stage.setTitle("Email");
 
-			stage1.setScene(new Scene(rootNode, 800, 500));
-			stage1.setResizable(false);
+			stage.setScene(new Scene(rootNode, 800, 500));
+			stage.setResizable(false);
 
 			emailBoundary.loadEmail(idUser, idCaritas);
 
-			stage1.show();
+			stage.show();
 
 		} catch (IOException e) {
 			logger.error(e.getMessage());

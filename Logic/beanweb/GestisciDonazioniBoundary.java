@@ -47,7 +47,7 @@ public class GestisciDonazioniBoundary {
 		    		return false;
 		    	}
 		    	else {
-		    		if(isNumeric(i) == true) {
+		    		if(isNumeric(i)) {
 		    			gestDon.cancellaDonazione(Integer.parseInt(i));
 		    		}
 		    		return true;
@@ -66,7 +66,7 @@ public class GestisciDonazioniBoundary {
 			return false;
 		}
 		else {
-			if(isNumeric(ritira) == true) {
+			if(isNumeric(ritira)) {
 				gestDon.ritiraDon(Integer.parseInt(ritira));
 			}
 			return true;

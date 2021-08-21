@@ -45,7 +45,7 @@ public class GestioneOfferteCaritas {
 		  if(idEv == null || idEv.equals("")) {
 	    		return false;
 		  }else {
-			  if(isNumeric(idEv) == true) {
+			  if(isNumeric(idEv)) {
 				  proponi.confermaEvento(Integer.parseInt(idEv));
 			  }
 	    	return true;
