@@ -22,7 +22,6 @@ public class ProponiOffertaCaritas {
 		}
 	   
 	public boolean isNumeric(String str) { 
-		 Logger logger = LoggerFactory.getLogger(ProponiOffertaCaritas.class.getName());
 		  try {  
 			  Float.parseFloat(str); 
 		    return true;

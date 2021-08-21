@@ -9,7 +9,6 @@ import entity.TurnoTab;
 public class GestioneTurniCaritas {
 	
 	private CreaTurnoDao turniDao;
-	private CreaTurnoBoundary caritasTurniB;
 	
 	public GestioneTurniCaritas() {
 		this.turniDao = new CreaTurnoDao();
