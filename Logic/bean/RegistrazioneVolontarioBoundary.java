@@ -92,7 +92,7 @@ public class RegistrazioneVolontarioBoundary implements Initializable {
 	
 	@FXML
 	void registraVolontarioPressed(ActionEvent event) {
-		Logger logger = LoggerFactory.getLogger(RegistrazioneVolontarioBoundary.class.getName());
+		
 		TransizionePagine check = new TransizionePagine();
 		
 		if (checker() == 0) {
@@ -109,6 +109,7 @@ public class RegistrazioneVolontarioBoundary implements Initializable {
 
 				home.show();
 			} catch (IOException e) {
+				Logger logger = LoggerFactory.getLogger(RegistrazioneVolontarioBoundary.class.getName());
 				logger.error(e.getMessage());
 			}
 		} else {
