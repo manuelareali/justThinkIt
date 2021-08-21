@@ -33,7 +33,7 @@ public class PromuoviEventoGenerale {
 
 
     public boolean confermaEventoPressed(String nome, String tipo, Float x, String note) {
-    	if(nome == null || nome.equals("") || tipo == null || tipo.equals("") || x != 0.0 ||note == null || note.equals("") ) {
+    	if(nome == null || nome.equals("") || tipo == null || tipo.equals("") || x != 0.0) {
     		return false;
     	}else {
     		GestisciEventiCaritasController controller = new GestisciEventiCaritasController();

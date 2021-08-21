@@ -156,7 +156,7 @@ public class CercaCaritas {
 	}
 	
 	public int getIdEvento() {
-		return idEvento;
+		return idEvento ;
 	}
 	public void setIdEvento(int idEvento) {
 		this.idEvento = idEvento;

@@ -9,17 +9,14 @@
 <%
 Class.forName("com.mysql.jdbc.Driver");
 if (request.getParameter("modifica") != null) {
-	if (GestisciTurniBoundary.getInstance().modificaTurno(request.getParameter("note"),
-	request.getParameter("id")) == true) {
-%>
-<jsp:forward page="homeCaritas.jsp" />
-<%
-}
+	
+	if (GestisciTurniBoundary.getInstance().modificaTurno(request.getParameter("note"), request.getParameter("id")) == true) {
+	}
 }
 %>
 <%
 if (request.getParameter("crea") != null) {
-	GestisciTurniBoundary.getInstance().creaTurno();
+	GestisciTurniBoundary.getInstance().creaTurni();
 %>
 <jsp:forward page="creaTurno.jsp" />
 <%
@@ -33,9 +30,6 @@ if (request.getParameter("indietro") != null) {
 
 if (request.getParameter("eliminaTurno") != null) {
 if (GestisciTurniBoundary.getInstance().cancellaTurno(request.getParameter("turno")) == true) {
-%>
-<jsp:forward page="homeCaritas.jsp" />
-<%
 }
 }
 %>
@@ -139,8 +133,8 @@ if (GestisciTurniBoundary.getInstance().cancellaTurno(request.getParameter("turn
 							<%
 											out.println(list.get(i).getOraIn());
 											%> <%
- out.println(list.get(i).getOraFine());
- %>
+ 					out.println(list.get(i).getOraFine());
+ 					%>
 						</td>
 						<td>
 							<%

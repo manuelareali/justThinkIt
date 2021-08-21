@@ -2,6 +2,10 @@ package beanweb;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import controller.GestisciDonazioniCaritas;
 import entity.DonazioneTab;
 
@@ -25,6 +29,17 @@ public class GestisciDonazioniBoundary {
 			return instance;
 			}
 	
+
+		public boolean isNumeric(String str) { 
+			Logger logger = LoggerFactory.getLogger(GestisciDonazioniBoundary.class.getName());
+			  try {  
+			    Integer.parseInt(str); 
+			    return true;
+			  } catch(NumberFormatException e){  
+				  logger.error("Inserisci correttamente l' id donazione");
+			    return false;  
+			  } 
+			}
 	 
 	public boolean cancellaDonazione(String i) {
 		gestDon = new GestisciDonazioniCaritas();
@@ -32,7 +47,9 @@ public class GestisciDonazioniBoundary {
 		    		return false;
 		    	}
 		    	else {
-		    		gestDon.cancellaDonazione(Integer.parseInt(i));
+		    		if(isNumeric(i) == true) {
+		    			gestDon.cancellaDonazione(Integer.parseInt(i));
+		    		}
 		    		return true;
 		    	}
 		    }
@@ -49,7 +66,9 @@ public class GestisciDonazioniBoundary {
 			return false;
 		}
 		else {
-			gestDon.ritiraDon(Integer.parseInt(ritira));
+			if(isNumeric(ritira) == true) {
+				gestDon.ritiraDon(Integer.parseInt(ritira));
+			}
 			return true;
 		}
 	}

@@ -23,9 +23,13 @@ public class PrenotaTurnoBoundary {
 		return instance;
 		}
 	
-    public int  prenotaTurno(String turni, String cbOraInizio, String oraFine, String cv) {
-    	prenotaC.prenotaTurno(turni, cbOraInizio, oraFine, cv);
-    	return 0;
+    public boolean  prenotaTurno(String turni, String cbOraInizio, String oraFine, String cv) {
+    	if(cbOraInizio.contentEquals(oraFine)) {
+    		return false;
+    	}else {	
+    		prenotaC.prenotaTurno(turni, cbOraInizio, oraFine, cv);
+    		return true;
+    	}
 	}
 
 

@@ -28,7 +28,7 @@ public class DonationBoundary {
 	
 	
 	public boolean creaDonazione(int tipo, String indirizzo,String descrizione){
-		if ( indirizzo == null || indirizzo.equals("") || descrizione == null || descrizione.equals("")) {
+		if ( indirizzo == null || indirizzo.equals("")) {
 			return false;
 		}
 		else {

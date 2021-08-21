@@ -2,7 +2,6 @@ package bean;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import controller.EmailController;
 import exception.MyException;
 import exception.Trigger;
@@ -39,12 +38,17 @@ public class EmailBoundary {
 
 	@FXML
 	private Button invia;
+	
+	@FXML
+	private Button indietro;
 
 
 	public EmailBoundary() {
 		trigger = new Trigger();
 	}
 	
+
+	 
 	
 	@FXML
 	public int sendMessage(ActionEvent event) {
@@ -78,6 +82,7 @@ public class EmailBoundary {
 
 	public void loadEmail(int idDestinatario, int idMittente) {
 		try {
+			
 			String[] mitDest = emailC.loadMittenteDestinatario(idDestinatario, idMittente);
 			this.mittente.setText(mitDest[0]);
 			this.destinatario.setText(mitDest[1]);
@@ -87,5 +92,8 @@ public class EmailBoundary {
 			
 		}
 	}
+	
+	
+	
 
 }

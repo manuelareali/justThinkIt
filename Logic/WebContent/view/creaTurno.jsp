@@ -3,13 +3,15 @@
 <%@ page import="beanweb.CreaTurnoBoundary"%>
 <%
 Class.forName("com.mysql.jdbc.Driver");
-if (request.getParameter("creaTurno") != null) {
-	if (CreaTurnoBoundary.getInstance().creaTurnoPressed(request.getParameter("nome_giorno"),
-	request.getParameter("oraInizio"), request.getParameter("oraFine"), request.getParameter("numMaxParte"),
-	request.getParameter("note")) == true) {
+if (request.getParameter("OK") != null) {
+	if(request.getParameter("oraInizio") != request.getParameter("oraFine") ){
+		if (CreaTurnoBoundary.getInstance().creaTurnoPressed(request.getParameter("nome_giorno"),
+				request.getParameter("oraInizio"), request.getParameter("oraFine"), request.getParameter("numMaxParte"),
+				request.getParameter("note")) == true) {
 %>
 <jsp:forward page="gestisciTurniCaritas.jsp" />
 <%
+	}
 }
 }
 
@@ -31,7 +33,7 @@ if (request.getParameter("creaTurno") != null) {
 	crossorigin="anonymous">
 
 <title>CREA TURNO</title>
-<link rel="stylesheet" href="../css/creaTurni.css">
+<link rel="stylesheet" href="../css/creaTurno.css">
 <link rel="icon" sizes="64x64" href="../img/favicon.png">
 </head>
 <body>
@@ -65,14 +67,77 @@ if (request.getParameter("creaTurno") != null) {
 						</div>
 						<div class="col">
 							<label  style = "font-size: 20px" for="validationCustom03" class="form-label">Ora
-								Inizio Turno</label> <input  style = "border: solid 2px;" class="form-control" type="text"
-								id="oraInizio" name="oraInizio" placeholder="es 12:00" />
+								Inizio Turno</label> 
+								<select style = "border: solid 2px;" class="form-select" id="oraInizio"						
+								name="oraInizio">
+								<option value="7:00">7:00</option>
+								<option value="7:30">7:30</option>
+								<option value="8:00">8:00</option>
+								<option value="8:30">8:30</option>
+								<option value="9:00">9:00</option>
+								<option value="9:30">9:30</option>
+								<option value="10:00">10:00</option>
+								<option value="10:30">10:30</option>
+								<option value="11:00">11:00</option>
+								<option value="11:30">11:30</option>
+								<option value="12:00">12:00</option>
+								<option value="12:30">12:30</option>
+								<option value="13:00">13:00</option>
+								<option value="13:30">13:30</option>
+								<option value="14:00">14:00</option>
+								<option value="14:30">14:30</option>
+								<option value="15:00">15:00</option>
+								<option value="15:30">15:30</option>
+								<option value="16:00">16:00</option>
+								<option value="16:30">16:30</option>
+								<option value="17:00">17:00</option>
+								<option value="17:30">17:30</option>
+								<option value="18:00">18:00</option>
+								<option value="18:30">18:30</option>
+								<option value="19:00">19:00</option>
+								<option value="19:30">19:30</option>
+								<option value="20:00">20:00</option>
+								<option value="20:30">20:30</option>
+								<option value="21:00">21:00</option>
+								<option value="21:30">21:30</option>
+							</select>
 
 						</div>
 						<div class="col">
 							<label  style = "font-size: 20px" for="validationCustom04" class="form-label">Ora
-								Fine Turno</label> <input  style = "border: solid 2px;" class="form-control" type="text" id="oraFine"
-								name="oraFine" placeholder="es 12:00" />
+								Fine Turno</label><select style = "border: solid 2px;" class="form-select" id="oraFine"						
+								name="oraFine">
+								<option value="7:30">7:30</option>
+								<option value="8:00">8:00</option>
+								<option value="8:30">8:30</option>
+								<option value="9:00">9:00</option>
+								<option value="9:30">9:30</option>
+								<option value="10:00">10:00</option>
+								<option value="10:30">10:30</option>
+								<option value="11:00">11:00</option>
+								<option value="11:30">11:30</option>
+								<option value="12:00">12:00</option>
+								<option value="12:30">12:30</option>
+								<option value="13:00">13:00</option>
+								<option value="13:30">13:30</option>
+								<option value="14:00">14:00</option>
+								<option value="14:30">14:30</option>
+								<option value="15:00">15:00</option>
+								<option value="15:30">15:30</option>
+								<option value="16:00">16:00</option>
+								<option value="16:30">16:30</option>
+								<option value="17:00">17:00</option>
+								<option value="17:30">17:30</option>
+								<option value="18:00">18:00</option>
+								<option value="18:30">18:30</option>
+								<option value="19:00">19:00</option>
+								<option value="19:30">19:30</option>
+								<option value="20:00">20:00</option>
+								<option value="20:30">20:30</option>
+								<option value="21:00">21:00</option>
+								<option value="21:30">21:30</option>
+								<option value="22:00">22:00</option>
+							</select>
 
 						</div>
 					</div>
@@ -87,12 +152,25 @@ if (request.getParameter("creaTurno") != null) {
 
 			</div>
 
+			<div id="popup5" class="overlay">
+			<div class="popup">
+
+				<div class="content">
+					<h3 class="fw-bold">Sei sicuro di voler confermare?</h3>
+					<p>I dati inseriti non potranno essere modificati.</p>
+					<div class="content text-center">
+						<button class="btn btn-outline-light"
+								type="submit" name="OK" value="OK">OK</button>
+							<button class="btn btn-outline-light"
+								type="submit" name="" value="">ANNULLA</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
 			
 
-			<div class="completa">
-				<button type="submit" class="btn btn-light" name="creaTurno"
-					value="creaTurno">Crea Turno</button>
-			</div>
+		
 
 			<!-- Optional JavaScript; choose one of the two! -->
 
@@ -106,10 +184,20 @@ if (request.getParameter("creaTurno") != null) {
 
 		</form>
 		
-		<div class="indietro">
-				<a href="gestisciTurniCaritas.jsp"><button class="btn btn-warning" type="submit"
-						name="indietro" value="indietro">Indietro</button></a>
+		<div class = "container my-4">
+			<div class = "row">
+			<div class = "col">
+			<a class="button" href="gestisciTurniCaritas.jsp"><button class="btn btn-warning" type="submit" name="indietro"
+					value="indietro">Indietro</button></a>
 			</div>
+			<div class = "col"></div>
+			<div class = "col"></div>
+			<div class = "col">
+			<a class="button" href="#popup5"><button class="btn btn-light" type="submit"   name ="CONFERMA" value = "CONFERMA">Conferma</button></a>
+			</div>
+			</div>
+			</div>
+		
 	</div>
 </body>
 </html>

@@ -26,18 +26,13 @@ if (request.getParameter("contatta") != null) {
 <%
 if (request.getParameter("eliminaDonazione") != null) {
 	if (GestisciDonazioniBoundary.getInstance().cancellaDonazione(request.getParameter("cod_dona")) == true) {
-%>
-<jsp:forward page="homeCaritas.jsp" />
-<%
+
 }
 }
 %>
 <%
 if (request.getParameter("RITIRA DONAZIONE") != null) {
 	if (GestisciDonazioniBoundary.getInstance().ritiraDonazione(request.getParameter("ritira")) == true) {
-%>
-<jsp:forward page="homeCaritas.jsp" />
-<%
 }
 }
 %>

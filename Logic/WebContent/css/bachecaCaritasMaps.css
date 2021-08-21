@@ -2,7 +2,7 @@
 
 body, html {
   height: 100%;
-  background:#f2f2f2
+  background:#f2f2f2;
 }
 
 .bg-light {
@@ -48,72 +48,21 @@ body, html {
 
 
 
-.overlay {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0.7);
-  transition: opacity 500ms;
-  visibility: hidden;
-  opacity: 0;
+
+.conferma{
+	position:absolute;
+	left:77%;
+	top:85%;
 }
-
-.overlay:target {
-  visibility: visible;
-  opacity: 1;
+.my-5 {
+    margin-top: 15rem!important;
 }
-
-.popup {
-  position:absolute;
-  top:10%;
-  left:34%;
-  margin: 70px auto;
-  padding: 20px;
-  background: #fff;
-  border-radius: 5px;
-  width: 30%;
- 
-  transition: all 1s ease-in-out;
-  border:solid red;
-}
-
-.content h3 {
- font-size:24px;
-  color: #333;
-  font-family: Tahoma, Arial, sans-serif;
-}
-
-
-
-.content p{
-	font-size:22px;
-}
-
-
-.btn-outline-light{	
-    color: black;
-    border-radius: 10px;
-  	 border-color: red;
-	outline:none;
-
-}
-
-
-.btn-outline-light:hover
-{
-	cursor: pointer;
-	background:yellow;
-
-}
-
 
 .my-4 {
-    margin-top: 8rem!important;
-    margin-bottom: 3rem!important;
-    margin-left:3rem!important;
+    margin-top: 3rem!important;  
+    margin-bottom: 2rem!important;
 }
+
 
 @import "../node_modules/bootstrap/scss/functions";
 @import "../node_modules/bootstrap/scss/variables";

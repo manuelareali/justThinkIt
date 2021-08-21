@@ -1,6 +1,10 @@
 package beanweb;
 
 import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import controller.BachecaPersonaleController;
 import entity.Necessita;
 
@@ -28,14 +32,26 @@ public class BachecaPersonaleBoundary {
 			 creaNec.getInstance().setCaritas(idCar);
 	}
 
+	public boolean isNumeric(String str) { 
+		Logger logger = LoggerFactory.getLogger(BachecaPersonaleBoundary.class.getName());
+		  try {  
+		    Integer.parseInt(str); 
+		    return true;
+		  } catch(NumberFormatException e){  
+			  logger.error("Inserisci correttamente l'id");
+		    return false;  
+		  } 
+		}
 	
 	public boolean eliminaNecessita(String i){
-		if (i == null || i.equals("")) {
+		if (i == null || i.equals("") ) {
 			return false;
 		}
 		else {
-			int x = Integer.parseInt(i);
-			bachecaController.eliminaAnnuncio(x);
+			if(isNumeric(i) == true) {
+				int x = Integer.parseInt(i);
+				bachecaController.eliminaAnnuncio(x);
+			}
 			return true;
 		}
 	}

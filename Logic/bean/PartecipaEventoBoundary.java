@@ -2,6 +2,9 @@ package bean;
 
 import java.util.ResourceBundle;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import controller.PartecipaEventoController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -34,15 +37,28 @@ public class PartecipaEventoBoundary {
 
 	@FXML
 	private Button indietro;
+	
+	public boolean isNumeric(String str) { 
+		Logger logger = LoggerFactory.getLogger(PartecipaEventoBoundary.class.getName());
+		try {  
+		  Float.parseFloat(str); 
+		  return true;
+		} catch(NumberFormatException e){  
+			logger.error("Inserisci correttamente l'importo da donare");
+		  return false;  
+		} 
+	}
+
 
 	@FXML
 	void partecipaEvento(ActionEvent event) {
-		PartecipaEventoController parteCon = new PartecipaEventoController();
-		parteCon.setDataController(idEvento, idUtente);
-		parteCon.partecipaEvento(Float.parseFloat(importo.getText()));
-		Stage st = (Stage) partecipa.getScene().getWindow();
-		st.close();
-
+		if(isNumeric(importo.getText()) == true) {
+			PartecipaEventoController parteCon = new PartecipaEventoController();
+			parteCon.setDataController(idEvento, idUtente);
+			parteCon.partecipaEvento(Float.parseFloat(importo.getText()));
+			Stage st = (Stage) partecipa.getScene().getWindow();
+			st.close();
+		}
 	}
 
 	public int checker() {

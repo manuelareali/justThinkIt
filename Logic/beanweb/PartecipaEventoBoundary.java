@@ -1,5 +1,9 @@
 package beanweb;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
 import controller.PartecipaEventoController;
 
 public class PartecipaEventoBoundary {
@@ -21,9 +25,21 @@ public class PartecipaEventoBoundary {
 		partecipaC = PartecipaEventoController.getInstance();
 	}
 
+	
+	 public boolean isNumeric(String str) { 
+		Logger logger = LoggerFactory.getLogger(PartecipaEventoBoundary.class.getName());
+		try {  
+		  Float.parseFloat(str); 
+		  return true;
+		} catch(NumberFormatException e){  
+		  logger.error("Inserisci correttamente l'importo da donare");
+		  return false;  
+		} 
+	}
 
-	public boolean partecipaEvento(String importo, String carta) {
-		if (importo == null || importo.equals("") || carta == null || carta.equals("")) {
+	
+	public boolean partecipaEvento(String importo) {
+		if (importo == null || importo.equals("")) {
 			return false;
 		}
 		else {

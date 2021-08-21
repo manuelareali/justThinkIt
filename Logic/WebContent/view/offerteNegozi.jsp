@@ -7,14 +7,15 @@ Class.forName("com.mysql.jdbc.Driver");
 %>
 <%
 if (request.getParameter("OK") != null) {
+	if(ProponiOffertaCaritas.getInstance().isNumeric(request.getParameter("PrezzoEvento")) == true){
 		if (ProponiOffertaCaritas.getInstance().conferma(Float.parseFloat(request.getParameter("PrezzoEvento")), request.getParameter("NoteEvento"), request.getParameter("DataEvento")) == true){
 %>
 	<jsp:forward page="eventiPropostiNegozi.jsp" />
 <%
 }
+	}
 		else{
 %>
-	<jsp:forward page="offerteNegozi.jsp" />
 <%			
 		}
 }
@@ -38,7 +39,7 @@ if (request.getParameter("OK") != null) {
 	crossorigin="anonymous">
 
 <title>PROMUOVI EVENTO</title>
-<link rel="stylesheet" href="../css/proponiEventi.css">
+<link rel="stylesheet" href="../css/proponiEvento.css">
 <link rel="icon" sizes="64x64" href="../img/favicon.png">
 </head>
 <body>
@@ -54,13 +55,13 @@ if (request.getParameter("OK") != null) {
 							<label style="font-size: 22px;" for="validationCustom02"
 								class="form-label">Prezzo Evento</label> <input
 								style="border: solid 2px;" type="text" class="form-control"
-								id="PrezzoEvento" name="PrezzoEvento" placeholder="500&euro;" />
+								id="PrezzoEvento" name="PrezzoEvento" placeholder="500" />
 						</div>
 						<div class="col">
 							<label style="font-size: 22px;" for="validationCustom01"
 								class="form-label">Data Evento </label> <input
-								style="border: solid 2px;" type="text" class="form-control"
-								id="DatEvento" name="DataEvento" placeholder="12/05/2021" />
+								style="border: solid 2px;" type="date" class="form-control"
+								id="DatEvento" name="DataEvento" />
 						</div>
 					</div>
 				</div>
@@ -82,7 +83,7 @@ if (request.getParameter("OK") != null) {
 
 					<div class="content">
 						<h3 class="fw-bold">Sei sicuro di voler confermare?</h3>
-						<p>L'offerta verrà eliminata se l'ID evento non è corretto.</p>
+						<p>L'offerta verrà eliminata se l'ID evento inserito non è corretto.</p>
 						<div class="content text-center">
 							<button class="btn btn-outline-light" type="submit" name="OK"
 								value="OK">OK</button>
@@ -113,6 +114,7 @@ if (request.getParameter("OK") != null) {
 							class="btn btn-warning" type="submit" name="indietro"
 							value="indietro">Indietro</button></a>
 				</div>
+				<div class = "col"></div>
 				<div class = "col"></div>
 				<div class="col">
 					<a class="button" href="#popup1"><button class="btn btn-light"

@@ -6,37 +6,21 @@
 Class.forName("com.mysql.jdbc.Driver");
 %>
 <%
-if (request.getParameter("CONFERMA") != null) {
-	if(request.getParameter("Tipologia2").equals("Vestiti") && request.getParameter("Tipologia1").equals("Cibo") )
-		if (PromuoviEventoBoundary.getInstance().confermaPressed(request.getParameter("NomeEvento"), "Tutto",
-				request.getParameter("NoteEvento"), request.getParameter("PrezzoEvento")) == true) {
-			
+if (request.getParameter("OK") != null) {
+	if(PromuoviEventoBoundary.getInstance().isNumeric(request.getParameter("PrezzoEvento")) == true){
+	if (PromuoviEventoBoundary.getInstance().confermaPressed(request.getParameter("NomeEvento"), request.getParameter("Tipologia"),
+		request.getParameter("NoteEvento"), Float.parseFloat(request.getParameter("PrezzoEvento"))) == true) {
 %>
-<jsp:forward page="mappa.jsp" />
-<%			
-		}
-		else if (request.getParameter("Tipologia2").equals("Vestiti")) {
-		if (PromuoviEventoBoundary.getInstance().confermaPressed(request.getParameter("NomeEvento"), "Vestiti",
-		request.getParameter("NoteEvento"), request.getParameter("PrezzoEvento")) == true) {
-%>
-<jsp:forward page="mappa.jsp" />
+		<jsp:forward page="mappa.jsp" />
 <%
 }
-}
-
-else if (request.getParameter("Tipologia1").equals("Cibo")) {
-if (PromuoviEventoBoundary.getInstance().confermaPressed(request.getParameter("NomeEvento"), "Cibo",
-		request.getParameter("NoteEvento"), request.getParameter("PrezzoEvento")) == true) {
-%>
-<jsp:forward page="mappa.jsp" />
-<%
-}
-} else {
+}else {
 %>
 
 <%
 }
 }
+
 %>
 
 <!doctype html>
@@ -54,7 +38,7 @@ if (PromuoviEventoBoundary.getInstance().confermaPressed(request.getParameter("N
 	crossorigin="anonymous">
 
 <title>PROMUOVI EVENTO</title>
-<link rel="stylesheet" href="../css/proponiEventi.css">
+<link rel="stylesheet" href="../css/proponiEvento.css">
 <link rel="icon" sizes="64x64" href="../img/favicon.png">
 </head>
 <body>
@@ -76,7 +60,7 @@ if (PromuoviEventoBoundary.getInstance().confermaPressed(request.getParameter("N
 					<div class="col">
 						<label style = "font-size: 22px;" for="validationCustom02" class="form-label">Prezzo
 							Evento</label> <input style = "border: solid 2px;" type="text" class="form-control" id="PrezzoEvento"
-							name="PrezzoEvento" placeholder="500&euro;" />
+							name="PrezzoEvento" placeholder="500" />
 					</div>
 				</div>
 			</div>
@@ -84,14 +68,19 @@ if (PromuoviEventoBoundary.getInstance().confermaPressed(request.getParameter("N
 				<div class="row justify-content-center">
 					<div class="col">
 						<div>
-							<input style = "border: solid 2px;" class="form-check-input" type="checkbox" name="Tipologia2"
+							<input style = "border: solid 2px;" class="form-check-input" type="checkbox" name="Tipologia"
 								value="Vestiti"> <label style = "font-size: 22px;" class="form-check-label"
 								for="invalidCheck"> Vestiti </label>
 						</div>
 						<div>
-							<input style = "border: solid 2px;" class="form-check-input" type="checkbox" name="Tipologia1"
+							<input style = "border: solid 2px;" class="form-check-input" type="checkbox" name="Tipologia"
 								value="Cibo"> <label style = "font-size: 22px;" class="form-check-label"
 								for="invalidCheck">Cibo</label>
+						</div>
+						<div>
+							<input style = "border: solid 2px;" class="form-check-input" type="checkbox" name="Tipologia"
+								value="Tutto"> <label style = "font-size: 22px;" class="form-check-label"
+								for="invalidCheck">Tutto</label>
 						</div>
 					</div>
 					<div class="col">
@@ -102,9 +91,25 @@ if (PromuoviEventoBoundary.getInstance().confermaPressed(request.getParameter("N
 				</div>
 			</div>
 			</div>
-			<div class = "conferma">
-			<button class="btn btn-light" type="submit"   name ="CONFERMA" value = "CONFERMA">Conferma</button>
+			
+		<div id="popup11" class="overlay">
+			<div class="popup">
+
+				<div class="content">
+					<h3 class="fw-bold">Sei sicuro di voler confermare?</h3>
+					<p>Se confermi non potrai più modificare la donazione.</p>
+					<div class="content text-center">
+						<button class="btn btn-outline-light"
+								type="submit" name="OK" value="OK">OK</button>
+							<button class="btn btn-outline-light"
+								type="submit" name="" value="">ANNULLA</button>
+					</div>
+				</div>
+
 			</div>
+		</div>
+			
+			
 			
 			
 			<!-- Optional JavaScript; choose one of the two! -->
@@ -117,10 +122,24 @@ if (PromuoviEventoBoundary.getInstance().confermaPressed(request.getParameter("N
 
 
 		</form>
-		<div class = "indietro">
-			<a href= "mappa.jsp"><button class="btn btn-warning" type="submit" name="indietro"
-					value="indietro">Indietro</button></a>
-					</div>
+		
+		<div class="container my-4 ">
+			<div class="row">
+				<div class="col">
+					<a href="mappa.jsp"><button
+							class="btn btn-warning" type="submit" name="INDIETRO"
+							value="INDIETRO">Indietro</button></a>
+				</div>
+				<div class="col"></div>
+				<div class="col"></div>
+				<div class="col">
+					<a class="button" href="#popup11"><button type="submit"
+							class="btn btn-light" name="INVIA" value="INVIA">INVIA</button></a>
+				</div>
+			</div>
+	</div>
+		
+		
 	</div>
 </body>
 </html>

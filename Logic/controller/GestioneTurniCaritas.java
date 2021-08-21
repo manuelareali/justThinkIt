@@ -23,10 +23,6 @@ public class GestioneTurniCaritas {
 		
 	}
 	
-	public void setIdCaritas(int idCaritas) {
-		caritasTurniB.getInstance().setCaritas(idCaritas);
-	}
-	
 	
 	public boolean cancellaTurno(int idTurn) {
 		return this.turniDao.cancellaTurno(idTurn);

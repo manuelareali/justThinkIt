@@ -82,8 +82,8 @@ List<CoordinateMap> donazione = CercaCaritas.getInstance().initMarkersDonazione(
 				onClick="updateLatLng(document.getElementById('latitude').value,document.getElementById('longitude').value,1)">Indicatore</button>
 		<div class="my-3">	
 			<label for="latitude">Latitude:</label> <input id="latitude" name = "latitude" value = "0"
-				type="text" /> <label for="longitude">Longitude:</label> <input
-				id="longitude" value = "0" name = "longitude" type="text" />
+				type="text" readonly/> <label for="longitude">Longitude:</label> <input
+				id="longitude" value = "0" name = "longitude" type="text" readonly/>
 		</div>
 
 		<div class="indietro">
@@ -119,8 +119,8 @@ List<CoordinateMap> donazione = CercaCaritas.getInstance().initMarkersDonazione(
 				onClick="updateLatLng(document.getElementById('latitude').value,document.getElementById('longitude').value,1)" style="visibility: hidden; position: absolute; top: 35%; left: 1%;">Indicatore</button>
 		<div class="my-3">	
 			<label  for="latitudine">Latitude:</label> <input id="latitude" name = "latitude" value = "0"
-				type="text" /> <label   for="longitudine">Longitude:</label> <input 
-				 id="longitude" name = "longitude" value = "0" type="text" />
+				type="text" readonly/> <label   for="longitudine">Longitude:</label> <input 
+				 id="longitude" name = "longitude" value = "0" type="text" readonly/>
 		</div>
 	
 
@@ -148,8 +148,8 @@ List<CoordinateMap> donazione = CercaCaritas.getInstance().initMarkersDonazione(
 				onClick="updateLatLng(document.getElementById('latitude').value,document.getElementById('longitude').value,1)" style="visibility: hidden; position: absolute; top: 35%; left: 1%;">Indicatore</button>
 		<div class="my-3">	
 			<label  for="latitudine">Latitude:</label> <input id="latitude" name = "latitude" value = "0"
-				type="text" /> <label   for="longitudine">Longitude:</label> <input 
-				 id="longitude" name = "longitude" value = "0" type="text" />
+				type="text" readonly/> <label   for="longitudine">Longitude:</label> <input 
+				 id="longitude" name = "longitude" value = "0" type="text" readonly/>
 		</div>
 		<div class="indietro">
 			<button class="btn btn-warning" type="submit" name="INDIETRO" value="INDIETRO">Indietro</button>

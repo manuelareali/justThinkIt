@@ -28,7 +28,6 @@ public class BachecaPersonaleBoundary {
 	
 	private BachecaPersonaleController bachecaController;
 	private static Logger logger = LoggerFactory.getLogger(BachecaPersonaleBoundary.class.getName());
-	private String s = "errore IoException";
 	private int caritas;
 	private Necessita necc;
 	
@@ -71,7 +70,7 @@ public class BachecaPersonaleBoundary {
 
 			home.show();
 		} catch (IOException e) {
-			logger.error(s);
+			logger.error(e.getMessage());
 		}
 
 	}
@@ -88,7 +87,7 @@ public class BachecaPersonaleBoundary {
 
 				home.show();
 			} catch (IOException e) {
-				logger.error(s);
+				logger.error(e.getMessage());
 			}
 		}
 	

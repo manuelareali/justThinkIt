@@ -25,10 +25,6 @@ public class PrenotaTurnoController {
 			PrenotaTurnoController.instance = new PrenotaTurnoController();
 		return instance;
 	}
-	
-	public void indietro(ActionEvent event) {
-		//forse anche questo
-	}
 
 
 	public boolean prenotaTurno(String giorno, String oraIn, String oraFin, String cv) {

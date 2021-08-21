@@ -5,15 +5,17 @@ import java.io.IOException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import controller.GestisciEventiController;
+import beanweb.CreaTurnoBoundary;
 import controller.ProponiOfferta;
-import controller.ShopHomeController;
+import exception.MyException;
+import exception.Trigger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -27,9 +29,8 @@ public class ProponiOffertaCaritas {
 	
     @FXML
     private TextField prezzo;
-
     @FXML
-    private TextField dataEvento;
+    private DatePicker dataEvento;
 
     @FXML
     private TextArea note;
@@ -40,13 +41,31 @@ public class ProponiOffertaCaritas {
     @FXML
     private Button indietro;
     
+    
+	public boolean isNumeric(String str) { 
+		Logger logger = LoggerFactory.getLogger(ProponiOffertaCaritas.class.getName());
+		  try {  
+			  Float.parseFloat(str); 
+		    return true;
+		  } catch(NumberFormatException e){  
+			  logger.error("Inserisci correttamente il prezzo dell'evento");
+		    return false;  
+		  } 
+		}
 
     @FXML
     void conferma(ActionEvent event) {
     	ProponiOfferta proponiOfferta = new ProponiOfferta();
-    	if(note.getText() != null && prezzo.getText() != null && dataEvento.getText() != null) {
-  	  		proponiOfferta.proponi(idShop, idEv, Float.parseFloat(prezzo.getText()),dataEvento.getText(), note.getText());	
+    	if(isNumeric(prezzo.getText()) && dataEvento.getValue() != null) {
+  	  		proponiOfferta.proponi(idShop, idEv, Float.parseFloat(prezzo.getText()),dataEvento.getValue().toString(), note.getText());	
 			this.switchPage(conferma.getScene().getWindow());
+    	}else {
+    		Trigger trigger = new Trigger();
+    		try {
+    			trigger.myTrigger();
+    		}catch(MyException e) {
+    			logger.error("Alcuni campi sono vuoti");
+    		}
     	}
     }
 

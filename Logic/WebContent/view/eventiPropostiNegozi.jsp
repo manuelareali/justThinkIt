@@ -18,10 +18,12 @@ if (request.getParameter("indietro") != null) {
 
 
 if (request.getParameter("Proponi OffertaId") != null){
+	if(GestisciEventiPropCaritas.getInstance().isNumeric(request.getParameter("Proponi OffertaId")) == true){
 		if(GestisciEventiPropCaritas.getInstance().proponi(request.getParameter("Proponi OffertaId"))== true){
 %>
 	<jsp:forward page="offerteNegozi.jsp" />
 <%		
+		}
 	}
 }
 %>

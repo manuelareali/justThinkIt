@@ -1,6 +1,10 @@
 package beanweb;
 
 import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import controller.GestioneTurniCaritas;
 import entity.TurnoTab;
 
@@ -9,6 +13,7 @@ import entity.TurnoTab;
 public class GestisciTurniBoundary {
 
 		private GestioneTurniCaritas gestTurn;
+		private CreaTurnoBoundary creaTurn;
 	    private int id;
 	
 	    
@@ -25,35 +30,46 @@ public class GestisciTurniBoundary {
 	    	this.gestTurn = new GestioneTurniCaritas();
 	    }
 	    
+		public boolean isNumeric(String str) { 
+			Logger logger = LoggerFactory.getLogger(GestisciTurniBoundary.class.getName());
+			  try {  
+			    Integer.parseInt(str); 
+			    return true;
+			  } catch(NumberFormatException e){  
+				  logger.error("Inserisci correttamente l'id");
+			    return false;  
+			  } 
+			}
 	   
 	    public boolean cancellaTurno(String i) {
 	    	if (i == null || i.equals("")) {
 	    		return false;
 	    	}
 	    	else {
-	    		int x = Integer.parseInt(i);
-	    		gestTurn.cancellaTurno(x);
+	    		if(isNumeric(i) == true) {
+	    			int x = Integer.parseInt(i);
+	    			gestTurn.cancellaTurno(x);
+	    		}
 	    		return true;
 	    	}
 	    }
 
-	   
-	   public void creaTurno() {
-		   gestTurn.setIdCaritas(id);
-	 		    	
-	    }
-
+	  
 	   
 	  public boolean modificaTurno(String note, String idTurno) {
-			   if (note == null || note.equals("") || idTurno == null || idTurno.equals("")) {
+			   if ( idTurno == null || idTurno.equals("")) {
 				   return false;
 			   }else {
-				   gestTurn.modificaTurno(Integer.parseInt(idTurno),note,id);
+				   if(isNumeric(idTurno) == true) {
+					   gestTurn.modificaTurno(Integer.parseInt(idTurno),note,id);
+				   }
 		    	return true;
 			   }
 	  }
 
-	
+	  public void creaTurni() {
+		  creaTurn.getInstance().setCaritas(id);
+	  }
 
 		public List<TurnoTab> loadFormTurni() {
 			 return gestTurn.caricaTurni(id);

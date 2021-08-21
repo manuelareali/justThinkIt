@@ -1,24 +1,18 @@
 package bean;
-import java.io.IOException;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.fxml.Initializable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.sothawo.mapjfx.Projection;
-
-import controller.CercaCaritasController;
 import controller.PromuoviEventoController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-import javafx.stage.Window;
+
 
 public class PromuoviEventoBoundary {
 
@@ -28,6 +22,8 @@ public class PromuoviEventoBoundary {
 		private int idShop;
 		private String tipo;
 		
+		private TextField[] text;
+
 		
 	    @FXML
 	    private TextField nome;
@@ -49,7 +45,7 @@ public class PromuoviEventoBoundary {
 
 	    @FXML
 		void confermaPressed(ActionEvent event) {
-			if (checker() != -1) {
+			if (checker() != -1 && isNumeric(prezzo.getText()) == true) {
 				float costoEvento = Float.parseFloat(prezzo.getText());
 
 				PromuoviEventoController promuoviEvento = new PromuoviEventoController();
@@ -64,6 +60,15 @@ public class PromuoviEventoBoundary {
 			
 		}
 
+		public boolean isNumeric(String str) { 
+			  try {  
+			    Integer.parseInt(str); 
+			    return true;
+			  } catch(NumberFormatException e){  
+				  logger.error("Inserisci correttamente il prezzo dell'evento");
+			    return false;  
+			  } 
+			}
 		
 		public int checker() {
 			if(idCibo.isSelected() && idVestiti.isSelected()) {
@@ -80,6 +85,6 @@ public class PromuoviEventoBoundary {
 			}
 		} 		
 	
-	 
+		
 
 }

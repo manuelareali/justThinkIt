@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -19,8 +20,8 @@
          </font>
       </Text>
       <Button fx:id="conferma" layoutX="442.0" layoutY="346.0" mnemonicParsing="false" onAction="#conferma" prefHeight="34.0" prefWidth="115.0" text="Conferma" />
-      <TextField fx:id="dataEvento" layoutX="36.0" layoutY="228.0" />
       <Text layoutX="36.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Data Evento" />
       <Button fx:id="indietro" layoutX="36.0" layoutY="346.0" mnemonicParsing="false" onAction="#indietro" prefHeight="34.0" prefWidth="115.0" text="Indietro" />
+      <DatePicker fx:id="dataEvento" layoutX="36.0" layoutY="230.0" />
    </children>
 </AnchorPane>

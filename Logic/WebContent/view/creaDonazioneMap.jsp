@@ -8,7 +8,7 @@ Class.forName("com.mysql.jdbc.Driver");
 
 
 <%
-if (request.getParameter("CONFERMA") != null) {
+if (request.getParameter("OK") != null) {
 	if ("Vestiti".equals(request.getParameter("tipo"))) {
 		if ((DonationBoundary.getInstance().creaDonazione(1, request.getParameter("IndirizzoVolontario"),
 		request.getParameter("descrizione")) == true)) {
@@ -52,7 +52,7 @@ if (request.getParameter("indietro") != null){
 	crossorigin="anonymous">
 
 <title>DONAZIONE</title>
-<link rel="stylesheet" href="../css/creaMappaDonazione.css">
+<link rel="stylesheet" href="../css/creaDonazioneMappa.css">
 <link rel="icon" sizes="64x64" href="../img/favicon.png">
 </head>
 <body>
@@ -95,18 +95,26 @@ if (request.getParameter("indietro") != null){
 						</div>
 						</div>
 					</div>
-				
-			</div>
+		<div id="popup8" class="overlay">
+			<div class="popup">
 
-			<div class="conferma">
-				<button class="btn btn-light" type="submit" name="CONFERMA"
-					value="CONFERMA">Conferma</button>
-			</div>
+				<div class="content">
+					<h3 class="fw-bold">Sei sicuro di voler confermare?</h3>
+					<p>Se confermi non potrai più modificare la donazione.</p>
+					<div class="content text-center">
+						<button class="btn btn-outline-light"
+								type="submit" name="OK" value="OK">OK</button>
+							<button class="btn btn-outline-light"
+								type="submit" name="" value="">ANNULLA</button>
+					</div>
+				</div>
 
-			<div class="indietro">
-				<button class="btn btn-warning"  name="indietro"
-					value="indietro">Indietro</button>
 			</div>
+		</div>
+			
+		</div>
+		
+	
 			<!-- Optional JavaScript; choose one of the two! -->
 
 			<!-- Option 1: Bootstrap Bundle with Popper -->
@@ -119,6 +127,22 @@ if (request.getParameter("indietro") != null){
 		
 
 		</form>
+		
+		</div>
+			<div class="container my-4 text-center">
+			<div class="row">
+				<div class="col">
+					<a href="mappa.jsp"><button
+							class="btn btn-warning" type="submit" name="INDIETRO"
+							value="INDIETRO">Indietro</button></a>
+				</div>
+				<div class="col"></div>
+				<div class="col"></div>
+				<div class="col">
+					<a class="button" href="#popup8"><button type="submit"
+							class="btn btn-light" name="INVIA" value="INVIA">INVIA</button></a>
+				</div>
+			</div>
 	</div>
 </body>
 </html>

@@ -2,7 +2,7 @@
 
 body, html {
   height: 100%;
-  background:#f2f2f2
+  background:#f2f2f2;
 }
 
 .bg-light {
@@ -28,13 +28,56 @@ body, html {
 
 .btn-light{	
     color: #fff;
-    width:200px;
+    background-color: red;
+    border-radius: 10px;
+    border: none;
+	outline:none;
+	font-size:18px;
+	color: #fff;
+}
+
+
+.btn-light:hover
+{
+	cursor: pointer;
+	background:yellow;
+	color: #000;
+}
+
+
+.btn-warning{
+	position: absolute;
+	font-size:18px;
+}
+
+
+select{
+	height:40px;
+	width:250px;
+	border: solid 2px;
+}
+
+textarea{
+	height:300px;
+	width:500px;
+	border: solid 2px;
+	font-size:18px;
+}
+
+
+.btn-outline-warning{
+	font-size:18px;
+}
+
+.btn-light{	
+ 	width:250px;
+    color: #fff;
+    font-size:18px;
     background-color: red;
     border-radius: 10px;
     border: none;
 	outline:none;
 	color: #fff;
-	font-size:18px;
 	font-weight:bold;
 }
 
@@ -47,6 +90,14 @@ body, html {
 }
 
 
+.my-4 {
+    margin-top: 2rem!important;
+}
+
+.my-3 {
+    margin-top: 4rem!important;  
+    margin-left:4rem!important;
+}
 
 .overlay {
   position: fixed;
@@ -91,7 +142,6 @@ body, html {
 	font-size:22px;
 }
 
-
 .btn-outline-light{	
     color: black;
     border-radius: 10px;
@@ -106,13 +156,6 @@ body, html {
 	cursor: pointer;
 	background:yellow;
 
-}
-
-
-.my-4 {
-    margin-top: 8rem!important;
-    margin-bottom: 3rem!important;
-    margin-left:3rem!important;
 }
 
 @import "../node_modules/bootstrap/scss/functions";

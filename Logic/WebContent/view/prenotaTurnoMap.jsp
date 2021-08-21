@@ -4,14 +4,18 @@
 
 <%
 Class.forName("com.mysql.jdbc.Driver");
-if (request.getParameter("PARTECIPA") != null) {
+if (request.getParameter("OK") != null) {
 	if (PrenotaTurnoBoundary.getInstance().prenotaTurno(request.getParameter("nome_giorno"),
 	request.getParameter("ora_inizio"), request.getParameter("ora_fine"),
-	request.getParameter("Curriculum")) == 0) {
+	request.getParameter("Curriculum")) == true) {
 %>
 <jsp:forward page="mappa.jsp" />
 <%
 }
+	else{
+		%>
+		<%
+	}
 }
 %>
 
@@ -31,7 +35,7 @@ if (request.getParameter("PARTECIPA") != null) {
 	crossorigin="anonymous">
 
 <title>PRENOTA TURNO</title>
-<link rel="stylesheet" href="../css/prenotaTurnoMappa.css">
+<link rel="stylesheet" href="../css/prenotaTurnoMap.css">
 <link rel="icon" sizes="64x64" href="../img/favicon.png">
 </head>
 <body>
@@ -42,7 +46,7 @@ if (request.getParameter("PARTECIPA") != null) {
 			<h6>*dopo aver inviato la richiesta verrà inoltrata una notifica
 				se accettata</h6>
 		</div>
-		<form action="partecipaEventoVolontario.jsp" name="my" method="POST">
+		<form action="prenotaTurnoMap.jsp" name="my" method="POST">
 
 			<div style="padding: 2%">
 				<div class="container text-center my-5">
@@ -66,11 +70,75 @@ if (request.getParameter("PARTECIPA") != null) {
 								class="form-label">Orari Disponibili</label> <select
 								style="border: solid 2px" class="form-select" id="ora_inizio"
 								name="ora_inizio">
-								<option value="08:00">08:00</option>
+								<option value="7:00">7:00</option>
+								<option value="7:30">7:30</option>
+								<option value="8:00">8:00</option>
+								<option value="8:30">8:30</option>
+								<option value="9:00">9:00</option>
+								<option value="9:30">9:30</option>
+								<option value="10:00">10:00</option>
+								<option value="10:30">10:30</option>
 								<option value="11:00">11:00</option>
+								<option value="11:30">11:30</option>
+								<option value="12:00">12:00</option>
+								<option value="12:30">12:30</option>
+								<option value="13:00">13:00</option>
+								<option value="13:30">13:30</option>
 								<option value="14:00">14:00</option>
+								<option value="14:30">14:30</option>
+								<option value="15:00">15:00</option>
+								<option value="15:30">15:30</option>
+								<option value="16:00">16:00</option>
+								<option value="16:30">16:30</option>
 								<option value="17:00">17:00</option>
-								<option value="20:00">19:00</option>
+								<option value="17:30">17:30</option>
+								<option value="18:00">18:00</option>
+								<option value="18:30">18:30</option>
+								<option value="19:00">19:00</option>
+								<option value="19:30">19:30</option>
+								<option value="20:00">20:00</option>
+								<option value="20:30">20:30</option>
+								<option value="21:00">21:00</option>
+								<option value="21:30">21:30</option>
+							</select>
+						</div>
+						
+						<div class="col">
+							<label style="font-size: 22px;" for="validationCustom02"
+								class="form-label">Orari Disponibili</label> <select
+								style="border: solid 2px" class="form-select" id="ora_fine"
+								name="ora_fine">
+								
+								<option value="7:30">7:30</option>
+								<option value="8:00">8:00</option>
+								<option value="8:30">8:30</option>
+								<option value="9:00">9:00</option>
+								<option value="9:30">9:30</option>
+								<option value="10:00">10:00</option>
+								<option value="10:30">10:30</option>
+								<option value="11:00">11:00</option>
+								<option value="11:30">11:30</option>
+								<option value="12:00">12:00</option>
+								<option value="12:30">12:30</option>
+								<option value="13:00">13:00</option>
+								<option value="13:30">13:30</option>
+								<option value="14:00">14:00</option>
+								<option value="14:30">14:30</option>
+								<option value="15:00">15:00</option>
+								<option value="15:30">15:30</option>
+								<option value="16:00">16:00</option>
+								<option value="16:30">16:30</option>
+								<option value="17:00">17:00</option>
+								<option value="17:30">17:30</option>
+								<option value="18:00">18:00</option>
+								<option value="18:30">18:30</option>
+								<option value="19:00">19:00</option>
+								<option value="19:30">19:30</option>
+								<option value="20:00">20:00</option>
+								<option value="20:30">20:30</option>
+								<option value="21:00">21:00</option>
+								<option value="21:30">21:30</option>
+								<option value="7:00">22:00</option>
 							</select>
 
 						</div>
@@ -86,13 +154,24 @@ if (request.getParameter("PARTECIPA") != null) {
 				</div>
 			</div>
 
-			
+			<div id="popup13" class="overlay">
+			<div class="popup">
 
-			<div class="completa">
-				<button type="submit" class="btn btn-light" name="PARTECIPA"
-					value="PARTECIPA">Prenota</button>
+				<div class="content">
+					<h3 class="fw-bold">Sei sicuro di voler confermare?</h3>
+					<p>Se confermi non potrai cambiare gli orari di prenotazione.</p>
+					<div class="content text-center">
+						<button class="btn btn-outline-light"
+								type="submit" name="OK" value="OK">OK</button>
+							<button class="btn btn-outline-light"
+								type="submit" name="" value="">ANNULLA</button>
+					</div>
+				</div>
+
 			</div>
+		</div>
 
+			
 			<!-- Optional JavaScript; choose one of the two! -->
 
 			<!-- Option 1: Bootstrap Bundle with Popper -->
@@ -104,10 +183,22 @@ if (request.getParameter("PARTECIPA") != null) {
 
 		</form>
 		
-		<div class="indietro">
-			<a href = "mappa.jsp"><button class="btn btn-warning" type="submit"
-						name="INDIETRO" value="INDIETRO">Indietro</button></a>
+			
+		<div class="container my-4">
+			<div class="row">
+				<div class="col">
+					<a href="mappa.jsp"><button
+							class="btn btn-warning" type="submit" name="INDIETRO"
+							value="INDIETRO">Indietro</button></a>
+				</div>
+				<div class="col"></div>
+				<div class="col"></div>
+				<div class="col">
+					<a class="button" href="#popup13"><button type="submit"
+							class="btn btn-light" name="INVIA" value="INVIA">INVIA</button></a>
+				</div>
 			</div>
+		</div>
 	</div>
 </body>
 </html>

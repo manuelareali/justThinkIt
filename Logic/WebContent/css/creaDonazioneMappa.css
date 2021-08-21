@@ -2,7 +2,7 @@
 
 body, html {
   height: 100%;
-  background:#f2f2f2
+  background:#f2f2f2;
 }
 
 .bg-light {
@@ -47,6 +47,30 @@ body, html {
 }
 
 
+.indietro{
+	position: absolute;
+	top:88%;
+	font-size:18px;
+	left:5%;
+}
+
+
+.conferma{
+	position:absolute;
+	left:77%;
+	top:85%;
+}
+
+
+input{
+	border: solid 2px;
+	width:280px;
+	height:35px;
+}
+
+textarea{
+	border: solid 2px;
+}
 
 .overlay {
   position: fixed;
@@ -68,12 +92,12 @@ body, html {
 .popup {
   position:absolute;
   top:10%;
-  left:34%;
+  left:34%;	
   margin: 70px auto;
   padding: 20px;
   background: #fff;
   border-radius: 5px;
-  width: 30%;
+  width: 33%;
  
   transition: all 1s ease-in-out;
   border:solid red;
@@ -88,9 +112,8 @@ body, html {
 
 
 .content p{
-	font-size:22px;
+	font-size:20px;
 }
-
 
 .btn-outline-light{	
     color: black;
@@ -108,9 +131,8 @@ body, html {
 
 }
 
-
 .my-4 {
-    margin-top: 8rem!important;
+    margin-top: 12rem!important;
     margin-bottom: 3rem!important;
     margin-left:3rem!important;
 }

@@ -284,7 +284,7 @@ public class CercaCaritas {
 			Stage stage = new Stage();
 			stage.setTitle("Promuovi Evento");
 
-			stage.setScene(new Scene(rootNode, 700, 450));
+			stage.setScene(new Scene(rootNode, 600, 400));
 			stage.setResizable(false);
 
 			PromuoviEventoBoundary promEvento = fxmlLoader.getController();
@@ -381,7 +381,7 @@ public class CercaCaritas {
 			Stage stage = new Stage();
 			stage.setTitle("Prenota Turno");
 			partecipaEvent.setData(idEvent, idUt);
-			stage.setScene(new Scene(rootNode, 700, 450));
+			stage.setScene(new Scene(rootNode, 600, 400));
 			stage.setResizable(false);
 			stage.show();
 		} catch (IOException e) {

@@ -1,12 +1,11 @@
 package bean;
 
 
+
 import java.util.ArrayList;
 import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import controller.GestisciDonazioniCaritas;
 import entity.DonazioneTab;
 import exception.MyException;
@@ -59,6 +58,7 @@ public class GestisciDonazioniBoundary {
 
 	@FXML
 	private Button cancella;
+	
 
 	private List<DonazioneTab> listDon;
 
@@ -107,6 +107,11 @@ public class GestisciDonazioniBoundary {
 		}
 
 	}
+	
+	
+
+
+
 
 	@FXML
 	void ritiraDonazione(ActionEvent event) {

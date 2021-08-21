@@ -2,9 +2,8 @@
 
 body, html {
   height: 100%;
-  background:#f2f2f2
+background:#f2f2f2;
 }
-
 .bg-light {
   /* The image used */
   
@@ -48,6 +47,7 @@ body, html {
 
 
 
+
 .overlay {
   position: fixed;
   top: 0;
@@ -68,7 +68,7 @@ body, html {
 .popup {
   position:absolute;
   top:10%;
-  left:34%;
+  left:34%;	
   margin: 70px auto;
   padding: 20px;
   background: #fff;
@@ -88,9 +88,8 @@ body, html {
 
 
 .content p{
-	font-size:22px;
+	font-size:20px;
 }
-
 
 .btn-outline-light{	
     color: black;
@@ -108,9 +107,8 @@ body, html {
 
 }
 
-
 .my-4 {
-    margin-top: 8rem!important;
+    margin-top: 6rem!important;
     margin-bottom: 3rem!important;
     margin-left:3rem!important;
 }
@@ -124,3 +122,4 @@ body, html {
 @import "../node_modules/bootstrap/scss/images";
 @import "../node_modules/bootstrap/scss/containers";
 @import "../node_modules/bootstrap/scss/grid";
+

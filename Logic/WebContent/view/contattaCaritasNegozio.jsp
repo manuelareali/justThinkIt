@@ -10,7 +10,7 @@ Class.forName("com.mysql.jdbc.Driver");
 		if(EmailBoundary.getInstance().sendMessage(ShopHomeBoundary.getInstance().getEmailShop(),request.getParameter("codice_destinatario"), request.getParameter("Messaggio"), request.getParameter("oggetto")) == true){
 			
 %>
-<jsp:forward page="homeCaritas.jsp" />
+<jsp:forward page="gestisciEventiNegozio.jsp" />
 <%			
 		}
 
@@ -34,7 +34,7 @@ Class.forName("com.mysql.jdbc.Driver");
 	crossorigin="anonymous">
 
 <title>CONTATTA</title>
-<link rel="stylesheet" href="../css/invioEmail.css">
+<link rel="stylesheet" href="../css/invioEmails.css">
 <link rel="icon" sizes="64x64" href="../img/favicon.png">
 </head>
 <body>
@@ -71,12 +71,12 @@ Class.forName("com.mysql.jdbc.Driver");
 			</div>
 
 
-	<div id="popup3" class="overlay">
+	<div id="popup7" class="overlay">
 			<div class="popup">
 
 				<div class="content">
 					<h3 class="fw-bold">Sei sicuro di voler inviare l'email?</h3>
-					<p>Verifica se l'indirizzo del destinatario sia corretto.</p>
+					<p>Verifica che l'indirizzo del destinatario sia corretto.</p>
 					<div class="content text-center">
 						<button class="btn btn-outline-light"
 								type="submit" name="OK" value="OK">OK</button>
@@ -95,10 +95,11 @@ Class.forName("com.mysql.jdbc.Driver");
 		<div class="container my-4">
 			<div class="row">
 				<div class="col">
-					<a class="button" href="#popup7"><button
+					<a class="button" href="gestisciEventiNegozio.jsp"><button
 							class="btn btn-warning" type="submit" name="INDIETRO"
 							value="INDIETRO">Indietro</button></a>
 				</div>
+				<div class="col"></div>
 				<div class="col"></div>
 				<div class="col">
 					<a class="button" href="#popup7"><button type="submit"
@@ -109,22 +110,7 @@ Class.forName("com.mysql.jdbc.Driver");
 
 
 	
-		<div id="popup3" class="overlay">
-			<div class="popup">
-
-				<div class="content">
-					<h3 class="fw-bold">Sei sicuro di voler tornare indietro?</h3>
-					<p>Se torni indietro perderai le modifiche effettuate.</p>
-					<div class="content text-center">
-						<a href="gestisciEventiNegozio.jsp"><button class="btn btn-outline-light"
-								type="submit" name="" value="">OK</button></a> <a
-							href="contattaCaritasNegozio.jsp"><button class="btn btn-outline-light"
-								type="submit" name="" value="">ANNULLA</button></a>
-					</div>
-				</div>
-
-			</div>
-		</div>
+		
 			<script
 				src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
 				integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"

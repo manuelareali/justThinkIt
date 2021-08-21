@@ -5,13 +5,15 @@
 <%Class.forName("com.mysql.jdbc.Driver"); %>
 <%
 	if (request.getParameter("PARTECIPA")!= null){
-		if (PartecipaEventoBoundary.getInstance().partecipaEvento(request.getParameter("Importo"),request.getParameter("carta")) == true){
+		if(PartecipaEventoBoundary.getInstance().isNumeric(request.getParameter("Importo")) == true){
+		if (PartecipaEventoBoundary.getInstance().partecipaEvento(request.getParameter("Importo")) == true){
 			
 		}
 %>
 	<jsp:forward page="mappa.jsp"/>
 <%
 	}
+	}		
 %> 
     
 
@@ -48,10 +50,6 @@
 					<div class="col">
 						<label style = "font-size:22px;" for="validationCustom01" class="form-label">*Quanto vuoi donare?</label> <input style = "border: solid 2px;" type="text" class="form-control" id = "Importo"  name="Importo" placeholder="10.00&euro;"/>
 					</div>
-					<div class="col">
-						<label style = "font-size:22px;"  for="validationCustom02" class="form-label">*Carta di Credito</label> <input  style = "border: solid 2px;" type="text" class="form-control" id = "cartaDicredito"  name="Email" placeholder="67966869869790"/>
-					</div>
-
 				</div>
 				</div>
 				

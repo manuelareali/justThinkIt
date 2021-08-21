@@ -25,7 +25,7 @@ public class VolunteerRepository {
 
     public VolunteerUser getVolunteerByID(int id) {
 
-        String sql = "SELECT  Nome, Cognome, Indirizzo, utenti.Email, RecapitoTel, CartaDiCredito FROM volontari JOIN utenti ON volontari.ID = utenti.Id_utente WHERE ID=?";
+        String sql = "SELECT  Nome, Cognome, Indirizzo, utenti.Email, RecapitoTel  FROM volontari JOIN utenti ON volontari.ID = utenti.Id_utente WHERE ID=?";
         ResultSet rs = null;
         VolunteerUser vUser = new VolunteerUser();
 
@@ -43,7 +43,6 @@ public class VolunteerRepository {
                 vUser.setIndirizzo(rs.getString("Indirizzo"));
                 vUser.setEmail(rs.getString("Email"));
                 vUser.setRecapitoTel(rs.getString("RecapitoTel"));
-                vUser.setCc(rs.getString("CartaDiCredito"));
             }
 
         } catch (SQLException ex) {

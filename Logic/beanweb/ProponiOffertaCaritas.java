@@ -21,7 +21,16 @@ public class ProponiOffertaCaritas {
 		return instance;
 		}
 	   
-	
+	public boolean isNumeric(String str) { 
+		 Logger logger = LoggerFactory.getLogger(ProponiOffertaCaritas.class.getName());
+		  try {  
+			  Float.parseFloat(str); 
+		    return true;
+		  } catch(NumberFormatException e){  
+			  logger.error("Inserisci correttamente il prezzo");
+		    return false;  
+		  } 
+		}
 	
     public boolean conferma(Float prezzo, String note, String data) {
     	ProponiOfferta proponiOfferta = new ProponiOfferta();

@@ -6,32 +6,17 @@
 Class.forName("com.mysql.jdbc.Driver");
 %>
 <%
-if (request.getParameter("CONFERMA") != null) {
-	if(request.getParameter("Tipologia").equals("Tutto")){
-		if(PromuoviEventoGenerale.getInstance().confermaEventoPressed(request.getParameter("NomeEvento"), "Tutto", Float.parseFloat("0"), request.getParameter("NoteEvento")) == true){ 
+if (request.getParameter("OK") != null) {
+		if(PromuoviEventoGenerale.getInstance().confermaEventoPressed(request.getParameter("NomeEvento"), request.getParameter("Tipologia"), Float.parseFloat("0"), request.getParameter("NoteEvento")) == true){ 
 			
 %>
 <jsp:forward page="gestisciEventiCaritas.jsp" />
 <%			
 	}
-	}
-		else if (request.getParameter("Tipologia").equals("Vestiti")) {
-	 		if(PromuoviEventoGenerale.getInstance().confermaEventoPressed(request.getParameter("NomeEvento"), "Vestiti", Float.parseFloat("0"), request.getParameter("NoteEvento")) == true){
-%>
-<jsp:forward page="gestisciEventiCaritas.jsp" />
-<%
-}
-		}
-
-else if (request.getParameter("Tipologia").equals("Cibo")) {
-	if(PromuoviEventoGenerale.getInstance().confermaEventoPressed(request.getParameter("NomeEvento"), "Cibo", Float.parseFloat("0"), request.getParameter("NoteEvento"))==true){
-	%>
-<jsp:forward page="gestisciEventiCaritas.jsp" />
-<%
-}}
  else {
  }
 }
+
 %>
 
 
@@ -54,7 +39,7 @@ else if (request.getParameter("Tipologia").equals("Cibo")) {
 	crossorigin="anonymous">
 
 <title>PROMUOVI EVENTO</title>
-<link rel="stylesheet" href="../css/proponiEvento.css">
+<link rel="stylesheet" href="../css/proponiEventi.css">
 <link rel="icon" sizes="64x64" href="../img/favicon.png">
 </head>
 <body>
@@ -102,11 +87,27 @@ else if (request.getParameter("Tipologia").equals("Cibo")) {
 				</div>
 			</div>
 			</div>
-			<div class = "conferma">
-			<button class="btn btn-light" type="submit"   name ="CONFERMA" value = "CONFERMA">Conferma</button>
+			
+			
+<div id="popup5" class="overlay">
+			<div class="popup">
+
+				<div class="content">
+					<h3 class="fw-bold">Sei sicuro di voler confermare?</h3>
+					<p>I dati inseriti non potranno essere modificati.</p>
+					<div class="content text-center">
+						<button class="btn btn-outline-light"
+								type="submit" name="OK" value="OK">OK</button>
+							<button class="btn btn-outline-light"
+								type="submit" name="" value="">ANNULLA</button>
+					</div>
+				</div>
+
 			</div>
+		</div>
 			
-			
+	
+		</form>	
 			<!-- Optional JavaScript; choose one of the two! -->
 
 			<!-- Option 1: Bootstrap Bundle with Popper -->
@@ -115,12 +116,21 @@ else if (request.getParameter("Tipologia").equals("Cibo")) {
 				integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
 				crossorigin="anonymous"></script>
 
-
-		</form>
-		<div class = "indietro">
-			<a href= "gestisciEventiCaritas.jsp"><button class="btn btn-warning" type="submit" name="indietro"
+	<div class = "container my-4">
+			<div class = "row">
+			<div class = "col">
+			<a class="button" href="gestisciEventiCaritas.jsp"><button class="btn btn-warning" type="submit" name="indietro"
 					value="indietro">Indietro</button></a>
-					</div>
+			</div>
+			
+			<div class = "col"></div>
+			<div class = "col">
+			<a class="button" href="#popup5"><button class="btn btn-light" type="submit"   name ="CONFERMA" value = "CONFERMA">Conferma</button></a>
+			</div>
+			</div>
+			</div>
+		
+		
 	</div>
 </body>
 </html>

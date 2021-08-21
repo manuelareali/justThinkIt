@@ -79,20 +79,26 @@ public class TransizionePagine {
 	
 	
 	public void goToEmail(int idUser,int idCaritas, Window stage) {
+	
 		try {
-			FXMLLoader fxmlLoader = new FXMLLoader();
-			Parent rootNode = fxmlLoader.load(getClass().getResourceAsStream("/boundary/Email.fxml"));
-			
-			EmailBoundary email;
-			email = fxmlLoader.getController();
-			email.loadEmail(idUser,idCaritas);
-			Stage stageBack = (Stage)  stage;
-			stageBack.setTitle("Email");
 
-			stageBack.setScene(new Scene(rootNode, 800, 500));
-			stageBack.setResizable(false);
-			stageBack.show();
-		}catch (IOException e) {
+			FXMLLoader fxmlLoader = new FXMLLoader();
+
+			Parent rootNode = fxmlLoader.load(getClass().getResourceAsStream("/boundary/Email.fxml"));
+
+			EmailBoundary emailBoundary = fxmlLoader.getController();
+
+			Stage stage1 = new Stage();
+			stage1.setTitle("Email");
+
+			stage1.setScene(new Scene(rootNode, 800, 500));
+			stage1.setResizable(false);
+
+			emailBoundary.loadEmail(idUser, idCaritas);
+
+			stage1.show();
+
+		} catch (IOException e) {
 			logger.error(e.getMessage());
 		}
 	}

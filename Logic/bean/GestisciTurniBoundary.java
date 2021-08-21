@@ -101,7 +101,7 @@ public class GestisciTurniBoundary {
 				this.caritasTurniBoundary = loader.getController();
 				this.caritasTurniBoundary.setCaritas(caritas);
 				Stage home = (Stage) creaTurn.getScene().getWindow();
-				home.setScene(new Scene(root, 770, 500));
+				home.setScene(new Scene(root, 780, 500));
 
 				home.show();
 			} catch (IOException e) {
@@ -112,7 +112,7 @@ public class GestisciTurniBoundary {
 
 	@FXML
 	void modificaTurno(ActionEvent event) {
-		if(this.turn != null) {
+		if(this.turn != null && newNote.getText() != null) {
 			gestTurn.modificaTurno(turn.getId(), newNote.getText(), turn.getIdCar());
 		}else {
 			try {

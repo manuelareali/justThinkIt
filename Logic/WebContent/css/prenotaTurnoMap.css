@@ -2,7 +2,7 @@
 
 body, html {
   height: 100%;
-  background:#f2f2f2
+  background:#f2f2f2;
 }
 
 .bg-light {
@@ -68,12 +68,12 @@ body, html {
 .popup {
   position:absolute;
   top:10%;
-  left:34%;
+  left:34%;	
   margin: 70px auto;
   padding: 20px;
   background: #fff;
   border-radius: 5px;
-  width: 30%;
+  width: 33%;
  
   transition: all 1s ease-in-out;
   border:solid red;
@@ -88,9 +88,8 @@ body, html {
 
 
 .content p{
-	font-size:22px;
+	font-size:20px;
 }
-
 
 .btn-outline-light{	
     color: black;
@@ -107,7 +106,6 @@ body, html {
 	background:yellow;
 
 }
-
 
 .my-4 {
     margin-top: 8rem!important;

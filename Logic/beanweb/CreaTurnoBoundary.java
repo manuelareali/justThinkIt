@@ -1,5 +1,7 @@
 package beanweb;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import controller.CreaTurnoController;
 
 
@@ -21,6 +23,18 @@ public class CreaTurnoBoundary {
 		return instance;
 	}
 	
+	
+	public boolean isNumeric(String str) { 
+		Logger logger = LoggerFactory.getLogger(CreaTurnoBoundary.class.getName());
+		  try {  
+		    Integer.parseInt(str); 
+		    return true;
+		  } catch(NumberFormatException e){  
+			  logger.error("Inserisci correttamente il numero di partecipanti");
+		    return false;  
+		  } 
+		}
+	
 	public boolean creaTurnoPressed(String nomeGiorno, String oraInizio, String oraFine, String  numMaxParte, String note) {
 		if (nomeGiorno == null || nomeGiorno.equals("")) {
 			return false;
@@ -28,7 +42,7 @@ public class CreaTurnoBoundary {
 		else if ( oraInizio == null || oraInizio.equals("")) {
 			return false;
 		}
-		else if (oraFine == null || oraFine.equals("")) {
+		else if (oraFine == null || oraFine.equals("") || oraFine.contentEquals(oraInizio)) {
 			return false;
 		} 
 		else if ( numMaxParte == null || numMaxParte.equals("")) {

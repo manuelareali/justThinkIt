@@ -91,11 +91,9 @@ public class PromuoviEventoGenerale {
     	Trigger trigger = new Trigger();
 		GestisciEventiCaritasController controller = new GestisciEventiCaritasController();
 		float x = (float) 0.0;
-		if (nome.getText() != null && note.getText() != null) {
-			if (checker() != -1) {
+			if (checker() ) {
 				controller.creaEventoGeneral(nome.getText(), tipo, x, note.getText(), this.idCar, this.idShop);
 				this.switchPage(confermaEventoPressed.getScene().getWindow());
-	    	}
 		}else {
 			try {
 				trigger.myTrigger();
@@ -122,26 +120,21 @@ public class PromuoviEventoGenerale {
 		}
 	}
     
-	public int checker() {
-		// Controlla che non ci siano campi lasciati vuoti
-	
+	public boolean checker() {
 		if (idCibo.isSelected()) {
 			tipo = "Cibo";
-			return 0;
+			return true;
 		}
-		// Almeno uno dei tipi deve essere selezionato
+	
 		else if (idVestiti.isSelected()) {
 			tipo = "Vestiti";
-			return 0;
-			// Almeno uno dei tipi deve essere selezionato
+			return true;
+			
 		}else if(tutto.isSelected()) {
 			tipo = "Tutto";
-			return 0;
-		} 		
-		
-		else {
-			return -1;
+			return true;
 		}
+		return false; 				
 	}
 
 

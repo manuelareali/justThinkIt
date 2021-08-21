@@ -1,6 +1,10 @@
 package beanweb;
 
 import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import controller.GestisciEventiCaritasController;
 import entity.EventTab;
 
@@ -24,13 +28,26 @@ public class GestisciEventiCaritasBoundary {
 			return instance;
 			}
 		
+
+		public boolean isNumeric(String str) { 
+			Logger logger = LoggerFactory.getLogger(GestisciEventiBoundary.class.getName());
+			  try {  
+			    Integer.parseInt(str); 
+			    return true;
+			  } catch(NumberFormatException e){  
+				  logger.error("Inserisci correttamente l'id");
+			    return false;  
+			  } 
+			}
 	
 		public boolean confermaEvento(String id) {
 			if (id == null || id.equals("")) {
 	    		return false;
 	    	}
 	    	else {
-	    		gestEventC.confermaEvento(Integer.parseInt(id));
+	    		if(isNumeric(id) == true) {
+	    			gestEventC.confermaEvento(Integer.parseInt(id));
+	    		}
 	    		return true;
 	    	}
 		}
@@ -41,7 +58,9 @@ public class GestisciEventiCaritasBoundary {
 	    		return false;
 	    	}
 	    	else {
-	    		gestEventC.cancellaEvento(Integer.parseInt(id));
+	    		if(isNumeric(id) == true) {
+	    			gestEventC.cancellaEvento(Integer.parseInt(id));
+	    		}
 	    		return true;
 	    	}
 		 }

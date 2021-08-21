@@ -171,6 +171,7 @@ if(request.getParameter("Evento") != null){
 						value="indietro">Indietro</button>
 						</div>
 						<div class = "col"></div>
+						<div class = "col"></div>
 						<div class = "col">
 						<button class="btn  btn-light" type="submit" name="Evento"
 						value="Evento">Crea Evento</button>

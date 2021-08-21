@@ -28,7 +28,7 @@ public class CaritasHomeBoundary {
 	
 	private static CaritasHomeBoundary instance = null;
 	private static Logger logger = LoggerFactory.getLogger(CaritasHomeBoundary.class.getName());
-	private String s = "errore IoException";
+	
 
 	private GestisciTurniBoundary gestTurn;
 	private GestisciDonazioniBoundary gestDon;
@@ -117,7 +117,7 @@ public class CaritasHomeBoundary {
 			stage.show();
 
 		} catch (IOException e) {
-			logger.error(s);
+			logger.error(e.getMessage());
 		}
 	}
 
@@ -138,7 +138,7 @@ public class CaritasHomeBoundary {
 			stage.show();
 
 		} catch (IOException e) {
-			logger.error(s);
+			logger.error(e.getMessage());
 		}
 	}
 
@@ -158,7 +158,7 @@ public class CaritasHomeBoundary {
 			home.show();
 
 		} catch (IOException e) {
-			logger.error(s);
+			logger.error(e.getMessage());
 		}
 
 	}
@@ -178,7 +178,7 @@ public class CaritasHomeBoundary {
 			bacheca.loadFormBoundary(idCar);
 
 		} catch (IOException e) {
-			logger.error(s);
+			logger.error(e.getMessage());
 		}
 	}
 

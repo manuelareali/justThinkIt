@@ -41,7 +41,7 @@ if(request.getParameter("accettaOfferta") != null){
 	crossorigin="anonymous">
 
 <title>GESTIONE OFFERTE NEGOZI </title>
-<link rel="stylesheet" href="../css/gestisciEventiCaritass.css">
+<link rel="stylesheet" href="../css/gestisciEventiCaritas.css">
 <link rel="icon" sizes="64x64" href="../img/favicon.png">
 </head>
 <body>

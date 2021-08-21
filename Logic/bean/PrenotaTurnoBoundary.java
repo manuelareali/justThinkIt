@@ -54,12 +54,12 @@ public class PrenotaTurnoBoundary {
 
 	@FXML
 	void prenotaTurno(ActionEvent event) {
-		if (checker()) {
+		if(!checker()) {
 			prenotaC.prenotaTurno(turni.getValue().toString(), cbOraInizio.getValue().toString(),
 					cbOraFine.getValue().toString(), cv.getText());
 			Stage st = (Stage) prenota.getScene().getWindow();
 			st.close();
-		} else {
+		}else {
 			try {
 				trigger.myTrigger();
 			} catch (MyException e) {
@@ -69,8 +69,8 @@ public class PrenotaTurnoBoundary {
 	}
 
 	public boolean checker() {
-		cv.getText().isEmpty();
-			return false;
+			cv.getText().isEmpty();
+		return false;
 	}
 
 	@FXML
@@ -88,15 +88,16 @@ public class PrenotaTurnoBoundary {
 		List<Orario> oraArrayList = prenotaC.initializzaOrari();
 
 		int i = 0;
+		
 		while (i < oraArrayList.size()) {
-
+			
 			cbOraInizio.getItems().add(oraArrayList.get(i).getOraFine());
 
 			cbOraFine.getItems().add(oraArrayList.get(i).getOraInizio());
 
 			i++;
-
 		}
+		
 
 	}
 

@@ -6,8 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import controller.CreaTurnoController;
-import exception.MyException;
-import exception.Trigger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,14 +21,7 @@ import javafx.stage.Window;
 public class CreaTurnoBoundary {
 	private static Logger logger = LoggerFactory.getLogger(CreaTurnoBoundary.class.getName());
 	
-	private TextField[] text ;
-	private TextArea[] textArea;
-	
-	private Trigger trigger;
-	
-	public CreaTurnoBoundary() {
-		trigger = new Trigger();
-	}
+
 
 	@FXML
 	private Button back;
@@ -41,11 +32,11 @@ public class CreaTurnoBoundary {
 	@FXML
 	private TextArea note;
 
-	@FXML
-	private TextField orain;
+    @FXML
+    private ChoiceBox<String> orain;
 
-	@FXML
-	private TextField oraFin;
+    @FXML
+    private ChoiceBox<String> oraFin;
 
 	@FXML
 	private ChoiceBox<String> giorni;
@@ -78,28 +69,36 @@ public class CreaTurnoBoundary {
 
 
 	public boolean checker() {
-		// Controlla che non ci siano campi lasciati vuoti
-		for (int i = 0; i < text.length; i++) {
-			if (text[i].getText().isEmpty()){
-				return false;
-			}
-		}	
+		// Controlla che non ci siano campi lasciati vuoti	
+		if(giorni.getValue() == null || orain.getValue() == null  || oraFin.getValue() == null || numParte.getText() == null) {
+			logger.error("Alcuni campi sono vuoti");
+			return false;
+		}
+		if(orain.getValue() == oraFin.getValue()) {
+			logger.error("Devi inserire orari diversi");
+			return false;
+		}
 		return true;
 	}
+	
+	
+	public boolean isNumeric(String str) { 
+		  try {  
+		    Integer.parseInt(str); 
+		    return true;
+		  } catch(NumberFormatException e){  
+			  logger.error("Inserisci correttamente il numero di partecipanti");
+		    return false;  
+		  } 
+		}
 	
 	@FXML
 	void creaTurnoPressed(ActionEvent event) {
 		CreaTurnoController creaTurn = new CreaTurnoController();
-		if (checker() && giorni.getValue() != null && !textArea[0].getText().isEmpty()) {
-				creaTurn.creaTurno(caritas, giorni.getValue().toString(), orain.getText(), oraFin.getText(),
+		if (checker() && isNumeric(numParte.getText())) {
+				creaTurn.creaTurno(caritas, giorni.getValue().toString(), orain.getValue().toString(), oraFin.getValue().toString(),
 						Integer.parseInt(numParte.getText()), note.getText());
 					this.switchPage(creaTurno.getScene().getWindow());
-		} else {
-				try {
-					trigger.myTrigger();
-				} catch (MyException e) {
-					logger.error("Alcuni campi sono vuoti");
-				}
 			}
 		} 
 	
@@ -127,7 +126,6 @@ public class CreaTurnoBoundary {
 
 	@FXML
 	void initialize() {
-
 		String[] days = { "Lunedi", "Martedì", "Mercoledi", "Giovedi", "Venerdi", "Sabato", "Domenica" };
 
 		for (int i = 0; i < 7; i++) {
@@ -135,14 +133,25 @@ public class CreaTurnoBoundary {
 			giorni.getItems().add(days[i]);
 
 		}
+		String[] oraIn = { "7:00", "7:30", "8:00", "8:30", "9:00", "9:30","10:00","10:30","11:00","11:30","12:00","12:30","13:00",
+				"13:30", "14:00","14:30","15:00","15:30","16:00","16:30","17:00","17:30","18:00","18:30","19:00","19:30","20:00","20:30","21:00","21:30"};
 		
-		text = new TextField[] {
-				this.oraFin, 
-				this.orain,
+		for(int i= 0; i<30; i++) {
+			orain.getItems().add(oraIn[i]);
+		}
+		
+		String[] oraFine = {"7:30", "8:00", "8:30", "9:00", "9:30","10:00","10:30","11:00","11:30","12:00","12:30","13:00",
+				"13:30", "14:00","14:30","15:00","15:30","16:00","16:30","17:00","17:30","18:00","18:30","19:00","19:30","20:00","20:30","21:00","21:30","22:00"};
+		
+		for(int i= 0; i<30; i++) {
+			oraFin.getItems().add(oraFine[i]);
+		}
+		
+		TextField[] text = new TextField[] {
 				this.numParte
 		};
 		
-		textArea = new TextArea[] {
+		TextArea[] textArea = new TextArea[] {
 				this.note
 		};
 
