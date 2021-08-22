@@ -42,7 +42,7 @@ public class PromuoviEventoBoundary {
 
 	    @FXML
 		void confermaPressed(ActionEvent event) {
-			if (!checker()) {
+			if (!checker() && isNumeric(prezzo.getText()) &&  !nome.getText().isEmpty() && tipo != null) {
 				float costoEvento = Float.parseFloat(prezzo.getText());
 
 				PromuoviEventoController promuoviEvento = new PromuoviEventoController();
@@ -78,9 +78,7 @@ public class PromuoviEventoBoundary {
 				tipo = "Cibo";
 				
 			}
-			if(!isNumeric(prezzo.getText())||nome.getText().isEmpty()||tipo == null || note.getText().isEmpty()){
-				return true;
-			}
+		
 			return false;
 			
 		}	

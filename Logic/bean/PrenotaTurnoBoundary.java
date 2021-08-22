@@ -54,7 +54,7 @@ public class PrenotaTurnoBoundary {
 
 	@FXML
 	void prenotaTurno(ActionEvent event) {
-		if(!checker()) {
+		if(turni.getValue() != null && cbOraInizio.getValue() != null && cbOraFine.getValue() != null && cv.getText().isEmpty() && !cbOraInizio.getValue().toString().contentEquals(cbOraFine.getValue().toString())) {
 			prenotaC.prenotaTurno(turni.getValue().toString(), cbOraInizio.getValue().toString(),
 					cbOraFine.getValue().toString(), cv.getText());
 			Stage st = (Stage) prenota.getScene().getWindow();
@@ -68,13 +68,7 @@ public class PrenotaTurnoBoundary {
 		}
 	}
 
-	public boolean checker() {
-		
-		if(turni.getValue() == null || cbOraInizio.getValue() == null || cbOraFine.getValue() == null|| cv.getText().isEmpty() || cbOraInizio.getValue().toString().contentEquals(cbOraFine.getValue().toString())) {
-			return true;
-		}
-	return false;
-}
+
 
 	@FXML
 	void initialize() {

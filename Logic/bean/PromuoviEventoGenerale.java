@@ -91,7 +91,7 @@ public class PromuoviEventoGenerale {
     	Trigger trigger = new Trigger();
 		GestisciEventiCaritasController controller = new GestisciEventiCaritasController();
 		float x = (float) 0.0;
-			if (!checker() ) {
+			if (!checker() && !nome.getText().isEmpty() && tipo != null ) {
 				controller.creaEventoGeneral(nome.getText(), tipo, x, note.getText(), this.idCar, this.idShop);
 				this.switchPage(confermaEventoPressed.getScene().getWindow());
 		}else {
@@ -131,10 +131,6 @@ public class PromuoviEventoGenerale {
 		}else if(tutto.isSelected()) {
 			tipo = "Tutto";
 			
-		}
-		
-		if(nome.getText().isEmpty() || tipo == null) {
-			return true;
 		}
 		return false; 				
 	}
