@@ -42,7 +42,7 @@ public class PromuoviEventoBoundary {
 
 	    @FXML
 		void confermaPressed(ActionEvent event) {
-			if (checker() != -1 && isNumeric(prezzo.getText())) {
+			if (!checker()) {
 				float costoEvento = Float.parseFloat(prezzo.getText());
 
 				PromuoviEventoController promuoviEvento = new PromuoviEventoController();
@@ -67,20 +67,23 @@ public class PromuoviEventoBoundary {
 			  } 
 			}
 		
-		public int checker() {
+		
+		public boolean checker() {
 			if(idCibo.isSelected() && idVestiti.isSelected()) {
 				tipo = "Tutto";
-				return 0;
 			}else if (idVestiti.isSelected()) {
 				tipo = "Vestiti";
-				return 0;
+				
 			}else if (idCibo.isSelected()) {
 				tipo = "Cibo";
-				return 0;
-			}else {
-				return -1;
+				
 			}
-		} 		
+			if(!isNumeric(prezzo.getText())||nome.getText().isEmpty()||tipo == null || note.getText().isEmpty()){
+				return true;
+			}
+			return false;
+			
+		}	
 	
 		
 

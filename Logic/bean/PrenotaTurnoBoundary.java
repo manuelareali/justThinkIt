@@ -69,9 +69,12 @@ public class PrenotaTurnoBoundary {
 	}
 
 	public boolean checker() {
-			cv.getText().isEmpty();
-		return false;
-	}
+		
+		if(turni.getValue() == null || cbOraInizio.getValue() == null || cbOraFine.getValue() == null|| cv.getText().isEmpty() || cbOraInizio.getValue().toString().contentEquals(cbOraFine.getValue().toString())) {
+			return true;
+		}
+	return false;
+}
 
 	@FXML
 	void initialize() {
