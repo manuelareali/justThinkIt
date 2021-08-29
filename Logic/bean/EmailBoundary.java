@@ -43,10 +43,6 @@ public class EmailBoundary {
 	private Button indietro;
 
 
-	public EmailBoundary() {
-		
-	}
-	
 
 	 
 	

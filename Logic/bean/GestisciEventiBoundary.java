@@ -11,6 +11,7 @@ import controller.GestisciEventiController;
 import controller.ShopHomeController;
 import entity.EventTab;
 import exception.MyException;
+import exception.MyIOException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -89,7 +90,7 @@ public class GestisciEventiBoundary {
 		try {
 			if (check()) {
 				try {
-
+					
 					FXMLLoader fxmlLoader = new FXMLLoader();
 					Parent rootNode = fxmlLoader.load(getClass().getResourceAsStream("/boundary/Email.fxml"));
 
@@ -102,15 +103,20 @@ public class GestisciEventiBoundary {
 					stage.setResizable(false);
 					stage.show();
 
-				} catch (IOException e) {
-					logger.error(s);
+				} catch (Exception e) {
+					logger.error(e.getMessage());
+					MyIOException.openPageFault("Email");
 				}
 			}
 		} catch (MyException e) {
-			logger.error(e.getMessage());
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		}
+			
+		
 
-	}
+	
 
 	@FXML
 	public void eliminaEvento(ActionEvent event) {

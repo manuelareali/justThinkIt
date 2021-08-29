@@ -1,7 +1,5 @@
 package bean;
 
-import java.io.IOException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import controller.CaritasHomeController;
@@ -23,12 +21,10 @@ public class LoginBoundary {
 
 	private static Logger logger = LoggerFactory.getLogger(LoginBoundary.class.getName());
 
-	private String s = "errore IoException";
 
 	private LoginController loginC = new LoginController();
 
-	private ShopHomeBoundary shopHomeBoundary;
-	private UserHomeBoundary userHomeBoundary;
+
 
 	@FXML
 	private TextField usernameField;
@@ -54,6 +50,8 @@ public class LoginBoundary {
 					if (loggedUser.equalsIgnoreCase("Volontario")) {
 						FXMLLoader loader = new FXMLLoader(getClass().getResource("/boundary/UserHomePage.fxml"));
 						Parent root = loader.load();
+						
+						UserHomeBoundary userHomeBoundary;
 						userHomeBoundary = loader.getController();
 						UserHomeController userHomeController = new UserHomeController();
 						userHomeController.initDataCont(idUser, userHomeBoundary);
@@ -84,7 +82,7 @@ public class LoginBoundary {
 
 						FXMLLoader loader = new FXMLLoader(getClass().getResource("/boundary/ShopHomePage.fxml"));
 						Parent root = loader.load();
-			
+						ShopHomeBoundary shopHomeBoundary;
 						shopHomeBoundary = loader.getController();
 						ShopHomeController shopHomeC = new ShopHomeController();
 						shopHomeC.initDataShop(idUser, shopHomeBoundary);
@@ -125,8 +123,9 @@ public class LoginBoundary {
 			signUp.setScene(scene);
 			signUp.show();
 			signUp.setResizable(false);
-		} catch (IOException e) {
-			logger.error(s);
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			MyIOException.openPageFault("Registration Menu");
 		}
 
 	}

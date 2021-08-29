@@ -47,7 +47,7 @@ public class DonationBoundary {
 	@FXML
 	public void creaDonazione(ActionEvent event) {
 		try {
-			if (checker() == true) {
+			if (checker()) {
 				controller.setIndirizzo(this.indirizzo.getText());
 				controller.setDescrizione(this.descrizione.getText());
 				controller.creaDonazione();
