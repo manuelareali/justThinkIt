@@ -22,8 +22,8 @@ public class ProponiOfferta {
 		return 0;	
 	}
 	
-	public boolean confermaEvento(int idEvento) {
-		return offerte.confermaOfferta(idEvento);
+	public boolean confermaEvento(int idOfferta) {
+		return offerte.confermaOfferta(idOfferta);
 	}
 	
 	public List<Offerte> caricaOfferte(int idCar){

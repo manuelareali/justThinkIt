@@ -1,16 +1,17 @@
 package bean;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
+
+
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import controller.RegistrazioneVolontarioController;
+import exception.MyException;
+import exception.MyIOException;
+import exception.Trigger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -21,12 +22,12 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
-public class RegistrazioneVolontarioBoundary implements Initializable {
+public class RegistrazioneVolontarioBoundary  {
 	private RegistrazioneVolontarioController regC;
 	
 
 
-	private TextField[] text;
+	
 
 	
 
@@ -88,66 +89,60 @@ public class RegistrazioneVolontarioBoundary implements Initializable {
 
 	}
 	
-	
-	
 	@FXML
 	void registraVolontarioPressed(ActionEvent event) {
+		Logger logger = LoggerFactory.getLogger(RegistrazioneVolontarioBoundary.class.getName());
+		Trigger trigger = new Trigger();
 		
-		TransizionePagine check = new TransizionePagine();
 		
-		if (checker() == 0) {
-			if(check.isNumeric(tel.getText())) {
 			try {
-				
-			 regC.completaButtonPressed(nome.getText(), cognome.getText(), password.getText(),
-						via.getText(),tel.getText(), mail.getText(), date.getValue().toString(), cittaRes.getText());
+				if(checker() && trigger.isNumeric(tel.getText()) && trigger.isNumeric(civico.getText())) {
+				try {
+					
+				 regC.completaButtonPressed(nome.getText(), cognome.getText(), password.getText(),
+							via.getText(),tel.getText(), mail.getText(), date.getValue().toString(), cittaRes.getText());
 
-				FXMLLoader loader = new FXMLLoader(getClass().getResource("/boundary/Login_boundary.fxml"));
-				Parent root = loader.load();
-				Stage home = (Stage) completaReg.getScene().getWindow();
-				home.setScene(new Scene(root));
+					FXMLLoader loader = new FXMLLoader(getClass().getResource("/boundary/Login_boundary.fxml"));
+					Parent root = loader.load();
+					Stage home = (Stage) completaReg.getScene().getWindow();
+					home.setScene(new Scene(root));
 
-				home.show();
-			} catch (IOException e) {
-				Logger logger = LoggerFactory.getLogger(RegistrazioneVolontarioBoundary.class.getName());
+					home.show();
+				} catch (Exception e) {
+					logger.error(e.getMessage());
+					MyIOException.openPageFault("login");
+					
+				}
+				}
+			} catch (NumberFormatException e) {
+				logger.error("Non sono presenti solo numeri in Telefono o N civico" + e.getMessage());
+			} catch (MyException e) {
 				logger.error(e.getMessage());
 			}
-		} else {
-			
-			check.check();
-			}
-		}
+		
 	}
 
-	public int checker() {
+
+	public boolean checker() throws MyException{
 
 		// Controlla che non ci siano campi lasciati vuoti
-		for (int i = 0; i < text.length; i++) {
-			if (text[i].getText().isEmpty()) {
-				passwordMatch.setText("Alcuni campi sono vuoti");
-				passwordMatch.setVisible(true);
-				return -1;
+			if (nome.getText().isEmpty() || mail.getText().isEmpty() || cittaRes.getText().isEmpty() || cognome.getText().isEmpty() ||
+					civico.getText().isEmpty() || via.getText().isEmpty() || tel.getText().isEmpty()) {
+				MyException e = new MyException("Alcuni campi sono vuoti.");
+				e.setErrorNumber(MyException.CAMPI_VUOTI);
+				throw e;		
 			}
-		}
-
-		// Valida che i campi password e conferma password siano uguali
 		
+		// Valida che i campi password e conferma password siano uguali
 		if (password.getText().equals(confermaPass.getText())) {
 			passwordMatch.setVisible(false);
-			return 0;
+			
 		} else {
 			passwordMatch.setText("Le password non corrispondono");
 			passwordMatch.setVisible(true);
-			return -1;
 		}
+		return true;
 	}
 
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-
-		passwordMatch.setVisible(false);
-		text = new TextField[] { nome, mail, cittaRes, cognome, civico, via, tel };
-		// Per rendere opzionale un campo basta rimuoverlo da questa lista
-	}
 
 }

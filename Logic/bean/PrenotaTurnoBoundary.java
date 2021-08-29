@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import controller.PrenotaTurnoController;
 import entity.Orario;
 import exception.MyException;
-import exception.Trigger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -21,12 +20,8 @@ import javafx.stage.Stage;
 public class PrenotaTurnoBoundary {
 
 	private PrenotaTurnoController prenotaC;
-	private Trigger trigger;
 	private static Logger logger = LoggerFactory.getLogger(PrenotaTurnoBoundary.class.getName());
 
-	public PrenotaTurnoBoundary() {
-		trigger = new Trigger();
-	}
 
 	@FXML
 	private ResourceBundle resources;
@@ -54,21 +49,34 @@ public class PrenotaTurnoBoundary {
 
 	@FXML
 	void prenotaTurno(ActionEvent event) {
-		if(turni.getValue() != null && cbOraInizio.getValue() != null && cbOraFine.getValue() != null && cv.getText().isEmpty() && !cbOraInizio.getValue().toString().contentEquals(cbOraFine.getValue().toString())) {
-			prenotaC.prenotaTurno(turni.getValue().toString(), cbOraInizio.getValue().toString(),
-					cbOraFine.getValue().toString(), cv.getText());
-			Stage st = (Stage) prenota.getScene().getWindow();
-			st.close();
-		}else {
-			try {
-				trigger.myTrigger();
-			} catch (MyException e) {
-				logger.error("Alcuni campi sono vuoti");
+		try {
+			if(checker()) {
+				prenotaC.prenotaTurno(turni.getValue().toString(), cbOraInizio.getValue().toString(),
+						cbOraFine.getValue().toString(), cv.getText());
+				Stage st = (Stage) prenota.getScene().getWindow();
+				st.close();
 			}
+		} catch (MyException e) {
+			logger.error(e.getMessage());
 		}
 	}
 
 
+	public boolean checker() throws MyException {
+		if(turni.getValue() == null || cbOraInizio.getValue() == null || cbOraFine.getValue() == null 
+				|| cv.getText().isEmpty()) {
+			MyException e = new MyException("Alcuni campi sono vuoti");
+			e.setErrorNumber(MyException.VOLONTARIO_ERROR);
+			throw e;
+		}
+		if(cbOraInizio.getValue().toString().equals(cbOraFine.getValue())) {
+			MyException ex = new MyException("Inserisci orari diversi");
+			ex.setErrorNumber(MyException.VOLONTARIO_ERROR);
+			throw ex;
+		}
+		return true;
+		
+	}
 
 	@FXML
 	void initialize() {

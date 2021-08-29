@@ -7,15 +7,17 @@ import org.slf4j.LoggerFactory;
 
 import controller.GestioneTurniCaritas;
 import entity.TurnoTab;
+import exception.MyException;
+import exception.Trigger;
 
 
 
 public class GestisciTurniBoundary {
-
+		private Logger logger = LoggerFactory.getLogger(GestisciTurniBoundary.class.getName());
 		private GestioneTurniCaritas gestTurn;
 		private CreaTurnoBoundary creaTurn;
 	    private int id;
-	
+	    private  Trigger trigger;
 	    
 	    private static GestisciTurniBoundary instance  = null;
 	    
@@ -28,28 +30,27 @@ public class GestisciTurniBoundary {
 	    
 	    private GestisciTurniBoundary() {
 	    	this.gestTurn = new GestioneTurniCaritas();
+	    	this.trigger = new Trigger();
 	    }
 	    
-		public boolean isNumeric(String str) { 
-			Logger logger = LoggerFactory.getLogger(GestisciTurniBoundary.class.getName());
-			  try {  
-			    Integer.parseInt(str); 
-			    return true;
-			  } catch(NumberFormatException e){  
-				  logger.error("Inserisci correttamente l'id");
-			    return false;  
-			  } 
-			}
+		
 	   
 	    public boolean cancellaTurno(String i) {
+
 	    	if (i == null || i.equals("")) {
 	    		return false;
 	    	}
 	    	else {
-	    		if(isNumeric(i)) {
-	    			int x = Integer.parseInt(i);
-	    			gestTurn.cancellaTurno(x);
-	    		}
+	    		try {
+					if(trigger.isNumeric(i)) {
+						int x = Integer.parseInt(i);
+						gestTurn.cancellaTurno(x);
+					}
+				} catch (NumberFormatException e) {
+					logger.error("Inserisci un id corretto" + e.getMessage());
+				} catch (MyException e) {
+					logger.error(e.getMessage());
+				}
 	    		return true;
 	    	}
 	    }
@@ -60,9 +61,15 @@ public class GestisciTurniBoundary {
 			   if ( idTurno == null || idTurno.equals("")) {
 				   return false;
 			   }else {
-				   if(isNumeric(idTurno)) {
-					   gestTurn.modificaTurno(Integer.parseInt(idTurno),note,id);
-				   }
+				   try {
+					if(trigger.isNumeric(idTurno)) {
+						   gestTurn.modificaTurno(Integer.parseInt(idTurno),note,id);
+					   }
+				} catch (NumberFormatException e) {
+					logger.error("Inserisci un id corretto" + e.getMessage());
+				} catch (MyException e) {
+					logger.error(e.getMessage());
+				}
 		    	return true;
 			   }
 	  }

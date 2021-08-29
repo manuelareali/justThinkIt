@@ -1,13 +1,10 @@
 package bean;
 
-import java.io.IOException;
-import java.net.URL;
 import java.util.Optional;
-import java.util.ResourceBundle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import controller.UserHomeController;
+import controller.ShopHomeController;
+import exception.MyIOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,7 +14,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.image.ImageView;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -28,41 +24,14 @@ public class ShopHomeBoundary {
 	
 
 	private int idShop;
-	private static ShopHomeBoundary instance = null;
 	
-
-		
-		public static ShopHomeBoundary getInstance() {
-			if (instance == null) {
-				instance = new ShopHomeBoundary();
-				}
-			return instance;
-		}
 
 	
     @FXML
     private Button gestEvent;
 
     @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
-
-
-
-    @FXML
-    private ImageView arrowLeft;
-
-    @FXML
-    private ImageView arrowRight;
-
-    @FXML
     private Button deleteAccountButton;
-
-
-    @FXML
-    private Button leftArrowButton;
 
     @FXML
     private Button logoutButton;
@@ -70,9 +39,6 @@ public class ShopHomeBoundary {
     @FXML
     private Text nomeCognome;
 
- 
-    @FXML
-    private Button rightArrowButton;
 
     @FXML
     private Button searchCaritasButton;
@@ -84,7 +50,7 @@ public class ShopHomeBoundary {
 
 
     @FXML
-    void cercaCaritas(ActionEvent event) {
+    public void cercaCaritas(ActionEvent event) {
     	TransizionePagine switchPage = new TransizionePagine();
     	switchPage.apriMappa(this.idShop, searchCaritasButton.getScene().getWindow());
 
@@ -93,14 +59,14 @@ public class ShopHomeBoundary {
     
 
     @FXML
-    void deleteAccountButtonPressed(ActionEvent event) {
+    public void deleteAccountButtonPressed(ActionEvent event) {
     	Alert alert = new Alert(AlertType.CONFIRMATION);
     	alert.setTitle("Logout");
     	alert.setHeaderText("Se cancelli il tuo account verrano cancellati anche le tue attività in corso e potresti ricevere delle sanzioni");
     	alert.setContentText("Sei sicuro di voler cancellare il tuo account?");
     	Optional<ButtonType> result = alert.showAndWait();
     	if (result.get() == ButtonType.OK){
-    		UserHomeController controller = new UserHomeController();
+    		ShopHomeController controller = new ShopHomeController();
     		controller.deleteAccount(idShop);
     		TransizionePagine pageSwitch = new TransizionePagine();
     		pageSwitch.backToLogin(deleteAccountButton.getScene().getWindow());
@@ -110,7 +76,7 @@ public class ShopHomeBoundary {
     
 
     @FXML
-    void gestisciProposteCaritas(ActionEvent event) {
+    public void gestisciProposteCaritas(ActionEvent event) {
     	Logger logger = LoggerFactory.getLogger(ShopHomeBoundary.class.getName());
     	try {
 
@@ -125,14 +91,15 @@ public class ShopHomeBoundary {
 			stage.setResizable(false);
 			stage.show();
 
-		} catch (IOException e) {
+		}catch (Exception e) {
 			logger.error(e.getMessage());
+			MyIOException.openPageFault("Shope event propose");
 		}
     }
 
     
 	@FXML
-	void gestisciEventi(ActionEvent event) {
+	public void gestisciEventi(ActionEvent event) {
 		Logger logger = LoggerFactory.getLogger(ShopHomeBoundary.class.getName());
 		try {
 
@@ -147,8 +114,9 @@ public class ShopHomeBoundary {
 			stage.setResizable(false);
 			stage.show();
 
-		} catch (IOException e) {
+		} catch (Exception e) {
 			logger.error(e.getMessage());
+			MyIOException.openPageFault("shop Event");
 		}
 
 	}
@@ -156,7 +124,7 @@ public class ShopHomeBoundary {
   
 
     @FXML
- void logoutButtonPressed(ActionEvent event) {
+    public void logoutButtonPressed(ActionEvent event) {
     	
      	
     	TransizionePagine pageSwitch = new TransizionePagine();

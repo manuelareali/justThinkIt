@@ -86,7 +86,7 @@ public class OfferteNegoziCaritas {
       }
       
     
-    public boolean confermaOfferta(int idEvento) {
+    public boolean confermaOfferta(int idOfferta) {
     	
   	   int rowAffected;
   	 	
@@ -94,7 +94,7 @@ public class OfferteNegoziCaritas {
 
          try (Connection conn = connector.getConnection();
               PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-         	pstmt.setInt(1, idEvento);
+         	pstmt.setInt(1, idOfferta);
          	
              rowAffected = pstmt.executeUpdate();
 

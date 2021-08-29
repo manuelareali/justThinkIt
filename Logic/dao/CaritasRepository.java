@@ -84,11 +84,6 @@ public class CaritasRepository {
 
    
 
-    public void deleteCaritas(int id) {
-    	UserDao userd= new UserDao();
-    	userd.deleteVolunteer(id);
-    }
-
 
    
 

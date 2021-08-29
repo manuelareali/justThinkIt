@@ -1,16 +1,15 @@
 package bean;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import controller.RegistrationShopManagerController;
+import exception.MyException;
+import exception.MyIOException;
+import exception.Trigger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -20,11 +19,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class RegistrationShopBoundary implements Initializable {
+public class RegistrationShopBoundary  {
 	private RegistrationShopManagerController regNeg;
 
 
-	private TextField[] textField;
+
 	private String tipo;
 	Logger logger = LoggerFactory.getLogger(RegistrationShopBoundary.class.getName());
 
@@ -83,43 +82,48 @@ public class RegistrationShopBoundary implements Initializable {
 
 	@FXML
 	void registraNegozioPressed(ActionEvent event) {
-		TransizionePagine check = new TransizionePagine();
-	if(checker() == 0) {
-		if(check.isNumeric(telNeg.getText())){
+		Trigger trigger = new Trigger();
 		try {
-			 regNeg.registraNegozioPressed(tipo, nomeNegozio.getText(), passwordNeg.getText(),
-					viaNeg.getText() + " " + civicoNeg.getText(), telNeg.getText(), mailNeg.getText(),
-					cittaResNeg.getText());
-			
+			if(checker() && trigger.isNumeric(telNeg.getText()) && trigger.isNumeric(civicoNeg.getText())) {
+			try {
+				 regNeg.registraNegozioPressed(tipo, nomeNegozio.getText(), passwordNeg.getText(),
+						viaNeg.getText() + " " + civicoNeg.getText(), telNeg.getText(), mailNeg.getText(),
+						cittaResNeg.getText());
+				
 
-				FXMLLoader loader = new FXMLLoader(getClass().getResource("/boundary/Login_boundary.fxml"));
-				Parent root = loader.load();
-				Stage home = (Stage) registraNegozio.getScene().getWindow();
-				home.setScene(new Scene(root));
-				home.show();
-			} catch (IOException e) {
-				logger.error(e.getMessage());
+					FXMLLoader loader = new FXMLLoader(getClass().getResource("/boundary/Login_boundary.fxml"));
+					Parent root = loader.load();
+					Stage home = (Stage) registraNegozio.getScene().getWindow();
+					home.setScene(new Scene(root));
+					home.show();
+				} catch (Exception e) {
+					logger.error(e.getMessage());
+					MyIOException.openPageFault("Login");
+				}
 			}
-	}
-	}else {
-			
-			check.check();
-			
+		} catch (NumberFormatException e) {
+			logger.error("Non sono presenti solo numeri in Telefono o N civico" + e.getMessage());
+		} catch (MyException e) {
+			logger.error(e.getMessage());
+		}
 		}
 		
 
-	}
+	
 
 
-	public int checker() {
-
+	public boolean checker() throws MyException {
+		MyException e = new MyException("Alcuni campi sono vuoti.");
 		// Controlla che non ci siano campi lasciati vuoti
-		for (int i = 0; i < textField.length; i++) {
-			if (textField[i].getText().isEmpty()) {
-				passwordMatch.setText("Alcuni campi sono vuoti");
-				passwordMatch.setVisible(true);
-				return 1;
-			}
+
+			if (cittaResNeg.getText().isEmpty() || viaNeg.getText().isEmpty() || civicoNeg.getText().isEmpty()
+					||telNeg.getText().isEmpty() || nomeNegozio.getText().isEmpty() ||
+					mailNeg.getText().isEmpty()) {
+			
+			
+				e.setErrorNumber(MyException.CAMPI_VUOTI);
+				throw e;
+			
 		}
 		if(typeCiboNeg.isSelected()) {
 			tipo = "Cibo";
@@ -127,26 +131,23 @@ public class RegistrationShopBoundary implements Initializable {
 		else if(typeVestNeg.isSelected()) {
 			tipo = "Vestiti";
 		}
+		else {
+			e.setErrorNumber(MyException.CAMPI_VUOTI);
+			throw e;
+		}
 		
 		// Valida che i campi password e conferma password siano uguali
 
-		if (passwordNeg.getText().equals(confermaPassNeg.getText())) {
+		if (passwordNeg.getText().equals(confermaPassNeg.getText()) && !passwordNeg.getText().equals("")) {
 			passwordMatch.setVisible(false);
-			return 0;
+			return true;
 		} else {
 			passwordMatch.setText("Le password non corrispondono");
 			passwordMatch.setVisible(true);
-			return 1;
+			return false;
 		}
 	}
 
 
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-
-		passwordMatch.setVisible(false);
-		textField = new TextField[] { cittaResNeg, viaNeg, civicoNeg, telNeg, nomeNegozio, mailNeg };
-
-	}
 
 }

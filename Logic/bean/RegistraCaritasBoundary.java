@@ -1,17 +1,16 @@
 package bean;
 
-import java.io.IOException;
-import java.net.URL;
-import java.sql.SQLException;
-import java.util.ResourceBundle;
 
+import java.sql.SQLException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import controller.RegistrazioneCaritasController;
+import exception.MyException;
+import exception.MyIOException;
+import exception.Trigger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -21,12 +20,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class RegistraCaritasBoundary implements Initializable {
+public class RegistraCaritasBoundary  {
 
 	
 	private RegistrazioneCaritasController regController;
 	Logger logger = LoggerFactory.getLogger(RegistraCaritasBoundary.class.getName());
-	private TextField[] textFields;
+
 	TransizionePagine pageSwitch;
 	private String tipo;
 
@@ -84,38 +83,43 @@ public class RegistraCaritasBoundary implements Initializable {
 
 	@FXML
 	public void completaButtonPressed(ActionEvent event) throws SQLException {
-		TransizionePagine check = new TransizionePagine();
-		int resCheck = checker();
-		if (resCheck != 1) {
-			if(check.isNumeric(telefono.getText())) {
-			try {
+		Trigger trigger = new Trigger();
+		try {
+			if (checker() && trigger.isNumeric(telefono.getText())) {
+				try {
 
-			 regController.completaButtonPressed(nomeCaritas.getText(),tipo, passwordCaritas.getText(),
-						via.getText(), telefono.getText() , email.getText(), cittadiResidenza.getText());
+				 regController.completaButtonPressed(nomeCaritas.getText(),tipo, passwordCaritas.getText(),
+							via.getText(), telefono.getText() , email.getText(), cittadiResidenza.getText());
 
-				FXMLLoader loader = new FXMLLoader(getClass().getResource("/boundary/Login_boundary.fxml"));
-				Parent root = loader.load();
-				Stage home = (Stage) completaButton.getScene().getWindow();
-				home.setScene(new Scene(root));
-				home.show();
+					FXMLLoader loader = new FXMLLoader(getClass().getResource("/boundary/Login_boundary.fxml"));
+					Parent root = loader.load();
+					Stage home = (Stage) completaButton.getScene().getWindow();
+					home.setScene(new Scene(root));
+					home.show();
 
-			} catch (IOException e) {
-				logger.error(e.getMessage());
+				}catch (Exception e) {
+					logger.error(e.getMessage());
+					MyIOException.openPageFault("Login");
+				}
+			}
+		} catch (NumberFormatException e) {
+			logger.error("In Telefono o N civico non ci sono solo numeri"+ e.getMessage());
+		} catch (MyException e) {
+			logger.error(e.getMessage());
+		}
+	}
+
+	public boolean checker() throws MyException {
+		MyException e = new MyException("Alcuni campi sono vuoti.");
+		// Controlla che non ci siano campi lasciati vuoti
+		
+			if (cittadiResidenza.getText().isEmpty()||via.getText().isEmpty() 
+					|| civico.getText().isEmpty() || telefono.getText().isEmpty() || nomeCaritas.getText().isEmpty()|| email.getText().isEmpty()) {
+				e.setErrorNumber(MyException.CAMPI_VUOTI);
+				
+				throw e;
 			}
 		
-			} else {
-			check.check();
-		}
-	}
-	}
-
-	public int checker() {
-		pageSwitch = new TransizionePagine();
-		// Controlla che non ci siano campi lasciati vuoti
-		if (pageSwitch.checkerText(textFields)) {
-			passwordMatch.setText("Alcuni campi sono vuoti");
-			passwordMatch.setVisible(true);
-		}
 		if (type.isSelected() && type2.isSelected()) {
 			tipo = "Tutto";
 		} else if (type2.isSelected()) {
@@ -124,29 +128,24 @@ public class RegistraCaritasBoundary implements Initializable {
 			tipo = "Vestiti";
 		} 	
 		else {
-			passwordMatch.setText("Alcuni campi sono vuoti 2");
-			passwordMatch.setVisible(true);
-			return 1; // Almeno uno dei tipi deve essere selezionato
+			e.setErrorNumber(MyException.CAMPI_VUOTI);
+			throw e;// Almeno uno dei tipi deve essere selezionato
 		}
 
 		// Valida che i campi password e conferma password siano uguali
 
-		if (passwordCaritas.getText().equalsIgnoreCase(confermaPassCaritas.getText())) {
+		if (passwordCaritas.getText().equals(confermaPassCaritas.getText()) && !passwordCaritas.getText().equals("")) {
 			passwordMatch.setVisible(false);
-			return 0;
+			return true;
 		} else {
 			passwordMatch.setText("Le password non corrispondono");
 			passwordMatch.setVisible(true);
-			return 1;
+			return false;
 		}
+		
+		
 	}
 
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
 
-		passwordMatch.setVisible(false);
-		textFields = new TextField[] { cittadiResidenza, via, civico, telefono, nomeCaritas, email };
-
-	}
 
 }

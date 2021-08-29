@@ -1,6 +1,6 @@
 package bean;
 
-import java.io.IOException;
+
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -10,7 +10,7 @@ import controller.BachecaPersonaleController;
 import controller.CaritasHomeController;
 import entity.Necessita;
 import exception.MyException;
-import exception.Trigger;
+import exception.MyIOException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -69,8 +69,9 @@ public class BachecaPersonaleBoundary {
 			home.setScene(new Scene(root, 800, 600));
 
 			home.show();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			logger.error(e.getMessage());
+			MyIOException.openPageFault("Caritas Home Page");
 		}
 
 	}
@@ -86,10 +87,12 @@ public class BachecaPersonaleBoundary {
 				home.setScene(new Scene(root, 600, 400));
 
 				home.show();
-			} catch (IOException e) {
+			} catch (Exception e) {
 				logger.error(e.getMessage());
+				MyIOException.openPageFault("Crea Necessita");
 			}
 		}
+		
 	
 
 	@FXML
@@ -99,18 +102,23 @@ public class BachecaPersonaleBoundary {
 	
 	@FXML
 	void eliminaNecessita(ActionEvent event) {
-		Trigger trigger = new Trigger();
-		if(this.necc != null) {
-			bachecaController.eliminaAnnuncio(this.necc.getIdNece());
-		}else {
-			try {
-				trigger.myTrigger();
-				
-			} catch (MyException e) {
-				logger.error("Devi selezionare una riga della tabella");
+		try {
+			if(check()) {
+				bachecaController.eliminaAnnuncio(this.necc.getIdNece());
 			}
+		}catch(MyException e) {
+			logger.error(e.getMessage());
 		}
-
+	}
+	
+	public boolean check() throws MyException{
+		if(this.necc == null) {
+			MyException e = new MyException("Devi selezionare una riga della taballa");
+			e.setErrorNumber(MyException.CARITAS_ERROR);
+			throw e;
+			
+		}
+		return true;
 	}
 
 	public void loadFormBoundary(int idCar) {

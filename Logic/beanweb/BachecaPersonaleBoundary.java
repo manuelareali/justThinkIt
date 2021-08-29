@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 
 import controller.BachecaPersonaleController;
 import entity.Necessita;
+import exception.MyException;
+import exception.Trigger;
 
 public class BachecaPersonaleBoundary {
 	
@@ -32,25 +34,24 @@ public class BachecaPersonaleBoundary {
 			 creaNec.getInstance().setCaritas(idCar);
 	}
 
-	public boolean isNumeric(String str) { 
-		Logger logger = LoggerFactory.getLogger(BachecaPersonaleBoundary.class.getName());
-		  try {  
-		    Integer.parseInt(str); 
-		    return true;
-		  } catch(NumberFormatException e){  
-			  logger.error("Inserisci correttamente l'id");
-		    return false;  
-		  } 
-		}
+
 	
 	public boolean eliminaNecessita(String i){
+		 Logger logger = LoggerFactory.getLogger(BachecaPersonaleBoundary.class.getName());
+		  Trigger trigger = new Trigger();
 		if (i == null || i.equals("") ) {
 			return false;
 		}
 		else {
-			if(isNumeric(i)) {
-				int x = Integer.parseInt(i);
-				bachecaController.eliminaAnnuncio(x);
+			try {
+				if(trigger.isNumerico(i)) {
+					int x = Integer.parseInt(i);
+					bachecaController.eliminaAnnuncio(x);
+				}
+			} catch (NumberFormatException e) {
+				logger.error("Inserisci un id corretto" + e.getMessage());
+			} catch (MyException e) {
+				logger.error(e.getMessage());
 			}
 			return true;
 		}

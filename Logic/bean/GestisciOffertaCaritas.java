@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import controller.ProponiOfferta;
 import entity.Offerte;
 import exception.MyException;
-import exception.Trigger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -55,19 +54,15 @@ public class GestisciOffertaCaritas {
 
 	 
     @FXML
-    boolean accetta(ActionEvent event) {
+    public void  accetta(ActionEvent event) {
     	Logger logger = LoggerFactory.getLogger(GestisciOffertaCaritas.class.getName());
-    	Trigger trigger = new Trigger();
-		if (this.offerta != null) {
-			return proponi.confermaEvento(this.offerta.getEvento());
-		} else {
-			try {
-				trigger.myTrigger();
-			} catch (MyException e) {
-				logger.error("Devi selezionare una riga della tabella");
+		try {
+			if (check()) {
+				proponi.confermaEvento(this.offerta.getIdProp());
 			}
-			return false;
-		}
+		} catch (MyException e) {
+			logger.error(e.getMessage());
+		} 
 		
     }
 
@@ -84,6 +79,15 @@ public class GestisciOffertaCaritas {
 
 	}
     
+	public boolean check() throws MyException{
+		if(this.offerta == null) {
+			MyException e = new MyException("Devi selezionare una riga della tabella");
+			e.setErrorNumber(MyException.CARITAS_ERROR);
+			throw e;	
+		}
+		return true;
+	}
+
     public void loadFormBoundary(int idCar) {
     	this.idCar = idCar;
 		List<Offerte> listEv = proponi.caricaOfferte(this.idCar);

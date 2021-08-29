@@ -20,7 +20,7 @@ public  class UserHomeController{
 	
 	public void deleteAccount(int id) {
 		UserDao userd = new UserDao();
-		userd.deleteVolunteer(id);
+		userd.delete(id);
 	}
 	
 	

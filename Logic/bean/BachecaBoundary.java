@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import controller.BachecaController;
 import entity.Necessita;
+import exception.MyIOException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -69,8 +70,9 @@ public class BachecaBoundary {
 			stage.setResizable(false);
 			stage.show();
 
-		} catch (IOException e) {
+		} catch (Exception e) {
 			logger.error(e.getMessage());
+			MyIOException.openPageFault("Email");
 		}
 
 	}

@@ -17,7 +17,7 @@ public class CaritasHomeController {
 	
 	public void deleteAccount(int id) {
 		UserDao userd = new UserDao();
-		userd.deleteVolunteer(id);
+		userd.delete(id);
 	}
 
 	public CaritasUser getCurrentUser() {

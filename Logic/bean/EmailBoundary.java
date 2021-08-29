@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import controller.EmailController;
 import exception.MyException;
-import exception.Trigger;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -20,7 +20,7 @@ public class EmailBoundary {
 
 	private TextArea[] textMex;
 	
-	private Trigger trigger;
+	
 	@FXML
 	private Stage stage;
 
@@ -44,7 +44,7 @@ public class EmailBoundary {
 
 
 	public EmailBoundary() {
-		trigger = new Trigger();
+		
 	}
 	
 
@@ -53,25 +53,35 @@ public class EmailBoundary {
 	@FXML
 	public int sendMessage(ActionEvent event) {
 		int i = 0;
-		if (!mittente.getText().isEmpty() && !destinatario.getText().isEmpty() && !textMex[0].getText().isEmpty()) {
-		i = emailC.sendMessageController(mittente.getText(), destinatario.getText(), messaggio.getText(),
-				oggetto.getText());
+		try {
+			if (checker()) {
 
-		Stage st = (Stage) invia.getScene().getWindow();
-		st.close();
-		return i;
-		}else {
-			try {
-				trigger.myTrigger();
-			}catch(MyException e) {
-				logger.error("Alcuni campi sono vuoti");
+				i = emailC.sendMessageController(mittente.getText(), destinatario.getText(), messaggio.getText(),oggetto.getText());
+
+				Stage st = (Stage) invia.getScene().getWindow();
+				st.close();
+				return i;
 			}
+		}catch(MyException e) {
+			logger.error(e.getMessage());
 		}
+		
 		return 0;
 	}
 
 
-
+	public boolean checker() throws MyException {
+		
+			if (this.mittente.getText().isEmpty() || this.destinatario.getText().isEmpty() || this.textMex[0].getText().isEmpty() ) {
+				MyException e = new MyException("Alcuni campi sono vuoti.");
+				e.setErrorNumber(MyException.EMAIL_ERROR);
+				throw e;
+				}	
+		return true;
+			
+	}
+	
+	
 	
 	@FXML
 	void initialize() {
@@ -81,16 +91,11 @@ public class EmailBoundary {
 	}
 
 	public void loadEmail(int idDestinatario, int idMittente) {
-		try {
-			
-			String[] mitDest = emailC.loadMittenteDestinatario(idDestinatario, idMittente);
+					
+			String[] mitDest = emailC.loadMittenteDestinatario(idDestinatario, idMittente);			
 			this.mittente.setText(mitDest[0]);
 			this.destinatario.setText(mitDest[1]);
-			trigger.myTrigger();
-		}catch(MyException e){
-			logger.error("Bisogna selezionare una riga della tabella");	
-			
-		}
+		
 	}
 	
 	

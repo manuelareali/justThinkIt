@@ -21,7 +21,7 @@ public class UserDao {
 	}
 	
 	
-    public void deleteVolunteer(int id) {
+    public void delete(int id) {
         String sql = "call elimina_utente(?)";
         int deletedRec;
 

@@ -8,13 +8,16 @@ import org.slf4j.LoggerFactory;
 
 import controller.GestisciDonazioniCaritas;
 import entity.DonazioneTab;
+import exception.MyException;
+import exception.Trigger;
 
 
 
 
 public class GestisciDonazioniBoundary {
 	private int caritas;
-
+	private Logger logger = LoggerFactory.getLogger(GestisciDonazioniBoundary.class.getName());
+	private  Trigger trigger;
 	private int idVolontario;
 	private GestisciDonazioniCaritas gestDon;
 	private EmailBoundary email;
@@ -30,26 +33,22 @@ public class GestisciDonazioniBoundary {
 			}
 	
 
-		public boolean isNumeric(String str) { 
-			Logger logger = LoggerFactory.getLogger(GestisciDonazioniBoundary.class.getName());
-			  try {  
-			    Integer.parseInt(str); 
-			    return true;
-			  } catch(NumberFormatException e){  
-				  logger.error("Inserisci correttamente l' id donazione");
-			    return false;  
-			  } 
-			}
-	 
 	public boolean cancellaDonazione(String i) {
+		 
 		gestDon = new GestisciDonazioniCaritas();
 		    	if (i == null || i.equals("") ) {
 		    		return false;
 		    	}
 		    	else {
-		    		if(isNumeric(i)) {
-		    			gestDon.cancellaDonazione(Integer.parseInt(i));
-		    		}
+		    		try {
+						if(trigger.isNumerico(i)) {
+							gestDon.cancellaDonazione(Integer.parseInt(i));
+						}
+					} catch (NumberFormatException e) {
+						logger.error("Inserisci un id corretto" + e.getMessage());
+					} catch (MyException e) {
+						logger.error(e.getMessage());
+					}
 		    		return true;
 		    	}
 		    }
@@ -66,8 +65,14 @@ public class GestisciDonazioniBoundary {
 			return false;
 		}
 		else {
-			if(isNumeric(ritira)) {
-				gestDon.ritiraDon(Integer.parseInt(ritira));
+			try {
+				if(trigger.isNumerico(ritira)) {
+					gestDon.ritiraDon(Integer.parseInt(ritira));
+				}
+			} catch (NumberFormatException e) {
+				logger.error("Inserisci un id corretto" + e.getMessage());
+			} catch (MyException e) {
+				logger.error(e.getMessage());
 			}
 			return true;
 		}
@@ -84,6 +89,7 @@ public class GestisciDonazioniBoundary {
 	
 	private GestisciDonazioniBoundary() {
 		this.gestDon = new GestisciDonazioniCaritas();
+		trigger = new Trigger();
 		new ArrayList<>();
 	}
 

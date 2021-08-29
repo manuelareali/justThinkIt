@@ -10,11 +10,10 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import java.io.IOException;
 import java.util.Optional;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import controller.UserHomeController;
+import controller.CaritasHomeController;
+import exception.MyIOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -26,7 +25,7 @@ public class CaritasHomeBoundary {
 
 	private int idCar;
 	
-	private static CaritasHomeBoundary instance = null;
+	
 	private static Logger logger = LoggerFactory.getLogger(CaritasHomeBoundary.class.getName());
 	
 
@@ -78,12 +77,7 @@ public class CaritasHomeBoundary {
     @FXML
     private Button offerteProposte;
 
-	public static CaritasHomeBoundary getInstance() {
-		if (instance == null) {
-			instance = new CaritasHomeBoundary();
-		}
-		return instance;
-	}
+
 
 	public CaritasHomeBoundary() {
 		bacheca = new BachecaPersonaleBoundary();
@@ -116,8 +110,9 @@ public class CaritasHomeBoundary {
 			stage.setResizable(false);
 			stage.show();
 
-		} catch (IOException e) {
+		} catch (Exception e) {
 			logger.error(e.getMessage());
+			MyIOException.openPageFault("Gestisci Donazioni");
 		}
 	}
 
@@ -137,8 +132,9 @@ public class CaritasHomeBoundary {
 			stage.setResizable(false);
 			stage.show();
 
-		} catch (IOException e) {
+		} catch (Exception e) {
 			logger.error(e.getMessage());
+			MyIOException.openPageFault("Gestisci Eventi Caritas");
 		}
 	}
 
@@ -157,8 +153,9 @@ public class CaritasHomeBoundary {
 			home.setScene(new Scene(root, 883, 550));
 			home.show();
 
-		} catch (IOException e) {
+		}catch (Exception e) {
 			logger.error(e.getMessage());
+			MyIOException.openPageFault("Bacheca Personale");
 		}
 
 	}
@@ -177,8 +174,9 @@ public class CaritasHomeBoundary {
 		
 			bacheca.loadFormBoundary(idCar);
 
-		} catch (IOException e) {
+		}catch (Exception e) {
 			logger.error(e.getMessage());
+			MyIOException.openPageFault("Gestisci Turni Caritas");
 		}
 	}
 
@@ -190,7 +188,7 @@ public class CaritasHomeBoundary {
 	    	alert.setContentText("Sei sicuro di voler cancellare il tuo account?");
 	    	Optional<ButtonType> result = alert.showAndWait();
 	    	if (result.get() == ButtonType.OK){
-	    		UserHomeController controller = new UserHomeController();
+	    		CaritasHomeController controller = new CaritasHomeController();
 	    		controller.deleteAccount(idCar);
 	    		TransizionePagine pageSwitch = new TransizionePagine();
 	    		pageSwitch.backToLogin(deleteAccountButton.getScene().getWindow());

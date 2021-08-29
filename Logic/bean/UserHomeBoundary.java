@@ -18,18 +18,8 @@ public class UserHomeBoundary{
 
 
 
-private static UserHomeBoundary instance = null;
-
 private int userId;
-	
-	
-	public static UserHomeBoundary getInstance() {
-		if (instance == null) {
-			instance = new UserHomeBoundary();
-			}
-		return instance;
-	}
-	
+
 
 	
 	@FXML

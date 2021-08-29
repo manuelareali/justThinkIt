@@ -6,7 +6,6 @@ import entity.Donazione;
 
 public class DonationController {
 
-	private static DonationController instance = null;
 	
 	private Donazione donazione;
 	private DonationDao donazioneDao;
@@ -17,14 +16,6 @@ public class DonationController {
 		donazioneDao = new DonationDao();
 	}
 	
-
-
-	public static DonationController getInstance() {
-		if (DonationController.instance == null)
-			DonationController.instance = new DonationController();
-		return instance;
-	}
-
 	
 	public void initController(int idCar, int idUt) {
 		this.donazione.setIdCaritas(idCar);
@@ -59,7 +50,7 @@ public class DonationController {
 	
 	
 	public int creaDonazione2(int tipo, String indirizzo, String descrizione, int idUtente, int idCaritas) {
-		
+
 		Donazione don = new Donazione(descrizione,  indirizzo, idUtente,idCaritas,tipo);
 		
 		

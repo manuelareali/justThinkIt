@@ -6,6 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import controller.CreaTurnoController;
+import exception.MyException;
+import exception.Trigger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -68,37 +70,38 @@ public class CreaTurnoBoundary {
 	}
 
 
-	public boolean checker() {
+	public boolean checker() throws MyException {
 		// Controlla che non ci siano campi lasciati vuoti	
 		if(giorni.getValue() == null || orain.getValue() == null  || oraFin.getValue() == null || numParte.getText() == null) {
-			logger.error("Alcuni campi sono vuoti");
-			return false;
+			MyException e = new MyException("Alcuni campi sono vuoti.");
+			e.setErrorNumber(MyException.CAMPI_VUOTI);
+			throw e;
 		}
 		if(orain.getValue() == oraFin.getValue()) {
-			logger.error("Devi inserire orari diversi");
-			return false;
+			MyException ex = new MyException("Devi inserire orari diversi");
+			 ex.setErrorNumber(MyException.ORARIO);
+			throw ex;
 		}
 		return true;
 	}
-	
-	
-	public boolean isNumeric(String str) { 
-		  try {  
-		    Integer.parseInt(str); 
-		    return true;
-		  } catch(NumberFormatException e){  
-			  logger.error("Inserisci correttamente il numero di partecipanti");
-		    return false;  
-		  } 
-		}
+
+
 	
 	@FXML
 	void creaTurnoPressed(ActionEvent event) {
+		Trigger trigger = new Trigger(); 
 		CreaTurnoController creaTurn = new CreaTurnoController();
-		if (checker() && isNumeric(numParte.getText())) {
+		try {
+			if (checker() && trigger.isNumeric(numParte.getText())) {
 				creaTurn.creaTurno(caritas, giorni.getValue().toString(), orain.getValue().toString(), oraFin.getValue().toString(),
 						Integer.parseInt(numParte.getText()), note.getText());
 					this.switchPage(creaTurno.getScene().getWindow());
+			}}catch(MyException e) {
+				logger.error(e.getMessage());
+	  		}catch (NumberFormatException n) {
+	  			logger.error("Non sono presenti solo numeri \n" + n.getMessage());
+	  		}catch (Exception e) {
+				logger.error(e.getMessage());
 			}
 		} 
 	

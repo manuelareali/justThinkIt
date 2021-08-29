@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory;
 
 import controller.DonationController;
 import exception.MyException;
-import exception.Trigger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
@@ -17,7 +16,8 @@ import javafx.scene.control.TextField;
 
 public class DonationBoundary {
 	private static Logger logger = LoggerFactory.getLogger(DonationBoundary.class.getName());
-	private Trigger trigger;
+
+	
 	
 	@FXML
 	private RadioButton vestiti;
@@ -37,59 +37,51 @@ public class DonationBoundary {
 	@FXML
 	private TextArea descrizione;
 
-	private TextField[] textFields;
 
 	private DonationController controller;
 
 	public DonationBoundary() {
-		controller = DonationController.getInstance();
-		trigger = new Trigger();
+		controller = new DonationController();
 	}
 
 	@FXML
 	public void creaDonazione(ActionEvent event) {
-		int i = checker();
-		if (i != -1) {
-			controller.setIndirizzo(this.indirizzo.getText());
-			controller.setDescrizione(this.descrizione.getText());
-			controller.creaDonazione();
-			Stage st = (Stage) donazione.getScene().getWindow();
-			st.close();
-		}
-		else {
-			try {
-			  	trigger.myTrigger();
-			}catch(MyException e) {
-				logger.error("Alcuni campi sono vuoti");
+		try {
+			if (checker() == true) {
+				controller.setIndirizzo(this.indirizzo.getText());
+				controller.setDescrizione(this.descrizione.getText());
+				controller.creaDonazione();
+				Stage st = (Stage) donazione.getScene().getWindow();
+				st.close();
 			}
-			
+		} catch (MyException e) {
+			logger.error(e.getMessage());
 		}
 	}
 
-	public void initialize() {
-		textFields = new TextField[] { indirizzo };
 
-	}
-
-	public int checker() {
+	public boolean checker() throws MyException{
 		// Controlla che non ci siano campi lasciati vuoti
-		for (int i = 0; i < textFields.length; i++) {
-			if (textFields[i].getText().isEmpty()) {
-				return -1;
-			}
-		}
 		if (cibo.isSelected()) {
 			controller.setTipologia(2);
-			return 0;
 		}
-		// Almeno uno dei tipi deve essere selezionato
 		else if (vestiti.isSelected()) {
 			controller.setTipologia(1);
-			return 0;
-			// Almeno uno dei tipi deve essere selezionato
-		} else {
-			return -1;
 		}
+		
+		if(indirizzo.getText().isEmpty()) {
+			MyException e = new MyException("Alcuni campi sono vuoti.");
+			e.setErrorNumber(MyException.CAMPI_VUOTI);
+			throw e;
+		}
+		
+		if(!cibo.isSelected() && !vestiti.isSelected())  {
+			MyException e = new MyException("Alcuni campi sono vuoti.");
+			e.setErrorNumber(MyException.CAMPI_VUOTI);
+			throw e;
+		}
+		
+		return true;
 	}
 
 	

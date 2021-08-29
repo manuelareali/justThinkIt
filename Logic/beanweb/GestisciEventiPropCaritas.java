@@ -48,16 +48,6 @@ public class GestisciEventiPropCaritas {
    
     }
 	
-	public boolean isNumeric(String str) { 
-		Logger logger = LoggerFactory.getLogger(GestisciEventiPropCaritas.class.getName());
-		  try {  
-		    Integer.parseInt(str); 
-		    return true;
-		  } catch(NumberFormatException e){  
-			  logger.error("Inserisci correttamente l'id evento");
-		    return false;  
-		  } 
-		}
 
 	public boolean proponi (String i) {
 		if (i == null || i.equals("")) {

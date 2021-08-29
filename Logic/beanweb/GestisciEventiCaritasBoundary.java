@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 
 import controller.GestisciEventiCaritasController;
 import entity.EventTab;
+import exception.MyException;
+import exception.Trigger;
 
 
 public class GestisciEventiCaritasBoundary {
@@ -15,7 +17,8 @@ public class GestisciEventiCaritasBoundary {
 		private GestisciEventiCaritasController gestEventC;
 		private PromuoviEventoGenerale prom;
 		private int idCar;
-		
+		private Logger logger = LoggerFactory.getLogger(GestisciEventiBoundary.class.getName());
+		private Trigger trigger;
 		
 		private EventTab event;
 		
@@ -29,25 +32,23 @@ public class GestisciEventiCaritasBoundary {
 			}
 		
 
-		public boolean isNumeric(String str) { 
-			Logger logger = LoggerFactory.getLogger(GestisciEventiBoundary.class.getName());
-			  try {  
-			    Integer.parseInt(str); 
-			    return true;
-			  } catch(NumberFormatException e){  
-				  logger.error("Inserisci correttamente l'id");
-			    return false;  
-			  } 
-			}
+	
 	
 		public boolean confermaEvento(String id) {
+			
 			if (id == null || id.equals("")) {
 	    		return false;
 	    	}
 	    	else {
-	    		if(isNumeric(id)) {
-	    			gestEventC.confermaEvento(Integer.parseInt(id));
-	    		}
+	    		try {
+					if(trigger.isNumerico(id)) {
+						gestEventC.confermaEvento(Integer.parseInt(id));
+					}
+				} catch (NumberFormatException e) {
+					logger.error("Inserisci un id corretto" + e.getMessage());
+				} catch (MyException e) {
+					logger.error(e.getMessage());
+				}
 	    		return true;
 	    	}
 		}
@@ -58,9 +59,15 @@ public class GestisciEventiCaritasBoundary {
 	    		return false;
 	    	}
 	    	else {
-	    		if(isNumeric(id)) {
-	    			gestEventC.cancellaEvento(Integer.parseInt(id));
-	    		}
+	    		try {
+					if(trigger.isNumerico(id)) {
+						gestEventC.cancellaEvento(Integer.parseInt(id));
+					}
+				} catch (NumberFormatException e) {
+					logger.error("Inserisci un id corretto" + e.getMessage());
+				} catch (MyException e) {
+					logger.error(e.getMessage());
+				}
 	    		return true;
 	    	}
 		 }

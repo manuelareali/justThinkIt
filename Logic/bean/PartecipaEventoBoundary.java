@@ -6,6 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import controller.PartecipaEventoController;
+import exception.MyException;
+import exception.Trigger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -18,7 +20,7 @@ public class PartecipaEventoBoundary {
 	private int idUtente;
 	private int idEvento;
 
-	private TextField[] textFields;
+
 
 	@FXML
 	private ResourceBundle resources;
@@ -38,48 +40,30 @@ public class PartecipaEventoBoundary {
 	@FXML
 	private Button indietro;
 	
-	public boolean isNumeric(String str) { 
-		Logger logger = LoggerFactory.getLogger(PartecipaEventoBoundary.class.getName());
-		try {  
-		  Float.parseFloat(str); 
-		  return true;
-		} catch(NumberFormatException e){  
-			logger.error("Inserisci correttamente l'importo da donare");
-		  return false;  
-		} 
-	}
 
 
 	@FXML
 	void partecipaEvento(ActionEvent event) {
-		if(isNumeric(importo.getText())) {
-			PartecipaEventoController parteCon = new PartecipaEventoController();
-			parteCon.setDataController(idEvento, idUtente);
-			parteCon.partecipaEvento(Float.parseFloat(importo.getText()));
-			Stage st = (Stage) partecipa.getScene().getWindow();
-			st.close();
-		}
-	}
-
-	public int checker() {
-
-		// Controlla che non ci siano campi lasciati vuoti
-		for (int i = 0; i < textFields.length; i++) {
-			if (textFields[i].getText().isEmpty()) {
-
-				return -1;
+		 Logger logger = LoggerFactory.getLogger(PartecipaEventoBoundary.class.getName());
+		Trigger trigger = new Trigger();
+		try {
+			if(trigger.isNumeric(importo.getText())) {
+				PartecipaEventoController parteCon = new PartecipaEventoController();
+				parteCon.setDataController(idEvento, idUtente);
+				parteCon.partecipaEvento(Float.parseFloat(importo.getText()));
+				Stage st = (Stage) partecipa.getScene().getWindow();
+				st.close();
 			}
-
+		} catch (NumberFormatException n) {
+			logger.error("In prezzo Evento non sono presenti solo numeri"+ n.getMessage());
+			
+		} catch (MyException e) {
+			logger.error(e.getMessage());			
 		}
-		return 0;
-
 	}
 
-	public void initialize() {
 
-		textFields = new TextField[] { importo, cdc };
 
-	}
 
 	public void setData(int idEvento, int idVolontario) {
 		this.idEvento = idEvento;

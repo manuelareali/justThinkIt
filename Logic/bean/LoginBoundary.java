@@ -9,7 +9,7 @@ import controller.LoginController;
 import controller.ShopHomeController;
 import controller.UserHomeController;
 import exception.MyException;
-import exception.Trigger;
+import exception.MyIOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,19 +22,13 @@ import javafx.stage.Stage;
 public class LoginBoundary {
 
 	private static Logger logger = LoggerFactory.getLogger(LoginBoundary.class.getName());
-	// può essere tolta la stringa
+
 	private String s = "errore IoException";
 
 	private LoginController loginC = new LoginController();
 
 	private ShopHomeBoundary shopHomeBoundary;
 	private UserHomeBoundary userHomeBoundary;
-
-	private Trigger trigger;
-
-	public LoginBoundary() {
-		trigger = new Trigger();
-	}
 
 	@FXML
 	private TextField usernameField;
@@ -53,65 +47,74 @@ public class LoginBoundary {
 
 		int idUser = loginC.trovaID(usernameField.getText());
 		String loggedUser = loginC.loginAccess(usernameField.getText(), passwordField.getText());
-		if (loggedUser != null) {
-			try {
+		try {
+			if (check()) {
+				try {
 
-				if (loggedUser.equalsIgnoreCase("Volontario")) {
-					FXMLLoader loader = new FXMLLoader(getClass().getResource("/boundary/UserHomePage.fxml"));
-					Parent root = loader.load();
-					userHomeBoundary = userHomeBoundary.getInstance();
-					userHomeBoundary = loader.getController();
-					UserHomeController userHomeController = new UserHomeController();
-					userHomeController.initDataCont(idUser, userHomeBoundary);
+					if (loggedUser.equalsIgnoreCase("Volontario")) {
+						FXMLLoader loader = new FXMLLoader(getClass().getResource("/boundary/UserHomePage.fxml"));
+						Parent root = loader.load();
+						userHomeBoundary = loader.getController();
+						UserHomeController userHomeController = new UserHomeController();
+						userHomeController.initDataCont(idUser, userHomeBoundary);
 
-					Stage home = (Stage) loginButton.getScene().getWindow();
-					home.setScene(new Scene(root, 800, 600));
+						Stage home = (Stage) loginButton.getScene().getWindow();
+						home.setScene(new Scene(root, 800, 600));
 
-					home.show();
+						home.show();
 
+					}
+
+					else if (loggedUser.equalsIgnoreCase("Caritas")) {
+
+						FXMLLoader loader = new FXMLLoader(getClass().getResource("/boundary/CaritasHomePage.fxml"));
+						Parent root = loader.load();
+						CaritasHomeBoundary caritasHomeBoundary;
+
+						caritasHomeBoundary = loader.getController();
+						CaritasHomeController caritasHomeController = new CaritasHomeController();
+						caritasHomeController.initDataCaritas(idUser, caritasHomeBoundary);
+
+						Stage home = (Stage) loginButton.getScene().getWindow();
+						home.setScene(new Scene(root, 800, 600));
+
+						home.show();
+
+					} else if (loggedUser.equalsIgnoreCase("Negozio")) {
+
+						FXMLLoader loader = new FXMLLoader(getClass().getResource("/boundary/ShopHomePage.fxml"));
+						Parent root = loader.load();
+			
+						shopHomeBoundary = loader.getController();
+						ShopHomeController shopHomeC = new ShopHomeController();
+						shopHomeC.initDataShop(idUser, shopHomeBoundary);
+						Stage home = (Stage) loginButton.getScene().getWindow();
+						home.setScene(new Scene(root, 800, 600));
+
+						home.show();
+					}
+				} catch (Exception e) {
+					logger.error(e.getMessage());
+					MyIOException.openPageFault("Home Menu");
 				}
-
-				else if (loggedUser.equalsIgnoreCase("Caritas")) {
-
-					FXMLLoader loader = new FXMLLoader(getClass().getResource("/boundary/CaritasHomePage.fxml"));
-					Parent root = loader.load();
-					CaritasHomeBoundary caritasHomeBoundary;
-
-					caritasHomeBoundary = loader.getController();
-					CaritasHomeController caritasHomeController = new CaritasHomeController();
-					caritasHomeController.initDataCaritas(idUser, caritasHomeBoundary);
-
-					Stage home = (Stage) loginButton.getScene().getWindow();
-					home.setScene(new Scene(root, 800, 600));
-
-					home.show();
-
-				} else if (loggedUser.equalsIgnoreCase("Negozio")) {
-
-					FXMLLoader loader = new FXMLLoader(getClass().getResource("/boundary/ShopHomePage.fxml"));
-					Parent root = loader.load();
-					shopHomeBoundary = shopHomeBoundary.getInstance();
-					shopHomeBoundary = loader.getController();
-					ShopHomeController shopHomeC = new ShopHomeController();
-					shopHomeC.initDataShop(idUser, shopHomeBoundary);
-					Stage home = (Stage) loginButton.getScene().getWindow();
-					home.setScene(new Scene(root, 800, 600));
-
-					home.show();
-				}
-			} catch (IOException e) {
-				logger.error(s);
+			 
 			}
-		} else {
-			try {
-				trigger.myTrigger();
-			} catch (MyException e) {
-				logger.error("L'utente non è registato");
-			}
+		} catch (MyException e) {
+			logger.error(e.getMessage());
 		}
-
 	}
 
+
+	public boolean check() throws MyException {
+		String loggedUser = loginC.loginAccess(usernameField.getText(), passwordField.getText());
+		if(loggedUser == null) {
+			MyException e = new MyException("Utente non registrato.");
+			e.setErrorNumber(MyException.UTENTE_NON_REGISTRATO);
+			throw e;
+		}
+		return true;
+	}
+	
 	@FXML
 	void registrazionePressed(ActionEvent event) {
 

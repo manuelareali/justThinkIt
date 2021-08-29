@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 
 import controller.CreaNecessitaController;
 import exception.MyException;
-import exception.Trigger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,10 +25,10 @@ public class CreaNecessitaBoundary {
 	private String[] urg = { "Alta", "Normale", "Bassa" };
 
 	private TextArea[] text;
-	private Trigger trigger;
+
 
 	public CreaNecessitaBoundary() {
-		trigger = new Trigger();
+		
 	}
 
 	@FXML
@@ -60,21 +59,26 @@ public class CreaNecessitaBoundary {
 	void creaAnnuncioPressed(ActionEvent event) {
 		CreaNecessitaController creaNec = new CreaNecessitaController();
 		creaNec.inizializza(idCaritas);
-		if (!text[0].getText().isEmpty() && tipologia.getValue() != null && urgenza.getValue() != null){
-			int i = creaNec.creaNecessita(tipologia.getValue().toString(), urgenza.getValue().toString(),
+		try{
+			if (checker()){
+			 creaNec.creaNecessita(tipologia.getValue().toString(), urgenza.getValue().toString(),
 					descrizione.getText());
-			if (i == 0) {
 				this.switchPage(creaAnnuncio.getScene().getWindow());
-			} else {
-				logger.trace("errore nella creazione dell'annuncio");
-			}
-		} else {
-			try {
-				trigger.myTrigger();
-			} catch (MyException e) {
-				logger.error("Alcuni campi sono vuoti");
-			}
+			} 
+		}catch(MyException e){
+			logger.error(e.getMessage());	
 		}
+	}
+	
+	
+	public boolean checker() throws MyException {
+		if (this.text[0].getText().isEmpty() || this.tipologia.getValue() == null || this.urgenza.getValue() == null) {
+			MyException e = new MyException("Alcuni campi sono vuoti.");
+			e.setErrorNumber(MyException.CARITAS_ERROR);
+			throw e;
+		}
+		return true;
+		
 	}
 
 	@FXML

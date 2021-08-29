@@ -2,14 +2,11 @@ package bean;
 
 import java.io.IOException;
 import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import controller.GestisciEventiCaritasController;
 import entity.EventTab;
 import exception.MyException;
-import exception.Trigger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -30,8 +27,7 @@ public class GestisciEventiCaritasBoundary {
 	private int idCar;
 	private PromuoviEventoGenerale promEv;
 	private EventTab event;
-	String s = "Devi selezionare una riga della tabella";
-	private Trigger trigger;
+	
 
 	@FXML
 	private TableView<EventTab> tab;
@@ -70,17 +66,13 @@ public class GestisciEventiCaritasBoundary {
     private Button creaEventoGenerale;
 
 	@FXML
-	boolean cancellaEvent(ActionEvent event) {
-		if(this.event != null) {
-			return gestEventC.cancellaEvento(this.event.getId());
-		}else {
-			try {
-				trigger.myTrigger();
-				
-			} catch (MyException e) {
-				logger.error(s);
+	public void cancellaEvent(ActionEvent event) {
+		try {
+			if(check()) {
+				gestEventC.cancellaEvento(this.event.getId());
 			}
-			return false;
+		} catch (MyException e) {
+			logger.error(e.getMessage());
 		}
 
 	}
@@ -93,25 +85,13 @@ public class GestisciEventiCaritasBoundary {
 	}
 
 	@FXML
-	boolean confermaEvento(ActionEvent event) {
-		if(this.event != null && this.event.getCodiceNegozio() != 0) {
-			return gestEventC.confermaEvento(this.event.getId());
-		} else {
-			if(this.event == null) {
-				try {
-					trigger.myTrigger();
-				} catch (MyException e) {
-					logger.error(s);
-				} 
-			}else {
-				try {
-					trigger.myTrigger();
-				} catch (MyException e) {
-					logger.error("Non puoi selezionare questo evento, verifica se ci sono offerte da parte dei negozi.");
-				} 
+	public void confermaEvento(ActionEvent event) {
+		try {
+			if(check()) {
+				 gestEventC.confermaEvento(this.event.getId());
 			}
-				
-			return false;
+		} catch (MyException e) {
+			logger.error(e.getMessage());
 		}
 
 	}
@@ -119,17 +99,24 @@ public class GestisciEventiCaritasBoundary {
 	
 	@FXML
 	void contattaShop(ActionEvent event) {
-		if (this.event != null) {
-			TransizionePagine pageSwitch = new TransizionePagine();
-			pageSwitch.goToEmail(this.event.getCodiceNegozio(), idCar);
-		} else {
-			try {
-				trigger.myTrigger();
-			} catch (MyException e) {
-				logger.error(s);
+		try {
+			if (check()) {
+				TransizionePagine pageSwitch = new TransizionePagine();
+				pageSwitch.goToEmail(this.event.getCodiceNegozio(), idCar);
 			}
+		} catch (MyException e) {
+			logger.error(e.getMessage());
 		}
 
+	}
+	
+	public boolean check() throws MyException{
+		if(this.event == null) {
+			MyException e = new MyException("Devi selezionare una riga della tabella");
+			e.setErrorNumber(MyException.CARITAS_ERROR);
+			throw e;	
+		}
+		return true;
 	}
 
 	@FXML
@@ -173,7 +160,6 @@ public class GestisciEventiCaritasBoundary {
 
 	public GestisciEventiCaritasBoundary() {
 		gestEventC = new GestisciEventiCaritasController();
-		trigger = new Trigger();
 		promEv = new PromuoviEventoGenerale();
 	}
 

@@ -7,7 +7,7 @@ import javafx.stage.Window;
 
 public class ShopHomeController {
 
-	
+
 
 	private ShopUser currentUser;
 
@@ -22,7 +22,7 @@ public class ShopHomeController {
 
 	public void deleteAccount(int id) {
 		UserDao userd = new UserDao();
-		userd.deleteVolunteer(id);
+		userd.delete(id);
 	}
 
 	public void initDataShop(int id, Object shopBean) {

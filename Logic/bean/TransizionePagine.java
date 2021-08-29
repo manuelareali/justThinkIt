@@ -1,6 +1,5 @@
 package bean;
 
-import java.io.IOException;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -10,8 +9,8 @@ import com.sothawo.mapjfx.Projection;
 
 import controller.CaritasHomeController;
 import controller.CercaCaritasController;
-import controller.ShopHomeController;
 import exception.MyException;
+import exception.MyIOException;
 import exception.Trigger;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -40,8 +39,9 @@ public class TransizionePagine {
 				signUp.setScene(scene);
 				signUp.show();
 				signUp.setResizable(false);
-			} catch (IOException e) {
+			} catch (Exception e) {
 				logger.error(e.getMessage());
+				MyIOException.openPageFault(pagina);
 			}
 		
 		
@@ -71,8 +71,9 @@ public class TransizionePagine {
 	        primaryStage.show();
 	        
 	
-	} catch (IOException e) {
+	} catch (Exception e) {
 		logger.error(e.getMessage());
+		MyIOException.openPageFault("Mappa");
 	}
 	
 	}
@@ -98,8 +99,9 @@ public class TransizionePagine {
 
 			stage.show();
 
-		} catch (IOException e) {
+		} catch (Exception e) {
 			logger.error(e.getMessage());
+			MyIOException.openPageFault("Email");
 		}
 	}
 	
@@ -117,8 +119,9 @@ public class TransizionePagine {
 			home.setScene(new Scene(root, 800, 600));
 
 			home.show();
-		} catch (IOException e) {
+		}catch (Exception e) {
 			logger.error(e.getMessage());
+			MyIOException.openPageFault("Caritas Home Page");
 		}
 	}
 	
@@ -148,10 +151,9 @@ public class TransizionePagine {
 
 				home.show();
 
-			} catch (IOException e) {
-
+			}catch (Exception e) {
 				logger.error(e.getMessage());
-
+				MyIOException.openPageFault("Login");
 			}
 
 		}
@@ -184,10 +186,9 @@ public class TransizionePagine {
 
 				home.show();
 
-			} catch (IOException e) {
-
+			}catch (Exception e) {
 				logger.error(e.getMessage());
-
+				MyIOException.openPageFault("Login");
 			}
 	}
 	

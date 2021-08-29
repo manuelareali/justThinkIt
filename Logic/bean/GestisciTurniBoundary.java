@@ -1,15 +1,13 @@
 package bean;
 
-import java.io.IOException;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import controller.GestioneTurniCaritas;
 import entity.TurnoTab;
 import exception.MyException;
-import exception.Trigger;
+import exception.MyIOException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -29,7 +27,6 @@ public class GestisciTurniBoundary {
 
 	Logger logger = LoggerFactory.getLogger(GestisciTurniBoundary.class.getName());
 	
-	private Trigger trigger;
 	
 	@FXML
 	private TextArea newNote;
@@ -76,19 +73,16 @@ public class GestisciTurniBoundary {
 	public GestisciTurniBoundary() {
 		this.gestTurn = new GestioneTurniCaritas();
 		this.caritasTurniBoundary = new CreaTurnoBoundary();
-		trigger = new Trigger();
 	}
 
 	@FXML
 	void cancellaTurno(ActionEvent event) {
-		if(this.turn != null) {
-			gestTurn.cancellaTurno(turn.getId());
-		}else {
-			try {
-				trigger.myTrigger();
-			} catch (MyException e) {
-				logger.error("Devi selezionare una riga della tabella");
+		try {
+			if(check()) {
+				gestTurn.cancellaTurno(turn.getId());
 			}
+		} catch (MyException e) {
+			logger.error(e.getMessage());
 		}
 	}
 
@@ -104,22 +98,21 @@ public class GestisciTurniBoundary {
 				home.setScene(new Scene(root, 780, 500));
 
 				home.show();
-			} catch (IOException e) {
+			} catch (Exception e) {
 				logger.error(e.getMessage());
+				MyIOException.openPageFault("Gestisci Turni Caritas");
 			}
 		}
 	
 
 	@FXML
-	void modificaTurno(ActionEvent event) {
-		if(this.turn != null && newNote.getText() != null) {
-			gestTurn.modificaTurno(turn.getId(), newNote.getText(), turn.getIdCar());
-		}else {
-			try {
-				trigger.myTrigger();
-			} catch (MyException e) {
-				logger.error("Devi selezionare una riga della tabella");
+	public void modificaTurno(ActionEvent event) {
+		try {
+			if(check()) {
+				gestTurn.modificaTurno(turn.getId(), newNote.getText(), turn.getIdCar());
 			}
+		} catch (MyException e) {
+			logger.error(e.getMessage());
 		}
 
 	}
@@ -137,6 +130,19 @@ public class GestisciTurniBoundary {
 
 	}
 
+	public boolean check() throws MyException{
+		if(this.turn == null) {
+			MyException e = new MyException("Devi selezionare una riga della tabella");
+			e.setErrorNumber(MyException.CARITAS_ERROR);
+			throw e;	
+		}
+		if(newNote.getText() == null) {
+			MyException e = new MyException("Alcuni campi sono vuoti");
+			e.setErrorNumber(MyException.CAMPI_VUOTI);
+			throw e;	
+		}
+		return true;
+	}
 
 	public void loadFormBoundary(int id) {
 		this.caritas = id;

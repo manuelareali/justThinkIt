@@ -11,7 +11,6 @@ import controller.GestisciEventiController;
 import controller.ShopHomeController;
 import entity.EventTab;
 import exception.MyException;
-import exception.Trigger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -30,12 +29,10 @@ public class GestisciEventiBoundary {
 	private static Logger logger = LoggerFactory.getLogger(GestisciEventiBoundary.class.getName());
 
 	private GestisciEventiController gestEventC;
-	private Trigger trigger;
 	private int idShop;
 	private int idCaritas;
 	private String s = "error IoException";
 	private EventTab event;
-	private ShopHomeBoundary shopHomeBoundary;
 
 	@FXML
 	private ResourceBundle resources;
@@ -74,7 +71,6 @@ public class GestisciEventiBoundary {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/boundary/ShopHomePage.fxml"));
 			Parent root = loader.load();
-			shopHomeBoundary = shopHomeBoundary.getInstance();
 			ShopHomeBoundary  shopC= loader.getController();
 			ShopHomeController shopHomeC = new ShopHomeController();
 			shopHomeC.initDataShop(idShop, shopC);
@@ -90,47 +86,40 @@ public class GestisciEventiBoundary {
 
 	@FXML
 	void contattaCaritas(ActionEvent event) {
-		if (this.event != null) {
-			try {
+		try {
+			if (check()) {
+				try {
 
-				FXMLLoader fxmlLoader = new FXMLLoader();
-				Parent rootNode = fxmlLoader.load(getClass().getResourceAsStream("/boundary/Email.fxml"));
+					FXMLLoader fxmlLoader = new FXMLLoader();
+					Parent rootNode = fxmlLoader.load(getClass().getResourceAsStream("/boundary/Email.fxml"));
 
-				EmailBoundary email = fxmlLoader.getController();
-				email.loadEmail(this.idCaritas, this.idShop);
-				Stage stage = new Stage();
-				stage.setTitle("Email");
+					EmailBoundary email = fxmlLoader.getController();
+					email.loadEmail(this.idCaritas, this.idShop);
+					Stage stage = new Stage();
+					stage.setTitle("Email");
 
-				stage.setScene(new Scene(rootNode, 800, 500));
-				stage.setResizable(false);
-				stage.show();
+					stage.setScene(new Scene(rootNode, 800, 500));
+					stage.setResizable(false);
+					stage.show();
 
-			} catch (IOException e) {
-				logger.error(s);
+				} catch (IOException e) {
+					logger.error(s);
+				}
 			}
-		} else {
-			try {
-				trigger.myTrigger();
-
-			} catch (MyException e) {
-				logger.error("Devi selezionare una riga della tabella");
-			}
+		} catch (MyException e) {
+			logger.error(e.getMessage());
 		}
 
 	}
 
 	@FXML
-	boolean eliminaEvento(ActionEvent event) {
-		if(this.event != null) {
-			return gestEventC.cancellaEvento(this.event.getId());
-		} else {
-			try {
-				trigger.myTrigger();
-				
-			} catch (MyException e) {
-				logger.error("Devi selezionare una riga della tabella");
+	public void eliminaEvento(ActionEvent event) {
+		try {
+			if(check()) {
+				gestEventC.cancellaEvento(this.event.getId());
 			}
-			return false;
+		}catch(MyException ex) {
+			logger.error(ex.getMessage());
 		}
 	}
 
@@ -139,11 +128,20 @@ public class GestisciEventiBoundary {
 	void prendiEvento(MouseEvent e) {
 		this.event = table.getSelectionModel().getSelectedItem();
 		this.idCaritas = event.getIdCaritas();
-
 	}
+	
+	
+	public boolean check() throws MyException {
+		if(this.event == null && this.idCaritas == 0) {
+			MyException e = new MyException("Devi selezionare una riga della tabella.");
+			e.setErrorNumber(MyException.NEGOZIO_ERROR);
+			throw e;
+		}
+		return true;
+	}
+	
 
 	public GestisciEventiBoundary() {
-		trigger = new Trigger();
 		gestEventC = new GestisciEventiController();
 
 	}

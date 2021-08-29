@@ -2,15 +2,11 @@ package bean;
 
 
 
-
-import java.io.IOException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import controller.GestisciEventiCaritasController;
 import exception.MyException;
-import exception.Trigger;
+import exception.MyIOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -69,38 +65,21 @@ public class PromuoviEventoGenerale {
     
     @FXML
     void indietro(ActionEvent event) {
-    	try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/boundary/gestisci_eventi_caritas.fxml"));
-			Parent root = loader.load();
-
-			Stage home = (Stage) indietro.getScene().getWindow();
-	
-			GestisciEventiCaritasBoundary gestCar = loader.getController();
-			
-			gestCar.loadShop(idCar);
-			home.setScene(new Scene(root, 800, 500));
-			home.show();
-
-		} catch (IOException e) {
-			logger.error("errore IoException");
-		}
-    }
+        this.switchPage(confermaEventoPressed.getScene().getWindow());
+       }
 
     @FXML
 	void confermaEventoPressed(ActionEvent event) {
-    	Trigger trigger = new Trigger();
 		GestisciEventiCaritasController controller = new GestisciEventiCaritasController();
 		float x = (float) 0.0;
-			if (!checker() && !nome.getText().isEmpty() && tipo != null ) {
-				controller.creaEventoGeneral(nome.getText(), tipo, x, note.getText(), this.idCar, this.idShop);
-				this.switchPage(confermaEventoPressed.getScene().getWindow());
-		}else {
 			try {
-				trigger.myTrigger();
-			}catch(MyException e) {
-				logger.error("Alcuni campi sono vuoti");
+				if (checker() == true ) {
+					controller.creaEventoGeneral(nome.getText(), tipo, x, note.getText(), this.idCar, this.idShop);
+					this.switchPage(confermaEventoPressed.getScene().getWindow());
+}
+			} catch (MyException e) {
+				logger.error(e.getMessage());
 			}
-		}
 	}
     
     public void switchPage(Window stage) {
@@ -115,12 +94,13 @@ public class PromuoviEventoGenerale {
 			GestisciEventiCaritasBoundary gest = loader.getController();
 			gest.loadShop(idCar);
 
-		} catch (IOException e) {
+		} catch (Exception e) {
 			logger.error(e.getMessage());
+			MyIOException.openPageFault("Gestisci Eventi Caritas");
 		}
 	}
     
-	public boolean checker() {
+	public boolean checker() throws MyException {
 		if (idCibo.isSelected()) {
 			tipo = "Cibo";
 		}
@@ -132,7 +112,13 @@ public class PromuoviEventoGenerale {
 			tipo = "Tutto";
 			
 		}
-		return false; 				
+		
+		if(nome.getText().isEmpty() || !idCibo.isSelected() && !idVestiti.isSelected() && !tutto.isSelected()) {
+			MyException e = new MyException("Alcuni campi sono vuoti.");
+			e.setErrorNumber(MyException.CAMPI_VUOTI);
+			throw e;
+		}
+		return true; 				
 	}
 
 

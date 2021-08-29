@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import controller.GestisciDonazioniCaritas;
 import entity.DonazioneTab;
 import exception.MyException;
-import exception.Trigger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -23,8 +22,7 @@ import javafx.scene.input.MouseEvent;
 
 public class GestisciDonazioniBoundary {
 	Logger logger = LoggerFactory.getLogger(GestisciDonazioniBoundary.class.getName());
-	private Trigger trigger;
-	String s = "Devi selezionare una riga della tabella";
+	
 	
 		
 	@FXML
@@ -71,16 +69,12 @@ public class GestisciDonazioniBoundary {
 	
 	@FXML
 	void cancellaDonazione(ActionEvent event) {
-		if(this.idVolontario != 0) {
-			gestDon.cancellaDonazione(this.idDono);
-		}else {
-			try {
-				trigger.myTrigger();
-			}catch(MyException e) {
-				logger.error(s);
-			}
+		try {
+			if(check()) {
+				gestDon.cancellaDonazione(this.idDono);
+		}}catch(MyException e) {
+			logger.error(e.getMessage());
 		}
-
 	}
 
 	@FXML
@@ -94,18 +88,14 @@ public class GestisciDonazioniBoundary {
 
 	@FXML
 	void contattaVolontario(ActionEvent event) {
-		
-		if(this.idVolontario != 0) {
-			TransizionePagine pageSwitch = new TransizionePagine();
-			pageSwitch.goToEmail(idVolontario, caritas);
-		}else {
-			try {
-				trigger.myTrigger();
-			}catch(MyException e) {
-				logger.error(s);
+		try {
+			if(check()) {
+				TransizionePagine pageSwitch = new TransizionePagine();
+				pageSwitch.goToEmail(idVolontario, caritas);
 			}
+		}catch(MyException e) {
+			logger.error(e.getMessage());
 		}
-
 	}
 	
 	
@@ -115,20 +105,29 @@ public class GestisciDonazioniBoundary {
 
 	@FXML
 	void ritiraDonazione(ActionEvent event) {
-		if(this.idVolontario != 0) {
-			gestDon.ritiraDon(this.idDono);
-		}else {
-			try {
-				trigger.myTrigger();
-			} catch (MyException e) {
-				logger.error(s);
+		try {
+			if(check()) {
+				gestDon.ritiraDon(this.idDono);
 			}
+		}catch(MyException e) {
+			logger.error(e.getMessage());
 		}
-
+			
 	}
 
+	public boolean check() throws MyException{
+		if(this.idDono == 0 && this.idVolontario == 0) {
+			MyException e = new MyException("Devi selezionare una riga della tabella");
+			e.setErrorNumber(MyException.CARITAS_ERROR);
+			throw e;
+			
+		}
+		return true;
+	}
+	
+	
 	@FXML
-	void donationSelect(MouseEvent event) {
+	public void donationSelect(MouseEvent event) {
 		this.idVolontario = table.getSelectionModel().getSelectedItem().getCodVol();
 		this.idDono = table.getSelectionModel().getSelectedItem().getIdDon();
 	}
@@ -149,7 +148,6 @@ public class GestisciDonazioniBoundary {
 	public GestisciDonazioniBoundary() {
 		this.gestDon = new GestisciDonazioniCaritas();
 		listDon = new ArrayList<>();
-		trigger = new Trigger();
 	}
 
 

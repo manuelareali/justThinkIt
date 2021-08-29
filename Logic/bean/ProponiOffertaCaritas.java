@@ -1,11 +1,11 @@
 package bean;
 
-import java.io.IOException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import controller.ProponiOfferta;
 import exception.MyException;
+import exception.MyIOException;
 import exception.Trigger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,7 +24,7 @@ public class ProponiOffertaCaritas {
  	Logger logger = LoggerFactory.getLogger(ProponiOffertaCaritas.class.getName());
 	private int idShop;
 	private int idEv;
-	
+
     @FXML
     private TextField prezzo;
     @FXML
@@ -39,51 +39,37 @@ public class ProponiOffertaCaritas {
     @FXML
     private Button indietro;
     
-    
-	public boolean isNumeric(String str) { 
-		  try {  
-			  Float.parseFloat(str); 
-		    return true;
-		  } catch(NumberFormatException e){  
-			  logger.error("Inserisci correttamente il prezzo dell'evento");
-		    return false;  
-		  } 
-		}
 
-    @FXML
-    void conferma(ActionEvent event) {
-    	ProponiOfferta proponiOfferta = new ProponiOfferta();
-    	if(isNumeric(prezzo.getText()) && dataEvento.getValue() != null) {
-  	  		proponiOfferta.proponi(idShop, idEv, Float.parseFloat(prezzo.getText()),dataEvento.getValue().toString(), note.getText());	
-			this.switchPage(conferma.getScene().getWindow());
-    	}else {
-    		Trigger trigger = new Trigger();
-    		try {
-    			trigger.myTrigger();
-    		}catch(MyException e) {
-    			logger.error("Alcuni campi sono vuoti");
-    		}
+   
+
+  @FXML
+  void conferma(ActionEvent event) {
+  	ProponiOfferta proponiOfferta = new ProponiOfferta();
+  	Trigger trigger = new Trigger();
+  	try {
+  		if(trigger.isNumeric(prezzo.getText()) && check()) {
+	  		proponiOfferta.proponi(idShop, idEv, Float.parseFloat(prezzo.getText()),dataEvento.getValue().toString(), note.getText());	
+			this.switchPage(conferma.getScene().getWindow());}
+  		}catch(MyException e) {
+  			logger.error(e.getMessage());
+  		}catch (NumberFormatException n) {
+  			logger.error("Non sono presenti solo numeri in Prezzo Evento." + n.getMessage());
+  		}
+  	}
+  
+    public boolean check() throws MyException {
+    	if(dataEvento.getValue() == null) {
+    		MyException e = new MyException("Alcuni campi sono vuoti");
+			e.setErrorNumber(MyException.CAMPI_VUOTI);
+			throw e;
     	}
+		return true;
     }
 
 
     @FXML
-    void indietro(ActionEvent event) {
-   
-    	try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/boundary/EventiPropNeg.fxml"));
-			Parent root = loader.load();
-			GestisciEventiPropCaritas  prop= loader.getController();
-		
-			prop.loadShop(idShop);
-			Stage home = (Stage) indietro.getScene().getWindow();
-			home.setScene(new Scene(root, 800, 500));
-
-			home.show();
-		} catch (IOException e) {
-			logger.error("IOException");
-		}
-
+    public void indietro(ActionEvent event) {
+    	 this.switchPage(conferma.getScene().getWindow());
     }
     
     
@@ -99,8 +85,9 @@ public class ProponiOffertaCaritas {
 			GestisciEventiPropCaritas gest = loader.getController();
 			gest.loadShop(idShop);
 
-		} catch (IOException e) {
+		}catch (Exception e) {
 			logger.error(e.getMessage());
+			MyIOException.openPageFault("Shop Event propose");
 		}
 	}
     

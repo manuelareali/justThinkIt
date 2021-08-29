@@ -3,6 +3,8 @@ package bean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import controller.PromuoviEventoController;
+import exception.MyException;
+import exception.Trigger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -42,11 +44,16 @@ public class PromuoviEventoBoundary {
 
 	    @FXML
 		void confermaPressed(ActionEvent event) {
-			if (!checker() && isNumeric(prezzo.getText()) &&  !nome.getText().isEmpty() && tipo != null) {
-				float costoEvento = Float.parseFloat(prezzo.getText());
-
-				PromuoviEventoController promuoviEvento = new PromuoviEventoController();
-				promuoviEvento.creaEventoController(nome.getText(), tipo, note.getText(), costoEvento, idCar, idShop);
+	    	Trigger trigger = new Trigger();
+	    	PromuoviEventoController promuoviEvento = new PromuoviEventoController();
+			try {
+				if (checker() ) {
+					promuoviEvento.creaEventoController(nome.getText(), tipo, note.getText(), Float.parseFloat(prezzo.getText()), idCar, idShop);
+				}
+			} catch (NumberFormatException n) {
+				logger.error("In Prezzo non sono presenti solo numeri" + n.getMessage());
+			} catch (MyException e) {
+				logger.error(e.getMessage());
 			}
 		
 		}
@@ -57,18 +64,9 @@ public class PromuoviEventoBoundary {
 			
 		}
 
-		public boolean isNumeric(String str) { 
-			  try {  
-			    Integer.parseInt(str); 
-			    return true;
-			  } catch(NumberFormatException e){  
-				  logger.error("Inserisci correttamente il prezzo dell'evento");
-			    return false;  
-			  } 
-			}
 		
 		
-		public boolean checker() {
+		public boolean checker() throws MyException {
 			if(idCibo.isSelected() && idVestiti.isSelected()) {
 				tipo = "Tutto";
 			}else if (idVestiti.isSelected()) {
@@ -76,7 +74,11 @@ public class PromuoviEventoBoundary {
 				
 			}else if (idCibo.isSelected()) {
 				tipo = "Cibo";
-				
+			}
+			if(nome.getText().isEmpty() && prezzo.getText().isEmpty()) {
+				MyException e = new MyException("Alcuni campi sono vuoti");
+				e.setErrorNumber(MyException.CAMPI_VUOTI);
+				throw e;
 			}
 		
 			return false;

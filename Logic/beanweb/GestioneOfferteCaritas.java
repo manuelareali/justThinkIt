@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 
 import controller.ProponiOfferta;
 import entity.Offerte;
+import exception.MyException;
+import exception.Trigger;
 
 public class GestioneOfferteCaritas {
 
@@ -29,25 +31,24 @@ public class GestioneOfferteCaritas {
 		
 
 
-	public boolean isNumeric(String str) { 
-		Logger logger = LoggerFactory.getLogger(GestioneOfferteCaritas.class.getName());
-		  try {  
-		    Integer.parseInt(str); 
-		    return true;
-		  } catch(NumberFormatException e){  
-			  logger.error("Inserisci correttamente l'id");
-		    return false;  
-		  } 
-		}
+	
 	 
 
 	  public boolean accetta(String idEv) {
+		  Logger logger = LoggerFactory.getLogger(GestioneOfferteCaritas.class.getName());
+		  Trigger trigger = new Trigger();
 		  if(idEv == null || idEv.equals("")) {
 	    		return false;
 		  }else {
-			  if(isNumeric(idEv)) {
-				  proponi.confermaEvento(Integer.parseInt(idEv));
-			  }
+			  try {
+				if(trigger.isNumerico(idEv)) {
+					  proponi.confermaEvento(Integer.parseInt(idEv));
+				  }
+			} catch (NumberFormatException e) {
+				logger.error("Inserisci un id corretto" + e.getMessage());
+			} catch (MyException e) {
+				logger.error(e.getMessage());
+			}
 	    	return true;
 		  }
 	    }
